@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  nats:
+    image: nats:2.6.5-alpine
+    ports:
+      - "4222:4222"
+  nats-ssl:
+    image: nats:2.6.5-alpine
+    ports:
+      - "4223:4222"
+    volumes:
+      - ./certificates/nats-ssl-server.pem:/ssl/certificate.pem
+      - ./certificates/nats-ssl-server-key.pem:/ssl/key.pem
+      - ./certificates/rootCA.pem:/ssl/ca.pem
+    command: "--tls --tlsverify --tlscert /ssl/certificate.pem --tlskey /ssl/key.pem --tlscacert /ssl/ca.pem"
+  nats-password:
+    image: nats:2.6.5-alpine
+    ports:
+      - "4224:4222"
+    command: "--user myprysm-dotnet-commons-integration-user --pass myprysm-dotnet-commons-integration-password"
+  minio:
+    image: minio/minio
+    environment:
+      MINIO_ACCESS_KEY: integration-minio
+      MINIO_SECRET_KEY: integration-minio-secret
+    command: server /data
+    ports:
+      - "9001:9000"
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+  
