@@ -4,8 +4,33 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using Myprysm.Tracing.Abstractions;
 
-public sealed class ActivityTrace : ITrace
+internal sealed class ActivityTrace : ITrace, IEquatable<ActivityTrace>
 {
+    public bool Equals(ActivityTrace? other)
+    {
+        if (ReferenceEquals(null, other))
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
+
+        return this.Activity.Equals(other.Activity);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return ReferenceEquals(this, obj) || obj is ActivityTrace other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return this.Activity.GetHashCode();
+    }
+
     public Activity Activity { get; }
 
     private readonly ActivitySourceTracer tracer;

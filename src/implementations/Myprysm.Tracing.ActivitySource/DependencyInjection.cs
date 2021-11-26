@@ -9,6 +9,7 @@ public static class DependencyInjection
         this IServiceCollection services)
     {
         return services
-            .AddSingleton<ITracerFactory, ActivitySourceTracerFactory>();
+            .AddSingleton<ActivitySourceTracerFactory>()
+            .AddSingleton<ITracerFactory>(p => p.GetRequiredService<ActivitySourceTracerFactory>());
     }
 }

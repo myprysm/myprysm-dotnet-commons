@@ -88,6 +88,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.PubSub.AzureStorage
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{DFA98688-E9E0-416B-A5EF-E53EAA379A5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Tracing.ApplicationInsights", "src\implementations\Azure\Myprysm.Tracing.ApplicationInsights\Myprysm.Tracing.ApplicationInsights.csproj", "{3B95E052-46C1-4973-8DA8-2DB74556EB5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Tracing.OpenTelemetry.Tests", "tests\implementations\Myprysm.Tracing.OpenTelemetry.Tests\Myprysm.Tracing.OpenTelemetry.Tests.csproj", "{55A717F9-F77E-4147-AD63-CEA17BF5BC6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Tracing.ApplicationInsights.Tests", "tests\implementations\Azure\Myprysm.Tracing.ApplicationInsights.Tests\Myprysm.Tracing.ApplicationInsights.Tests.csproj", "{D6916287-D844-451D-863B-34DE49197B18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +139,9 @@ Global
 		{FEBE5A50-AFBA-4B78-8A51-8DF60F0B8EA8} = {784C4AE2-8A5E-4E03-B93E-347D584E7E0C}
 		{7CDC652C-19A3-4616-BEA6-ED2F15650AE3} = {6DF3B6BA-6554-4085-8134-ECAA8E34A674}
 		{19AF83DA-EBFF-479A-B495-9A2E148035FE} = {784C4AE2-8A5E-4E03-B93E-347D584E7E0C}
+		{3B95E052-46C1-4973-8DA8-2DB74556EB5E} = {6DF3B6BA-6554-4085-8134-ECAA8E34A674}
+		{55A717F9-F77E-4147-AD63-CEA17BF5BC6D} = {E4C2EE25-C3EF-4E14-808A-6D171FF37085}
+		{D6916287-D844-451D-863B-34DE49197B18} = {784C4AE2-8A5E-4E03-B93E-347D584E7E0C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DFA98688-E9E0-416B-A5EF-E53EAA379A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -257,5 +266,17 @@ Global
 		{19AF83DA-EBFF-479A-B495-9A2E148035FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19AF83DA-EBFF-479A-B495-9A2E148035FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19AF83DA-EBFF-479A-B495-9A2E148035FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B95E052-46C1-4973-8DA8-2DB74556EB5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B95E052-46C1-4973-8DA8-2DB74556EB5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B95E052-46C1-4973-8DA8-2DB74556EB5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B95E052-46C1-4973-8DA8-2DB74556EB5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55A717F9-F77E-4147-AD63-CEA17BF5BC6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A717F9-F77E-4147-AD63-CEA17BF5BC6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A717F9-F77E-4147-AD63-CEA17BF5BC6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A717F9-F77E-4147-AD63-CEA17BF5BC6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6916287-D844-451D-863B-34DE49197B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6916287-D844-451D-863B-34DE49197B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6916287-D844-451D-863B-34DE49197B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6916287-D844-451D-863B-34DE49197B18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
