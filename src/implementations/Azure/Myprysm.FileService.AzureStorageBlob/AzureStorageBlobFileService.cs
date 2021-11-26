@@ -45,7 +45,7 @@ public class AzureStorageBlobFileService : IFileService
 
             if (blobExists)
             {
-                throw new FileAlreadyExistsException(path);
+                throw new FileAlreadyExistsException(container, path);
             }
 
             conditions = new BlobRequestConditions { IfNoneMatch = new Azure.ETag(ETag.All.Value), };
@@ -84,7 +84,7 @@ public class AzureStorageBlobFileService : IFileService
                 path,
                 container,
                 overwriteExistingFile);
-            throw new FileAlreadyExistsException(path);
+            throw new FileAlreadyExistsException(container, path);
         }
     }
 
@@ -96,7 +96,7 @@ public class AzureStorageBlobFileService : IFileService
 
         if (!blobExists)
         {
-            throw new FileNotFoundException($"File {container}/{path} does not exist.");
+            throw new FileNotFoundException(container, path);
         }
 
         var blobProperties = await blobClient.GetPropertiesAsync(cancellationToken: cancellation).ConfigureAwait(false);

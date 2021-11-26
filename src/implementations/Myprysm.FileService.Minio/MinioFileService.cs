@@ -83,7 +83,7 @@ public class MinioFileService : IFileService
             return;
         }
 
-        throw new FileAlreadyExistsException(path);
+        throw new FileAlreadyExistsException(container, path);
     }
 
     private async Task EnsureBucketExists(
@@ -121,7 +121,7 @@ public class MinioFileService : IFileService
         }
         catch (MinioException)
         {
-            throw new FileNotFoundException($"File {container}/{path} does not exist.");
+            throw new FileNotFoundException(container, path);
         }
 
 

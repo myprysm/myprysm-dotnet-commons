@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Myprysm.SharedKernel.Exceptions;
 using Myprysm.Tracing.Abstractions;
-using NotImplementedException = System.NotImplementedException;
 
 public sealed record SerializedTrace : ITrace
 {
@@ -28,6 +27,11 @@ public sealed record SerializedTrace : ITrace
     public IReadOnlyDictionary<string, string?> Baggage { get; }
 
     public IReadOnlyDictionary<string, string?> Tags { get; }
+
+    public void SetParentId(string parentId)
+    {
+        throw new NotImplementedException();
+    }
 
     [ExcludeFromCodeCoverage]
     public void AddBaggage(string key, string? value)

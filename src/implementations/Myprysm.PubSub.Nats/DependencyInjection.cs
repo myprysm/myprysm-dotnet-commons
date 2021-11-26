@@ -10,15 +10,15 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddPubSubNats(
         this IServiceCollection services,
-        Action<NatsBrokerOptions>? configure = null)
+        Action<NatsPubSubOptions>? configure = null)
     {
         var configureOptions = configure ?? (_ => { });
 
         return services
                 .Configure(configureOptions)
+                .TryAddDefaultTracer()
                 .RegisterTracerOnStartup(PubSubNatsConstants.TracerIdentity)
-                .AddSingleton<NatsBrokerConnectionHolder>()
-                .AddScoped<IBrokerConnection, NatsBrokerConnection>()
+                .AddSingleton<IBrokerConnection, NatsBrokerConnection>()
             ;
     }
 

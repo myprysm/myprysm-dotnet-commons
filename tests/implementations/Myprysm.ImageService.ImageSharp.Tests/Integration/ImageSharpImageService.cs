@@ -10,6 +10,10 @@ public class ImageSharpImageServiceTests : ImageServiceTests
 {
     protected override void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddImageSharpImageService(MemoryPoolKind.Medium);
+        services.AddImageSharpImageService(options =>
+        {
+            options.MemoryPoolKind = MemoryPoolKind.Medium;
+            options.WithTracing = true;
+        });
     }
 }

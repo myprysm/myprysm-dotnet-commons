@@ -15,6 +15,7 @@ public interface IReaderInput
 /// <typeparam name="TResponse">The response type.</typeparam>
 public interface IReader<in TRequest, TResponse>
     where TRequest : IReaderInput
+    where TResponse : notnull
 {
     /// <summary>
     ///     Read asynchronously the output for the given request.

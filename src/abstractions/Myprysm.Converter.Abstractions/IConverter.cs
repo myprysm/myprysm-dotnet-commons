@@ -26,10 +26,10 @@ public interface IConverter
         return this.Read(bytes, tObj);
     }
 
-    void WriteToStream(object data, Stream stream);
+    void WriteToStream(object? data, Stream stream);
 
 
-    public byte[] WriteBytes(object data)
+    public byte[] WriteBytes(object? data)
     {
         using var stream = new MemoryStream();
         this.WriteToStream(data, stream);
@@ -37,7 +37,7 @@ public interface IConverter
         return stream.ToArray();
     }
 
-    public string WriteString(object data)
+    public string WriteString(object? data)
     {
         var bytes = this.WriteBytes(data);
         return DefaultEncoding.GetString(bytes);

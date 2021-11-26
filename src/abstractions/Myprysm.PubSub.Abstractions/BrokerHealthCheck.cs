@@ -32,7 +32,7 @@ public class BrokerHealthCheck : IHealthCheck
         try
         {
             using var subscription = await this.broker
-                .Subscribe(this.topic, this.collector, cancellation: cancellationToken)
+                .Subscribe(this.topic, this.collector.HandleAsync, cancellation: cancellationToken)
                 .ConfigureAwait(false);
 
             var publication = new Publication(this.topic, Message);

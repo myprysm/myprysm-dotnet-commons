@@ -1,6 +1,8 @@
 namespace Myprysm.FileService.FileSystem;
 
-public class FileSystemFileServiceOptions
+using Myprysm.FileService.Abstractions;
+
+public class FileSystemFileServiceOptions : FileServiceOptions
 {
     public string Directory { get; set; } = Path.GetTempPath();
 }

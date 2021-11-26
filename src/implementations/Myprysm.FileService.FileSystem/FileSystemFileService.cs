@@ -85,7 +85,7 @@ public class FileSystemFileService : IFileService
 
         if (fileInfo.Exists)
         {
-            throw new FileAlreadyExistsException(fileInfo.FullName);
+            throw new FileAlreadyExistsException(container, path);
         }
     }
 
@@ -109,13 +109,13 @@ public class FileSystemFileService : IFileService
 
         if (!fileInfo.Exists)
         {
-            throw new FileNotFoundException($"File {container}/{path} does not exist.");
+            throw new FileNotFoundException(container, path);
         }
 
         var fileStream = fileInfo.OpenRead();
         var fileDownload = new FileDownload(
             fileStream,
-            ETag.From(fileInfo.LastWriteTimeUtc.Ticks.ToString()), 
+            ETag.From(fileInfo.LastWriteTimeUtc.Ticks.ToString()),
             Instant.FromDateTimeUtc(fileInfo.LastWriteTimeUtc),
             fileInfo.Length);
 

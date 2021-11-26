@@ -1,73 +1,191 @@
 namespace Myprysm.PubSub.Nats;
 
 using System;
+using System.Collections.Concurrent;
+using System.Globalization;
+using System.Linq;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Myprysm.Converter.Abstractions;
 using Myprysm.PubSub.Abstractions;
 using Myprysm.Tracing.Abstractions;
+using NATS.Client;
+using ISubscription = Myprysm.PubSub.Abstractions.ISubscription;
 
 public class NatsBrokerConnection : IBrokerConnection
 {
+    private static readonly BrokerCapabilities CapabilitiesInstance = new(Transport.Transient, Replay: false, SubscriptionGroups: true);
+
+    internal readonly IConnection Connection;
+    private readonly IConverter converter;
     private readonly ITracer tracer;
-    private readonly NatsBrokerConnectionHolder connectionHolder;
+    private readonly ConcurrentDictionary<IAsyncSubscription, NatsSubscription> subscriptions;
+    private readonly ILogger<NatsBrokerConnection> logger;
+    private readonly ILogger<NatsSubscription> subscriptionLogger;
+    private readonly SubscriptionExceptionHandler globalExceptionHandler;
+    private readonly bool tracingEnabled;
+    private bool disposed;
 
     public NatsBrokerConnection(
+        IConverter converter,
         ITracerFactory tracerFactory,
-        NatsBrokerConnectionHolder connectionHolder)
+        IOptions<NatsPubSubOptions> options,
+        ILogger<NatsBrokerConnection> logger,
+        ILogger<NatsSubscription> subscriptionLogger)
     {
+        this.logger = logger;
+        this.subscriptionLogger = subscriptionLogger;
         this.tracer = tracerFactory.GetTracer(PubSubNatsConstants.TracerIdentity);
-        this.connectionHolder = connectionHolder;
+        this.converter = converter;
+        this.Connection = this.CreateConnection(options.Value);
+        this.subscriptions = new ConcurrentDictionary<IAsyncSubscription, NatsSubscription>();
+        this.globalExceptionHandler = options.Value.GlobalSubscriptionExceptionHandler;
+        this.tracingEnabled = options.Value.WithTracing;
     }
 
-    public BrokerCapabilities Capabilities => this.connectionHolder.Capabilities;
+    public BrokerCapabilities Capabilities => CapabilitiesInstance;
 
-    public Task Publish(Publication publication, CancellationToken cancellationToken)
+    public Task Publish(Publication publication, CancellationToken cancellation = default)
     {
-        var tracedPublication = this.WrapTraceIfNotProvided(publication);
+        using var trace = this.tracingEnabled
+            ? this.tracer.StartTrace(nameof(this.Publish), TraceKind.Producer, publication.Trace)
+            : null;
+        trace?.AddTag("broker_connection.topic", publication.Topic.Value);
+        trace?.AddTag("broker_connection.size", publication.Message.LongLength.ToString(CultureInfo.InvariantCulture));
+        trace?.AddTag("broker_connection.is_volatile", publication.IsVolatile.ToString());
 
-        return this.connectionHolder.Publish(tracedPublication, cancellationToken);
-    }
-
-    private Publication WrapTraceIfNotProvided(Publication publication)
-    {
-        if (publication.Trace is not null || this.tracer.CurrentTrace is null)
+        try
         {
-            return publication;
-        }
+            var serializedTrace = SerializedTrace.GetSerializedTrace(trace);
+            var envelope = new Envelope(publication.Message, serializedTrace);
+            var payload = this.converter.WriteBytes(envelope);
 
-        return new Publication(
-            publication.Topic,
-            publication.Message,
-            publication.IsVolatile,
-            this.tracer.CurrentTrace);
+            this.Connection.Publish(publication.Topic.Value, payload);
+            return Task.CompletedTask;
+        }
+        catch (Exception exception)
+        {
+            this.logger.LogError(exception, "An error occured during the publication: {Message}", exception.Message);
+            trace?.AddTag("otel.status_code", "ERROR");
+            trace?.AddTag("otel.status_description", $"Unhandled exception: {exception.Message}");
+            throw;
+        }
     }
 
     public Task<ISubscription> Subscribe(
         Topic topic,
-        Func<Publication, Task> handler,
+        PublicationHandler handler,
         SubscriptionGroup? group = null,
+        SubscriptionExceptionHandler? exceptionHandler = null,
         CancellationToken cancellation = default)
     {
-        return this.connectionHolder.Subscribe(topic, this.HandleMessage(handler), group, cancellation);
+        var subscription = this.Connection.SubscribeAsync(topic.Value, group?.Value);
+        var mappedSubscription = new NatsSubscription(
+            handler,
+            exceptionHandler ?? this.globalExceptionHandler,
+            subscription,
+            this.tracingEnabled,
+            this.converter,
+            this.tracer,
+            this.subscriptionLogger,
+            () => this.subscriptions.TryRemove(subscription, out _));
+
+        this.subscriptions.TryAdd(subscription, mappedSubscription);
+
+        return Task.FromResult<ISubscription>(mappedSubscription);
     }
 
-    private Func<Publication, Task> HandleMessage(Func<Publication, Task> handler)
+
+    private IConnection CreateConnection(NatsPubSubOptions configuration)
     {
-        return async publication =>
-        {
-            using var trace = this.tracer.StartTrace(nameof(this.HandleMessage), TraceKind.Consumer, publication.Trace);
-            var tracedPublication = new Publication(
-                publication.Topic,
-                publication.Message,
-                publication.IsVolatile,
-                trace);
+        var options = ConnectionFactory.GetDefaultOptions();
 
-            await handler(tracedPublication).ConfigureAwait(false);
-        };
+        options.Url = configuration.Url;
+
+        if (configuration.WithSsl)
+        {
+            this.logger.LogInformation("Enabling SSL on NATS broker");
+            options.Secure = true;
+            var certificate = new X509Certificate2(configuration.KeyStorePath, configuration.KeyStorePassword);
+            options.AddCertificate(certificate);
+
+            if (configuration.TrustAllCertificates)
+            {
+                options.TLSRemoteCertificationValidationCallback = (_, _, _, _) => true;
+                this.logger.LogWarning("Server certificate validation disabled. Avoid this setting in PRODUCTION");
+            }
+            else if (!string.IsNullOrWhiteSpace(configuration.TrustStorePath) && !string.IsNullOrWhiteSpace(configuration.TrustStorePassword))
+            {
+                var ca = new X509Certificate2(configuration.TrustStorePath, configuration.TrustStorePassword);
+                options.TLSRemoteCertificationValidationCallback = (_, _, chain, policyErrors) =>
+                {
+                    return policyErrors switch
+                    {
+                        SslPolicyErrors.None => true,
+                        SslPolicyErrors.RemoteCertificateChainErrors => chain?.ChainElements
+                            .Any(element => element.Certificate.Issuer.Equals(ca.Subject, StringComparison.InvariantCulture)) ?? false,
+                        _ => false,
+                    };
+                };
+
+                this.logger.LogWarning("Server certificate validation configured with the provided trust store");
+            }
+        }
+
+        if (!(string.IsNullOrWhiteSpace(configuration.User) || string.IsNullOrWhiteSpace(configuration.Password)))
+        {
+            this.logger.LogInformation("Enabling password authentication on NATS broker");
+            options.User = configuration.User;
+            options.Password = configuration.Password;
+        }
+
+        try
+        {
+            return new ConnectionFactory().CreateConnection(options);
+        }
+        catch (Exception exception)
+        {
+            this.logger.LogError(exception, "Unable to connect to NATS");
+            throw;
+        }
     }
 
+    /// <summary>
+    /// Disposes managed resources of <see cref="NatsSubscription"/>.
+    /// </summary>
+    /// <param name="disposing">If disposing equals true, the method has been called directly
+    /// or indirectly by a user's code. Managed and unmanaged resources can be disposed.
+    /// If disposing equals false, the method has been called by the
+    /// runtime from inside the finalizer and you should not reference
+    /// other objects. Only unmanaged resources can be disposed.</param>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!this.disposed)
+        {
+            if (disposing)
+            {
+                foreach (var subscription in this.subscriptions.Values.ToList())
+                {
+                    subscription.Dispose();
+                }
+
+                this.Connection.Dispose();
+            }
+
+            this.disposed = true;
+        }
+    }
+
+    /// <summary>
+    /// Disposes managed resources of <see cref="NatsSubscription"/>.
+    /// </summary>
     public void Dispose()
     {
-        // Do Nothing
+        // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        this.Dispose(true);
     }
 }

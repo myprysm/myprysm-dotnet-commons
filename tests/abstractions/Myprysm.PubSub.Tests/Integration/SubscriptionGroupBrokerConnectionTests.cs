@@ -6,8 +6,18 @@ using FluentAssertions;
 using Myprysm.PubSub.Abstractions;
 using NUnit.Framework;
 
-public abstract class SubscriptionGroupBrokerConnectionTests : BrokerConnectionTests
+public abstract class SubscriptionGroupBrokerConnectionTests<TOptions> : BrokerConnectionTests<TOptions>
+    where TOptions : PubSubOptions
 {
+    [SetUp]
+    public void CheckCapability()
+    {
+        if (!this.BrokerConnection.Capabilities.SubscriptionGroups)
+        {
+            Assert.Ignore("Broker does not support persistent messages.");
+        }
+    }
+
     [Test]
     public async Task When_two_subscriptions_are_active_then_both_receive_publication()
     {
@@ -19,8 +29,8 @@ public abstract class SubscriptionGroupBrokerConnectionTests : BrokerConnectionT
         var publication = new Publication(topic, encodedMessage);
         var handler = new PublicationCollectorHandler();
 
-        await connection.Subscribe(topic, handler);
-        await connection.Subscribe(topic, handler);
+        await connection.Subscribe(topic, handler.HandleAsync);
+        await connection.Subscribe(topic, handler.HandleAsync);
 
         // Act
         await connection.Publish(publication);
@@ -43,8 +53,8 @@ public abstract class SubscriptionGroupBrokerConnectionTests : BrokerConnectionT
         var publication = new Publication(topic, encodedMessage);
         var handler = new PublicationCollectorHandler();
 
-        await connection.Subscribe(topic, handler, subscriptionGroup);
-        await connection.Subscribe(topic, handler, subscriptionGroup);
+        await connection.Subscribe(topic, handler.HandleAsync, subscriptionGroup);
+        await connection.Subscribe(topic, handler.HandleAsync, subscriptionGroup);
 
         // Act
         await connection.Publish(publication);
@@ -72,8 +82,8 @@ public abstract class SubscriptionGroupBrokerConnectionTests : BrokerConnectionT
         var publication = new Publication(topic, encodedMessage);
         var handler = new PublicationCollectorHandler();
 
-        await connection.Subscribe(topic, handler, firstSubscriptionGroup);
-        await connection.Subscribe(topic, handler, secondSubscriptionGroup);
+        await connection.Subscribe(topic, handler.HandleAsync, firstSubscriptionGroup);
+        await connection.Subscribe(topic, handler.HandleAsync, secondSubscriptionGroup);
 
         // Act
         await connection.Publish(publication);

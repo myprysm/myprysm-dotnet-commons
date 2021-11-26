@@ -6,7 +6,8 @@ using FluentAssertions;
 using Myprysm.PubSub.Abstractions;
 using NUnit.Framework;
 
-public abstract class PersistentBrokerConnectionTests : BrokerConnectionTests
+public abstract class PersistentBrokerConnectionTests<TOptions> : BrokerConnectionTests<TOptions>
+    where TOptions : PubSubOptions
 {
     [SetUp]
     public void CheckCapability()
@@ -17,7 +18,7 @@ public abstract class PersistentBrokerConnectionTests : BrokerConnectionTests
             Assert.Ignore("Broker does not support persistent messages.");
         }
     }
-                
+
     [Test]
     public async Task When_subscription_is_active_before_publication_is_sent_then_publication_is_received()
     {
@@ -28,7 +29,7 @@ public abstract class PersistentBrokerConnectionTests : BrokerConnectionTests
         var encodedMessage = EncodeString(message);
         var publication = new Publication(topic, encodedMessage, false);
         var handler = new PublicationCollectorHandler();
-        await connection.Subscribe(topic, handler);
+        await connection.Subscribe(topic, handler.HandleAsync);
 
         // Act
         await connection.Publish(publication);
@@ -52,7 +53,7 @@ public abstract class PersistentBrokerConnectionTests : BrokerConnectionTests
 
         // Act
         await connection.Publish(publication);
-        await connection.Subscribe(topic, handler);
+        await connection.Subscribe(topic, handler.HandleAsync);
 
         // Assert
         var publications = handler.GetMessages(TimeSpan.FromSeconds(1));

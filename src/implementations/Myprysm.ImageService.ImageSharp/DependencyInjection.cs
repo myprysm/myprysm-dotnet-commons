@@ -2,6 +2,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Myprysm.ImageService.Abstractions;
+using Myprysm.Tracing.Abstractions;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Memory;
 
@@ -11,9 +12,22 @@ public static class DependencyInjection
         this IServiceCollection services,
         MemoryPoolKind memoryPool = MemoryPoolKind.Default)
     {
-        Configuration.Default.MemoryAllocator = GetMemoryAllocator(memoryPool);
+        return services.AddImageSharpImageService(options => options.MemoryPoolKind = memoryPool);
+    }
 
-        return services.AddScoped<IImageService, ImageSharpImageService>();
+    public static IServiceCollection AddImageSharpImageService(
+        this IServiceCollection services,
+        Action<ImageSharpImageServiceOptions> configure)
+    {
+        return services
+            .Configure(configure)
+            .PostConfigure<ImageSharpImageServiceOptions>(options => { Configuration.Default.MemoryAllocator = GetMemoryAllocator(options.MemoryPoolKind); })
+            .TryAddDefaultTracer()
+            .RegisterTracerOnStartup(ImageServiceImageSharpConstants.TracerIdentity)
+            .AddSingleton<ImageSharpImageService>()
+            .AddSingleton(sp => sp.CreateImageService<ImageSharpImageServiceOptions>(
+                ImageServiceImageSharpConstants.TracerIdentity,
+                p => p.GetRequiredService<ImageSharpImageService>()));
     }
 
     private static MemoryAllocator GetMemoryAllocator(MemoryPoolKind kind)

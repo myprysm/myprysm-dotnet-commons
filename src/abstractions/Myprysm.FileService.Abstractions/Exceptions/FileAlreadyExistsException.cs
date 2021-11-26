@@ -4,8 +4,8 @@ using Myprysm.SharedKernel.Exceptions;
 
 public class FileAlreadyExistsException : ManagedException
 {
-    public FileAlreadyExistsException(string message)
-        : base(message)
+    public FileAlreadyExistsException(string container, string path)
+        : base($"{container}/{path}")
     {
     }
 }

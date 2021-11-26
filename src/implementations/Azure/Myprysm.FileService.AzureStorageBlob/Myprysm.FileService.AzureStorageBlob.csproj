@@ -15,5 +15,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\abstractions\Myprysm.FileService.Abstractions\Myprysm.FileService.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\abstractions\Myprysm.Tracing.Abstractions\Myprysm.Tracing.Abstractions.csproj" />
     </ItemGroup>
 </Project>

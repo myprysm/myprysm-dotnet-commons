@@ -1,6 +1,8 @@
 ﻿namespace Myprysm.PubSub.AzureStorageQueue;
 
-public class AzureStorageQueueBrokerOptions
+using Myprysm.PubSub.Abstractions;
+
+public class AzureStorageQueuePubSubOptions : PubSubOptions
 {
     public string ConnectionString { get; set; } = "UseDevelopmentStorage=true";
 

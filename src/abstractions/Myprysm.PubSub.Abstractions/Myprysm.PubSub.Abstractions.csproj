@@ -13,6 +13,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Myprysm.SharedKernel\Myprysm.SharedKernel.csproj" />
       <ProjectReference Include="..\Myprysm.Tracing.Abstractions\Myprysm.Tracing.Abstractions.csproj" />
+      <ProjectReference Include="..\Myprysm.Converter.Abstractions\Myprysm.Converter.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>
