@@ -33,7 +33,7 @@ internal class TracedFileService : IFileService
         using var trace = this.tracer.StartTrace(nameof(this.UploadFile));
         trace?.AddTag("file_service.container", container);
         trace?.AddTag("file_service.path", path);
-        
+
         try
         {
             await this.delegated

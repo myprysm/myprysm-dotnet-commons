@@ -114,7 +114,7 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
         trace?.AddTag("broker_connection.topic", publication.Topic.Value);
         trace?.AddTag("broker_connection.size", publication.Message.LongLength.ToString(CultureInfo.InvariantCulture));
         trace?.AddTag("broker_connection.is_volatile", publication.IsVolatile.ToString());
-        
+
         try
         {
             var client = await this.GetClient(publication.Topic.Value, cancellation).ConfigureAwait(false);

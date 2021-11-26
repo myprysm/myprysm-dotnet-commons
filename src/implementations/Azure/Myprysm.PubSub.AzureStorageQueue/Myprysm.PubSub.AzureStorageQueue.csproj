@@ -1,22 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Azure.Storage.Queues" Version="12.8.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
-        <PackageReference Include="Polly" Version="7.2.2" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Queues" Version="12.8.0"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0"/>
+    <PackageReference Include="Polly" Version="7.2.2"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\abstractions\Myprysm.Converter.Abstractions\Myprysm.Converter.Abstractions.csproj" />
-        <ProjectReference Include="..\..\..\abstractions\Myprysm.PubSub.Abstractions\Myprysm.PubSub.Abstractions.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\abstractions\Myprysm.Converter.Abstractions\Myprysm.Converter.Abstractions.csproj"/>
+    <ProjectReference Include="..\..\..\abstractions\Myprysm.PubSub.Abstractions\Myprysm.PubSub.Abstractions.csproj"/>
+  </ItemGroup>
 
 </Project>

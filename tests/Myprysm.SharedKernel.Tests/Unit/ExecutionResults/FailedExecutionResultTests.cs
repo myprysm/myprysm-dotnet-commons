@@ -51,7 +51,7 @@ public class FailedExecutionResultTests : FixtureTests
     {
         // Arrange
         var errors = new[] { this.A<string>(), this.A<string>(), };
-        
+
         // Act
         var result = ExecutionResult.Failed(errors);
 

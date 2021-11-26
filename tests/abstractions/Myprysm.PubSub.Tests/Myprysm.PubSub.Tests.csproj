@@ -1,20 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <Nullable>enable</Nullable>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
 
-        <IsPackable>false</IsPackable>
-    </PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="NUnit" Version="3.13.2" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.13.2"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\..\src\abstractions\Myprysm.PubSub.Abstractions\Myprysm.PubSub.Abstractions.csproj" />
-      <ProjectReference Include="..\..\..\src\implementations\Myprysm.Converter.NewtonsoftJson.ValueObjects\Myprysm.Converter.NewtonsoftJson.ValueObjects.csproj" />
-      <ProjectReference Include="..\..\..\src\Myprysm.Testing\Myprysm.Testing.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\abstractions\Myprysm.PubSub.Abstractions\Myprysm.PubSub.Abstractions.csproj"/>
+    <ProjectReference Include="..\..\..\src\implementations\Myprysm.Converter.NewtonsoftJson.ValueObjects\Myprysm.Converter.NewtonsoftJson.ValueObjects.csproj"/>
+    <ProjectReference Include="..\..\..\src\Myprysm.Testing\Myprysm.Testing.csproj"/>
+  </ItemGroup>
 
 </Project>

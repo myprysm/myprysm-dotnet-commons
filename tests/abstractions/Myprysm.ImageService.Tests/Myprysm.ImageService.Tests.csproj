@@ -1,18 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <Nullable>enable</Nullable>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
 
-        <IsPackable>false</IsPackable>
-    </PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\..\src\abstractions\Myprysm.ImageService.Abstractions\Myprysm.ImageService.Abstractions.csproj" />
-      <ProjectReference Include="..\..\..\src\Myprysm.Testing\Myprysm.Testing.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\abstractions\Myprysm.ImageService.Abstractions\Myprysm.ImageService.Abstractions.csproj"/>
+    <ProjectReference Include="..\..\..\src\Myprysm.Testing\Myprysm.Testing.csproj"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <EmbeddedResource Include="Integration\bender.jpeg" CopyToOutputDirectory="PreserveNewest" />
-    </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Integration\bender.jpeg" CopyToOutputDirectory="PreserveNewest"/>
+  </ItemGroup>
 </Project>
