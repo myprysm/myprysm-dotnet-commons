@@ -1,6 +1,7 @@
 ﻿namespace Myprysm.PubSub.AzureStorageQueue;
 
 using System.Collections.Concurrent;
+using System.Globalization;
 using Azure.Storage.Queues;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -32,11 +33,12 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
     private readonly int maxDequeueCount;
     private readonly AsyncRetryPolicy retryPolicy;
     private bool disposed;
+    private readonly SubscriptionExceptionHandler globalExceptionHandler;
 
     public AzureStorageQueueBrokerConnection(
         IConverter converter,
         ITracerFactory tracerFactory,
-        IOptions<AzureStorageQueueBrokerOptions> options,
+        IOptions<AzureStorageQueuePubSubOptions> options,
         ILogger<AzureStorageQueueBrokerConnection> logger,
         ILogger<AzureStorageQueueSubscription> subscriptionLogger)
     {
@@ -85,6 +87,7 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
         this.retryPolicy = Policy
             .Handle<EmptyQueueException>()
             .WaitAndRetryForeverAsync(this.CalculateWaitIntervalForAttempt);
+        this.globalExceptionHandler = options.Value.GlobalSubscriptionExceptionHandler;
     }
 
     private TimeSpan CalculateWaitIntervalForAttempt(int attempt)
@@ -107,17 +110,31 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
 
     public async Task Publish(Publication publication, CancellationToken cancellation = default)
     {
-        var trace = publication.Trace ?? this.tracer.CurrentTrace;
-        var client = await this.GetClient(publication.Topic.Value, cancellation).ConfigureAwait(false);
+        using var trace = this.tracer.StartTrace(nameof(this.Publish), TraceKind.Producer, publication.Trace);
+        trace?.AddTag("broker_connection.topic", publication.Topic.Value);
+        trace?.AddTag("broker_connection.size", publication.Message.LongLength.ToString(CultureInfo.InvariantCulture));
+        trace?.AddTag("broker_connection.is_volatile", publication.IsVolatile.ToString());
+        
+        try
+        {
+            var client = await this.GetClient(publication.Topic.Value, cancellation).ConfigureAwait(false);
 
-        var serializedTrace = SerializedTrace.GetSerializedTrace(trace);
+            var serializedTrace = SerializedTrace.GetSerializedTrace(trace);
+            var envelope = new Envelope(publication.Message, serializedTrace);
+            var payload = this.converter.WriteBytes(envelope);
 
-        var envelope = new Envelope(publication.Message, serializedTrace);
-        var payload = this.converter.WriteBytes(envelope);
-        _ = await client.SendMessageAsync(new BinaryData(payload), cancellationToken: cancellation).ConfigureAwait(false);
+            _ = await client.SendMessageAsync(new BinaryData(payload), cancellationToken: cancellation).ConfigureAwait(false);
+        }
+        catch (Exception exception)
+        {
+            this.logger.LogError(exception, "An error occured during the publication: {Message}", exception.Message);
+            trace?.AddTag("otel.status_code", "ERROR");
+            trace?.AddTag("otel.status_description", $"Unhandled exception: {exception.Message}");
+            throw;
+        }
     }
 
-    private async ValueTask<QueueClient> GetClient(string queue, CancellationToken cancellation)
+    internal async ValueTask<QueueClient> GetClient(string queue, CancellationToken cancellation)
     {
         if (this.queueClients.ContainsKey(queue))
         {
@@ -132,8 +149,9 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
 
     public async Task<ISubscription> Subscribe(
         Topic topic,
-        Func<Publication, Task> handler,
+        PublicationHandler handler,
         SubscriptionGroup? group = null,
+        SubscriptionExceptionHandler? exceptionHandler = null,
         CancellationToken cancellation = default)
     {
         if (group != null)
@@ -154,6 +172,7 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
             queueClient,
             poisonQueueClient,
             handler,
+            exceptionHandler ?? this.globalExceptionHandler,
             this.retryPolicy,
             this.batchSize,
             this.maxDequeueCount,

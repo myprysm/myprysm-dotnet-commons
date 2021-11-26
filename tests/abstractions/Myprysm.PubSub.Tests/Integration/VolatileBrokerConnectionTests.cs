@@ -7,7 +7,8 @@ using FluentAssertions;
 using Myprysm.PubSub.Abstractions;
 using NUnit.Framework;
 
-public abstract class VolatileBrokerConnectionTests : BrokerConnectionTests
+public abstract class VolatileBrokerConnectionTests<TOptions> : BrokerConnectionTests<TOptions>
+    where TOptions : PubSubOptions
 {
     [SetUp]
     public void CheckCapability()
@@ -29,7 +30,7 @@ public abstract class VolatileBrokerConnectionTests : BrokerConnectionTests
         var encodedMessage = EncodeString(message);
         var publication = new Publication(topic, encodedMessage);
         var handler = new PublicationCollectorHandler();
-        await connection.Subscribe(topic, handler);
+        await connection.Subscribe(topic, handler.HandleAsync);
 
         // Act
         await connection.Publish(publication);
@@ -62,7 +63,7 @@ public abstract class VolatileBrokerConnectionTests : BrokerConnectionTests
 
         // Act
         await connection.Publish(publication);
-        await connection.Subscribe(topic, handler);
+        await connection.Subscribe(topic, handler.HandleAsync);
 
         // Assert
         var action = handler.Invoking(h => h.GetMessages(TimeSpan.FromMilliseconds(500)));

@@ -13,7 +13,8 @@ public sealed class AzureStorageQueueSubscription : ISubscription
 {
     private readonly QueueClient queueClient;
     private readonly QueueClient poisonQueueClient;
-    private readonly Func<Publication, Task> handler;
+    private readonly PublicationHandler handler;
+    private readonly SubscriptionExceptionHandler exceptionHandler;
     private readonly AsyncRetryPolicy retryPolicy;
     private readonly int batchSize;
     private readonly int maxDequeueCount;
@@ -28,7 +29,8 @@ public sealed class AzureStorageQueueSubscription : ISubscription
     internal AzureStorageQueueSubscription(
         QueueClient queueClient,
         QueueClient poisonQueueClient,
-        Func<Publication, Task> handler,
+        PublicationHandler handler,
+        SubscriptionExceptionHandler exceptionHandler,
         AsyncRetryPolicy retryPolicy,
         int batchSize,
         int maxDequeueCount,
@@ -40,6 +42,7 @@ public sealed class AzureStorageQueueSubscription : ISubscription
         this.queueClient = queueClient;
         this.poisonQueueClient = poisonQueueClient;
         this.handler = handler;
+        this.exceptionHandler = exceptionHandler;
         this.retryPolicy = retryPolicy;
         this.batchSize = batchSize;
         this.maxDequeueCount = maxDequeueCount;
@@ -80,16 +83,21 @@ public sealed class AzureStorageQueueSubscription : ISubscription
 
     private async Task HandleMessage(QueueMessage message, CancellationToken cancellation)
     {
-        // Check max dequeue count
-        if (message.DequeueCount > this.maxDequeueCount)
-        {
-            await this.MoveToPoisonQueue(message, cancellation);
-            return;
-        }
+        using var trace = this.tracer.StartTrace(nameof(this.HandleMessage), TraceKind.Consumer);
+        trace?.AddTag("azure_queue_subscription.topic", this.topic.Value);
+        trace?.AddTag("azure_queue_subscription.dequeue_count", message.DequeueCount.ToString());
 
-        using var _ = new AzureStorageQueueMessageLockHolder(message, this.queueClient);
         try
         {
+            // Check max dequeue count
+            if (message.DequeueCount > this.maxDequeueCount)
+            {
+                await this.MoveToPoisonQueue(message, cancellation);
+                return;
+            }
+
+            using var _ = new AzureStorageQueueMessageLockHolder(message, this.queueClient);
+
             var envelope = this.converter.Read<Envelope>(message.Body.ToStream());
 
             if (envelope is null)
@@ -98,7 +106,15 @@ public sealed class AzureStorageQueueSubscription : ISubscription
                 throw new SubscriptionHandlerException($"Envelope is null in handler for subject {this.topic}");
             }
 
-            using var trace = this.tracer.StartTrace(nameof(this.HandleMessage), TraceKind.Consumer, envelope.Trace);
+            if (envelope.Trace is not null && trace is not null)
+            {
+                trace.SetParentId(envelope.Trace.Id);
+                foreach (var (key, value) in envelope.Trace.Baggage)
+                {
+                    trace.AddBaggage(key, value);
+                }
+            }
+
             var publication = new Publication(
                 this.topic,
                 envelope.Payload,
@@ -107,6 +123,15 @@ public sealed class AzureStorageQueueSubscription : ISubscription
             await this.handler(publication).ConfigureAwait(false);
             await this.DeleteMessageAsync(message, cancellation).ConfigureAwait(false);
         }
+        catch (SubscriptionHandlerException exception)
+        {
+            trace?.AddTag("otel.status_code", "ERROR");
+            trace?.AddTag("otel.status_description", exception.Message);
+
+            await this.MoveToPoisonQueue(message, cancellation);
+
+            this.exceptionHandler(exception);
+        }
         catch (Exception exception)
         {
             this.logger.LogError(
@@ -114,6 +139,9 @@ public sealed class AzureStorageQueueSubscription : ISubscription
                 "Error while processing publication {PublicationId} on topic {Topic}",
                 message.MessageId,
                 this.topic.Value);
+            trace?.AddTag("otel.status_code", "ERROR");
+            trace?.AddTag("otel.status_description", $"Unhandled exception: {exception.Message}");
+
             // Check max dequeue count
             if (message.DequeueCount + 1 > this.maxDequeueCount)
             {
@@ -124,6 +152,8 @@ public sealed class AzureStorageQueueSubscription : ISubscription
             await this.queueClient
                 .UpdateMessageAsync(message.MessageId, message.PopReceipt, visibilityTimeout: TimeSpan.Zero, cancellationToken: cancellation)
                 .ConfigureAwait(false);
+
+            this.exceptionHandler(exception);
         }
     }
 

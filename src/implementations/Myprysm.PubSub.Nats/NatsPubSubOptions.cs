@@ -1,6 +1,8 @@
 namespace Myprysm.PubSub.Nats;
 
-public class NatsBrokerOptions
+using Myprysm.PubSub.Abstractions;
+
+public class NatsPubSubOptions : PubSubOptions
 {
     public bool WithSsl { get; set; }
 

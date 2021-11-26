@@ -4,8 +4,8 @@ using Myprysm.SharedKernel.Exceptions;
 
 public class FileNotFoundException : ManagedException
 {
-    public FileNotFoundException(string message)
-        : base(message)
+    public FileNotFoundException(string container, string path)
+        : base($"{container}/{path}")
     {
     }
 }

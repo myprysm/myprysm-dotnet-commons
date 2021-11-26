@@ -4,14 +4,15 @@ using System.Collections.Concurrent;
 
 public sealed class DefaultTrace : ITrace
 {
-    private readonly ITrace? parent;
     private readonly DefaultTracer tracer;
     private readonly ConcurrentDictionary<string, string?> baggage;
     private readonly ConcurrentDictionary<string, string?> tags;
 
-    public DefaultTrace(string name, ITrace? parent, DefaultTracer tracer)
+    private ITrace? parent;
+
+    public DefaultTrace(string id, string name, ITrace? parent, DefaultTracer tracer)
     {
-        this.Id = Guid.NewGuid().ToString();
+        this.Id = id;
         this.Name = name;
         this.parent = parent;
         this.tracer = tracer;
@@ -31,7 +32,10 @@ public sealed class DefaultTrace : ITrace
 
     public void Dispose()
     {
-        // Do nothing.
+        if (DefaultTracer.CurrentTraceLocal.Value == this)
+        {
+            DefaultTracer.CurrentTraceLocal.Value = this.parent;
+        }
     }
 
     public string Name { get; }
@@ -44,14 +48,36 @@ public sealed class DefaultTrace : ITrace
 
     public IReadOnlyDictionary<string, string?> Tags => this.tags;
 
+    /// <inheritdoc cref="ITrace"/>
+    public void SetParentId(string parentId)
+    {
+        this.parent = new DefaultTrace(parentId, string.Empty, null, this.tracer);
+    }
+
     public void AddBaggage(string key, string? value)
     {
-        this.baggage.TryAdd(key, value);
+        if (this.baggage.TryAdd(key, value))
+        {
+            return;
+        }
+
+        if (this.baggage.TryGetValue(key, out var oldValue))
+        {
+            this.baggage.TryUpdate(key, value, oldValue);
+        }
     }
 
     public void AddTag(string key, string? value)
     {
-        this.tags.TryAdd(key, value);
+        if (this.tags.TryAdd(key, value))
+        {
+            return;
+        }
+
+        if (this.tags.TryGetValue(key, out var oldValue))
+        {
+            this.tags.TryUpdate(key, value, oldValue);
+        }
     }
 
     public ITrace CreateChild(string name, TraceKind kind = TraceKind.Internal)

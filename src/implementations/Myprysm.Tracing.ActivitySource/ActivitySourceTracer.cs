@@ -17,9 +17,11 @@ public class ActivitySourceTracer : ITracer
 
     public string Name => this.ActivitySource.Name;
 
-    public ITrace? CurrentTrace => Activity.Current is null
-        ? null
-        : new ActivityTrace(Activity.Current, this);
+    public ITrace? CurrentTrace => Activity.Current switch
+    {
+        null => null,
+        _ => new ActivityTrace(Activity.Current, this),
+    };
 
     public ITrace? StartTrace(string name, TraceKind kind = TraceKind.Internal, ITrace? parent = null)
     {

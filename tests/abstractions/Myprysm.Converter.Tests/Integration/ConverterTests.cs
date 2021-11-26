@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Myprysm.Converter.Abstractions;
+using Myprysm.Converter.Abstractions.Exceptions;
 using Myprysm.Testing;
 using NUnit.Framework;
 
@@ -12,6 +13,36 @@ public abstract class ConverterTests : ServiceTests
 {
     private IConverter Converter => this.Services.GetRequiredService<IConverter>();
 
+    protected abstract byte[] GetInvalidData();
+
+    [Test]
+    public void Read_WhenDataIsInvalid_ShouldThrow()
+    {
+        // Arrange
+        var invalidData = this.GetInvalidData();
+        
+        // Act
+        var act = () => this.Converter.Read<Shape>(invalidData);
+        
+        // Assert
+        act.Should().Throw<ConversionReadException>();
+    }
+
+    [Test]
+    public void Write_WhenStreamIsDisposed_ShouldThrow()
+    {
+        // Arrange
+        var shape = this.A<Shape>();
+        var stream = new MemoryStream();
+        stream.Dispose();
+
+        // Act
+        var act = () => this.Converter.WriteToStream(shape, stream);
+        
+        // Assert
+        act.Should().Throw<ConversionWriteException>();
+    }
+    
     [Test]
     public void CanReadByteArray_FromConverterWriteBytes()
     {

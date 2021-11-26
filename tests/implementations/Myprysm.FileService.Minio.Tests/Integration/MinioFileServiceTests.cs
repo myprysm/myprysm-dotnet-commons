@@ -13,6 +13,7 @@ public class MinioFileServiceTests : FileServiceTests
     {
         var config = new Dictionary<string, string>
         {
+            [nameof(MinioFileServiceOptions.WithTracing)] = "true",
             [nameof(MinioFileServiceOptions.Endpoint)] = "localhost:9001",
             [nameof(MinioFileServiceOptions.AccessKey)] = "integration-minio",
             [nameof(MinioFileServiceOptions.SecretKey)] = "integration-minio-secret",

@@ -1,6 +1,8 @@
 ﻿namespace Myprysm.FileService.Minio;
 
-public class MinioFileServiceOptions
+using Myprysm.FileService.Abstractions;
+
+public class MinioFileServiceOptions : FileServiceOptions
 {
     public bool WithSsl { get; set; }
 

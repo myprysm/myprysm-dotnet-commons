@@ -9,12 +9,13 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddPubSubAzureStorageQueue(
         this IServiceCollection services,
-        Action<AzureStorageQueueBrokerOptions>? configure = null)
+        Action<AzureStorageQueuePubSubOptions>? configure = null)
     {
         var configureOptions = configure ?? (_ => { });
 
         return services
                 .Configure(configureOptions)
+                .TryAddDefaultTracer()
                 .RegisterTracerOnStartup(PubSubAzureStorageQueueConstants.TracerIdentity)
                 .AddSingleton<IBrokerConnection, AzureStorageQueueBrokerConnection>()
             ;

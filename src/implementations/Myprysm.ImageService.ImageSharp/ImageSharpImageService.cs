@@ -1,5 +1,6 @@
 ﻿namespace Myprysm.ImageService.ImageSharp;
 
+using Microsoft.Extensions.Logging;
 using Myprysm.ImageService.Abstractions;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
@@ -9,14 +10,30 @@ using Size = Myprysm.ImageService.Abstractions.Size;
 
 public class ImageSharpImageService : IImageService
 {
+    private readonly ILogger<ImageSharpImageService> logger;
+
+    public ImageSharpImageService(
+        ILogger<ImageSharpImageService> logger)
+    {
+        this.logger = logger;
+    }
+
     public async Task<ImageMetadata> GetMetadataAsync(Stream source, CancellationToken cancellation = default)
     {
-        var (info, format) = await Image.IdentifyWithFormatAsync(source, cancellation).ConfigureAwait(false);
+        try
+        {
+            var (info, format) = await Image.IdentifyWithFormatAsync(source, cancellation).ConfigureAwait(false);
 
-        return new ImageMetadata(
-            format.GetImageFormat(),
-            new Size(info.Width, info.Height),
-            format.DefaultMimeType);
+            return new ImageMetadata(
+                format.GetImageFormat(),
+                new Size(info.Width, info.Height),
+                format.DefaultMimeType);
+        }
+        catch (Exception exception)
+        {
+            this.logger.LogError(exception, "Unable to read metadata for image: {Message}", exception.Message);
+            throw new Abstractions.Exceptions.ImageProcessingException("Unable to read metadata for image", exception);
+        }
     }
 
     public async Task<Stream> CropAsync(
@@ -25,28 +42,41 @@ public class ImageSharpImageService : IImageService
         ImageFormat format = ImageFormat.Original,
         CancellationToken cancellation = default)
     {
-        var originalFormat = await Image.DetectFormatAsync(source).ConfigureAwait(false);
-        using var sourceImage = await Image.LoadAsync(source).ConfigureAwait(false);
+        try
+        {
+            var originalFormat = await Image.DetectFormatAsync(source).ConfigureAwait(false);
+            using var sourceImage = await Image.LoadAsync(source).ConfigureAwait(false);
 
-        var (point, size) = cropArea;
+            var (point, size) = cropArea;
 
-        var rectangle = new SixLabors.ImageSharp.Rectangle(
-            new Point(point.XAsInt, point.YAsInt),
-            new SixLabors.ImageSharp.Size(size.WidthAsInt, size.HeightAsInt));
+            var rectangle = new SixLabors.ImageSharp.Rectangle(
+                new Point(point.XAsInt, point.YAsInt),
+                new SixLabors.ImageSharp.Size(size.WidthAsInt, size.HeightAsInt));
 
-        await Task.Run(
-                // ReSharper disable once AccessToDisposedClosure
-                () => sourceImage.Mutate(i => i.Crop(rectangle)),
-                cancellation)
-            .ConfigureAwait(false);
+            await Task.Run(
+                    // ReSharper disable once AccessToDisposedClosure
+                    () => sourceImage.Mutate(i => i.Crop(rectangle)),
+                    cancellation)
+                .ConfigureAwait(false);
 
-        var outputFormat = format.GetImageFormat(originalFormat);
+            var outputFormat = format.GetImageFormat(originalFormat);
 
-        var outputStream = new MemoryStream();
-        await sourceImage.SaveAsync(outputStream, outputFormat, cancellation).ConfigureAwait(false);
+            var outputStream = new MemoryStream();
+            await sourceImage.SaveAsync(outputStream, outputFormat, cancellation).ConfigureAwait(false);
 
-        outputStream.Position = 0;
-        return outputStream;
+            outputStream.Position = 0;
+            return outputStream;
+        }
+        catch (Exception exception)
+        {
+            this.logger.LogError(
+                exception,
+                "Unable to crop image to area {@Area} with format {Format}: {Message}",
+                cropArea,
+                format,
+                exception.Message);
+            throw new Abstractions.Exceptions.ImageProcessingException($"Unable to crop image to area {cropArea} with format {format}", exception);
+        }
     }
 
     public async Task<Stream> ResizeAsync(
@@ -55,22 +85,35 @@ public class ImageSharpImageService : IImageService
         ImageFormat format = ImageFormat.Original,
         CancellationToken cancellation = default)
     {
-        var originalFormat = await Image.DetectFormatAsync(source).ConfigureAwait(false);
-        using var sourceImage = await Image.LoadAsync(source).ConfigureAwait(false);
+        try
+        {
+            var originalFormat = await Image.DetectFormatAsync(source).ConfigureAwait(false);
+            using var sourceImage = await Image.LoadAsync(source).ConfigureAwait(false);
 
-        var newSize = new SixLabors.ImageSharp.Size(size.WidthAsInt, size.HeightAsInt);
+            var newSize = new SixLabors.ImageSharp.Size(size.WidthAsInt, size.HeightAsInt);
 
-        await Task.Run(
-                // ReSharper disable once AccessToDisposedClosure
-                () => sourceImage.Mutate(i => i.Resize(newSize)),
-                cancellation)
-            .ConfigureAwait(false);
+            await Task.Run(
+                    // ReSharper disable once AccessToDisposedClosure
+                    () => sourceImage.Mutate(i => i.Resize(newSize)),
+                    cancellation)
+                .ConfigureAwait(false);
 
-        var outputFormat = format.GetImageFormat(originalFormat);
-        var outputStream = new MemoryStream();
-        await sourceImage.SaveAsync(outputStream, outputFormat, cancellation).ConfigureAwait(false);
+            var outputFormat = format.GetImageFormat(originalFormat);
+            var outputStream = new MemoryStream();
+            await sourceImage.SaveAsync(outputStream, outputFormat, cancellation).ConfigureAwait(false);
 
-        outputStream.Position = 0;
-        return outputStream;
+            outputStream.Position = 0;
+            return outputStream;
+        }
+        catch (Exception exception)
+        {
+            this.logger.LogError(
+                exception,
+                "Unable to resize image to size {@Size} with format {Format}: {Message}",
+                size,
+                format,
+                exception.Message);
+            throw new Abstractions.Exceptions.ImageProcessingException($"Unable to resize image to size {size} with format {format}", exception);
+        }
     }
 }

@@ -27,6 +27,10 @@ public class FileSystemFileServiceTests : FileServiceTests
 
     protected override void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddFileSystemFileService(this.testDirectory);
+        services.AddFileSystemFileService(options =>
+        {
+            options.Directory = this.testDirectory;
+            options.WithTracing = true;
+        });
     }
 }

@@ -2,6 +2,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Myprysm.FileService.Abstractions;
+using Myprysm.Tracing.Abstractions;
 
 public static class DependencyInjection
 {
@@ -9,7 +10,7 @@ public static class DependencyInjection
         this IServiceCollection services,
         string directory)
     {
-        return services.AddFileSystemFileService(options => { options.Directory = directory; });
+        return services.AddFileSystemFileService(options => options.Directory = directory);
     }
 
     public static IServiceCollection AddFileSystemFileService(
@@ -18,6 +19,11 @@ public static class DependencyInjection
     {
         return services
             .Configure(configure)
-            .AddSingleton<IFileService, FileSystemFileService>();
+            .TryAddDefaultTracer()
+            .RegisterTracerOnStartup(FileServiceFileSystemConstants.TracerIdentity)
+            .AddSingleton<FileSystemFileService>()
+            .AddSingleton(sp => sp.CreateFileService<FileSystemFileServiceOptions>(
+                FileServiceFileSystemConstants.TracerIdentity,
+                p => p.GetRequiredService<FileSystemFileService>()));
     }
 }

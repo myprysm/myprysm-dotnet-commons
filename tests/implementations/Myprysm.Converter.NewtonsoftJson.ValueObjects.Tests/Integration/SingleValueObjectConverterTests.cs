@@ -51,7 +51,7 @@ public class SingleValueObjectConverterTests : ServiceTests
     public void DeserializeNullableIntWithoutValue()
     {
         // Arrange
-        var json = JsonConvert.SerializeObject(new { });
+        var json = this.Converter.WriteString(new { });
 
         // Act
         var with = JsonConvert.DeserializeObject<WithNullableIntSingleValue>(json);
@@ -80,7 +80,7 @@ public class SingleValueObjectConverterTests : ServiceTests
     {
         // Arrange
         var i = this.A<int>();
-        var json = JsonConvert.SerializeObject(new { i, });
+        var json = this.Converter.WriteString(new { i, });
 
         // Act
         var with = JsonConvert.DeserializeObject<WithNullableIntSingleValue>(json);
@@ -97,7 +97,7 @@ public class SingleValueObjectConverterTests : ServiceTests
         var with = new WithNullableIntSingleValue(null!);
 
         // Act
-        var json = JsonConvert.SerializeObject(with);
+        var json = this.Converter.WriteString(with);
 
         // Assert
         json.Should().Be("{}");
@@ -110,7 +110,7 @@ public class SingleValueObjectConverterTests : ServiceTests
         var with = new WithNullableIntSingleValue(new IntSingleValue(42));
 
         // Act
-        var json = JsonConvert.SerializeObject(with);
+        var json = this.Converter.WriteString(with);
 
         // Assert
         json.Should().Be("{\"i\":42}");
@@ -126,7 +126,7 @@ public class SingleValueObjectConverterTests : ServiceTests
         var stringSvo = new StringSvo(value);
 
         // Act
-        var json = JsonConvert.SerializeObject(stringSvo);
+        var json = this.Converter.WriteString(stringSvo);
 
         // Assert
         json.Should().Be(expectedJson);

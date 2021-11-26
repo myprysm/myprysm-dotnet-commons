@@ -3,7 +3,7 @@ namespace Myprysm.PubSub.Abstractions;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 
-public class PublicationCollectorHandler : IPublicationHandler
+public class PublicationCollectorHandler
 {
     private readonly BlockingCollection<Publication> receivedPublications;
 

@@ -8,16 +8,8 @@ public interface IBrokerConnection : IDisposable
 
     Task<ISubscription> Subscribe(
         Topic topic,
-        IPublicationHandler handler,
+        PublicationHandler handler,
         SubscriptionGroup? group = null,
-        CancellationToken cancellation = default)
-    {
-        return this.Subscribe(topic, handler.HandleAsync, group, cancellation);
-    }
-
-    Task<ISubscription> Subscribe(
-        Topic topic,
-        Func<Publication, Task> handler,
-        SubscriptionGroup? group = null,
+        SubscriptionExceptionHandler? exceptionHandler = null,
         CancellationToken cancellation = default);
 }

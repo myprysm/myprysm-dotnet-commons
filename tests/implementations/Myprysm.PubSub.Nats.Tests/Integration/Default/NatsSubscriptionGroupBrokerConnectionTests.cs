@@ -1,15 +1,17 @@
 namespace Myprysm.PubSub.Nats.Tests.Integration.Default;
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoFixture;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Myprysm.PubSub.Abstractions;
 using Myprysm.PubSub.Tests.Integration;
 using Myprysm.Testing;
 using NUnit.Framework;
 
 [TestFixture]
-public class NatsSubscriptionGroupBrokerConnectionTests : SubscriptionGroupBrokerConnectionTests
+public class NatsSubscriptionGroupBrokerConnectionTests : SubscriptionGroupBrokerConnectionTests<NatsPubSubOptions>
 {
     protected override void CustomizeFixture(Fixture fixture)
     {
@@ -20,16 +22,24 @@ public class NatsSubscriptionGroupBrokerConnectionTests : SubscriptionGroupBroke
     {
         var config = new Dictionary<string, string>
         {
-            [nameof(NatsBrokerOptions.Url)] = "nats://localhost:4222",
+            [nameof(NatsPubSubOptions.Url)] = "nats://localhost:4222",
         };
 
         configuration.AddInMemoryCollection(config);
     }
-        
+
     protected override void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
         base.ConfigureServices(services, configuration);
 
         services.AddPubSubNats(configuration);
+    }
+
+    protected override Task SendNullMessage(Topic topic)
+    {
+        var connection = this.Services.GetRequiredService<IBrokerConnection>() as NatsBrokerConnection;
+
+        connection?.Connection.Publish(topic.Value, null);
+        return Task.CompletedTask;
     }
 }

@@ -14,6 +14,7 @@ public class AzureStorageBlobFileServiceTests : FileServiceTests
     {
         var config = new Dictionary<string, string>
         {
+            [nameof(AzureStorageBlobFileServiceOptions.WithTracing)] = "true",
             [nameof(AzureStorageBlobFileServiceOptions.ConnectionString)] = "UseDevelopmentStorage=true",
         };
 

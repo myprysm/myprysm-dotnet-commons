@@ -3,6 +3,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Myprysm.FileService.Abstractions;
+using Myprysm.Tracing.Abstractions;
 
 public static class DependencyInjection
 {
@@ -14,7 +15,12 @@ public static class DependencyInjection
 
         return services
                 .Configure(configureOptions)
-                .AddSingleton<IFileService, AzureStorageBlobFileService>()
+                .TryAddDefaultTracer()
+                .RegisterTracerOnStartup(FileServiceAzureStorageBlobConstants.TracerIdentity)
+                .AddSingleton<AzureStorageBlobFileService>()
+                .AddSingleton(sp => sp.CreateFileService<AzureStorageBlobFileServiceOptions>(
+                    FileServiceAzureStorageBlobConstants.TracerIdentity,
+                    p => p.GetRequiredService<AzureStorageBlobFileService>()))
             ;
     }
 
