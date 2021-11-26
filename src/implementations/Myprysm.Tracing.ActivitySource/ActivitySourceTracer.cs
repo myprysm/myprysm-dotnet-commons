@@ -3,12 +3,12 @@ namespace Myprysm.Tracing.ActivitySource;
 using System.Diagnostics;
 using Myprysm.Tracing.Abstractions;
 
-public class ActivitySourceTracer : ITracer
+internal sealed class ActivitySourceTracer : ITracer
 {
-    public ActivitySourceTracer(TracerIdentity identity, ActivitySource activitySource)
+    public ActivitySourceTracer(TracerIdentity identity)
     {
         this.Identity = identity;
-        this.ActivitySource = activitySource;
+        this.ActivitySource = new ActivitySource(identity.Name, identity.Version);
     }
 
     public TracerIdentity Identity { get; }

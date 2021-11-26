@@ -1,7 +1,6 @@
 ﻿namespace Myprysm.Tracing.Abstractions;
 
 using System.Collections.Concurrent;
-using System.Collections.Immutable;
 using Microsoft.Extensions.Options;
 
 public class DefaultTracerFactory : ITracerFactory
@@ -12,8 +11,6 @@ public class DefaultTracerFactory : ITracerFactory
     {
         options.Value.OnStartup.ForEach(id => this.GetTracer(id));
     }
-
-    public IEnumerable<TracerIdentity> RegisteredIdentities => this.tracers.Keys.ToImmutableList();
 
     public ITracer GetTracer(TracerIdentity identity)
     {
