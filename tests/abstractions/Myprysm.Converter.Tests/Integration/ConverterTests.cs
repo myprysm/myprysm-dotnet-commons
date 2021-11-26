@@ -20,10 +20,10 @@ public abstract class ConverterTests : ServiceTests
     {
         // Arrange
         var invalidData = this.GetInvalidData();
-        
+
         // Act
         var act = () => this.Converter.Read<Shape>(invalidData);
-        
+
         // Assert
         act.Should().Throw<ConversionReadException>();
     }
@@ -38,11 +38,11 @@ public abstract class ConverterTests : ServiceTests
 
         // Act
         var act = () => this.Converter.WriteToStream(shape, stream);
-        
+
         // Assert
         act.Should().Throw<ConversionWriteException>();
     }
-    
+
     [Test]
     public void CanReadByteArray_FromConverterWriteBytes()
     {

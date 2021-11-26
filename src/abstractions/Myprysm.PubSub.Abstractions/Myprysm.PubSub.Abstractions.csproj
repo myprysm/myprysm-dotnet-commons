@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-    
-    <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.0" />
-    </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\Myprysm.SharedKernel\Myprysm.SharedKernel.csproj" />
-      <ProjectReference Include="..\Myprysm.Tracing.Abstractions\Myprysm.Tracing.Abstractions.csproj" />
-      <ProjectReference Include="..\Myprysm.Converter.Abstractions\Myprysm.Converter.Abstractions.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.0"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Myprysm.SharedKernel\Myprysm.SharedKernel.csproj"/>
+    <ProjectReference Include="..\Myprysm.Tracing.Abstractions\Myprysm.Tracing.Abstractions.csproj"/>
+    <ProjectReference Include="..\Myprysm.Converter.Abstractions\Myprysm.Converter.Abstractions.csproj"/>
+  </ItemGroup>
 
 </Project>

@@ -5,7 +5,6 @@ using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
-using Nuke.Common.Tools.Docker;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Utilities.Collections;
@@ -14,7 +13,7 @@ using static Nuke.Common.Tools.Docker.DockerTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 [ExcludeFromCodeCoverage]
-[CheckBuildProjectConfigurations]
+[CheckBuildProjectConfigurations(TimeoutInMilliseconds = 1000)]
 [ShutdownDotNetAfterServerBuild]
 class Build : NukeBuild
 {
@@ -23,18 +22,19 @@ class Build : NukeBuild
     ///   - JetBrains Rider            https://nuke.build/rider
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
-
-    public static int Main () => Execute<Build>(x => x.Compile);
+    public static int Main() => Execute<Build>(x => x.Compile);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
     [Solution] readonly Solution Solution;
     [GitRepository] readonly GitRepository GitRepository;
-    [GitVersion] readonly GitVersion GitVersion;
+    [GitVersion(NoFetch = true)] readonly GitVersion GitVersion;
 
     AbsolutePath SourceDirectory => RootDirectory / "src";
+
     AbsolutePath TestsDirectory => RootDirectory / "tests";
+
     AbsolutePath OutputDirectory => RootDirectory / "output";
 
     Target Clean => _ => _
@@ -68,6 +68,8 @@ class Build : NukeBuild
 
     Target Test => _ => _
         .DependsOn(Compile)
+        .After(StartContainers)
+        .Before(StopContainers)
         .Executes(() =>
         {
             DotNetTest(s => s

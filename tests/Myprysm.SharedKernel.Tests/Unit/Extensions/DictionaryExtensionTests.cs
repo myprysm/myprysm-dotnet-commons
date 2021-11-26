@@ -68,7 +68,7 @@ public class DictionaryExtensionTests
         // Act
         var value = subject.GetOrAdd(
             "foo",
-            [ExcludeFromCodeCoverage] () =>
+            [ExcludeFromCodeCoverage]() =>
             {
                 counter = 1;
                 return "baz";

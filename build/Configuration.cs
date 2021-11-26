@@ -1,6 +1,8 @@
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Nuke.Common.Tooling;
 
+[ExcludeFromCodeCoverage]
 [TypeConverter(typeof(TypeConverter<Configuration>))]
 public class Configuration : Enumeration
 {

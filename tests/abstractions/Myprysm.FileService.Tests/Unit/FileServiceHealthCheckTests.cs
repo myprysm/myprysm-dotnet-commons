@@ -107,7 +107,7 @@ public class FileServiceHealthCheckTests
         Mock.Get(this.fileService)
             .Setup(s => s.DownloadFile("container", It.IsAny<string>(), CancellationToken.None))
             .ReturnsAsync(file);
-        
+
         Mock.Get(this.fileService)
             .Setup(s => s.RemoveFile(It.IsAny<string>(), It.IsAny<string>(), CancellationToken.None))
             .ThrowsAsync(new Exception("something"));
