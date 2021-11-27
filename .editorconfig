@@ -10,5 +10,8 @@ indent_size = 4
 [*.md]
 trim_trailing_whitespace = false
 
+[*rc]
+end_of_line = lf
+
 [*.sh]
 end_of_line = lf

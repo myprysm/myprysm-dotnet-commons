@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <Description>Myprysm file service implementation with MinIO. Should Support any S3 compatible object storage.</Description>
+    <PackageTags>myprysm file files storage io minio objectstorage s3</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

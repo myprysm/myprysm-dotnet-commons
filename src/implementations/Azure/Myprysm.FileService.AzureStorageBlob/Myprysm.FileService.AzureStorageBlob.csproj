@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <Description>Myprysm file service implementation with Azure Storage Blobs.</Description>
+    <PackageTags>myprysm file files storage io azure storage blob container</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

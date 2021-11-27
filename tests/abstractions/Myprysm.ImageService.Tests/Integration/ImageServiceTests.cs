@@ -7,7 +7,7 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Myprysm.ImageService.Abstractions;
 using Myprysm.ImageService.Abstractions.Exceptions;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using NUnit.Framework;
 
 [Category(Categories.Integration)]

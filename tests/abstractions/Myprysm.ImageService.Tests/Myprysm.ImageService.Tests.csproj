@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\abstractions\Myprysm.ImageService.Abstractions\Myprysm.ImageService.Abstractions.csproj"/>
-    <ProjectReference Include="..\..\..\src\Myprysm.Testing\Myprysm.Testing.csproj"/>
+    <ProjectReference Include="..\..\..\src\abstractions\Myprysm.ImageService.Abstractions\Myprysm.ImageService.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\src\Myprysm.Testing.NUnit\Myprysm.Testing.NUnit.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Integration\bender.jpeg" CopyToOutputDirectory="PreserveNewest"/>
+    <EmbeddedResource Include="Integration\bender.jpeg" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

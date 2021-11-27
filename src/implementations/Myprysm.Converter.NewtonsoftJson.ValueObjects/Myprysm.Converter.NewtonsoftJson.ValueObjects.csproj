@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <Description>Myprysm JSON converter extension to support SingleValueObjects with Newtownsoft.Json.</Description>
+    <PackageTags>myprysm converter serialization deserialization json newtonsoft newtonsoftjson extension converter</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

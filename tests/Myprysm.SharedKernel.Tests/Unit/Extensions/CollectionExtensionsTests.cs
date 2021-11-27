@@ -3,7 +3,7 @@
 using System.Collections.ObjectModel;
 using FluentAssertions;
 using Myprysm.SharedKernel.Extensions;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using NUnit.Framework;
 
 [TestFixture]

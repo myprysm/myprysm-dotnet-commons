@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <Description>Myprysm PubSub abstractions.</Description>
+    <PackageTags>myprysm pubsub publisher subscriber subscription eventbus messagebus servicebus subscriptiongroup competingconsumer abstraction</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

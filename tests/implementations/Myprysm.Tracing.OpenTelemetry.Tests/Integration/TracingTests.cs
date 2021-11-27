@@ -1,6 +1,5 @@
 ﻿namespace Myprysm.Tracing.OpenTelemetry.Tests.Integration;
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,7 +7,7 @@ using FluentAssertions;
 using global::OpenTelemetry.Trace;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using Myprysm.Tracing.Abstractions;
 using NUnit.Framework;
 

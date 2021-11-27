@@ -1,7 +1,6 @@
 ﻿namespace Myprysm.Tracing.ApplicationInsights;
 
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using Microsoft.ApplicationInsights;
 using Myprysm.Tracing.Abstractions;
 

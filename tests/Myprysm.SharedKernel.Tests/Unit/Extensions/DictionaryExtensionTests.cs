@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Myprysm.SharedKernel.Extensions;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using NUnit.Framework;
 
 [TestFixture]

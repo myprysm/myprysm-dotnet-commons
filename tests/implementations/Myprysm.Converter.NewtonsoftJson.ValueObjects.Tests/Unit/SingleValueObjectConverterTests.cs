@@ -1,7 +1,7 @@
 ﻿namespace Myprysm.Converter.NewtonsoftJson.ValueObjects.Tests.Unit;
 
 using System.IO;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using Newtonsoft.Json;
 using NUnit.Framework;
 

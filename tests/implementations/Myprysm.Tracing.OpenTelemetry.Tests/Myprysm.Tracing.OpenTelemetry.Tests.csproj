@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\implementations\Myprysm.Tracing.OpenTelemetry\Myprysm.Tracing.OpenTelemetry.csproj" />
-    <ProjectReference Include="..\..\..\src\Myprysm.Testing\Myprysm.Testing.csproj" />
+    <ProjectReference Include="..\..\..\src\Myprysm.Testing.NUnit\Myprysm.Testing.NUnit.csproj" />
   </ItemGroup>
 
 </Project>

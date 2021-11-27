@@ -1,0 +1,65 @@
+name: publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Use Dotnet cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+      
+      - name: Configure committer
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - name: Tag release
+        run: |
+          npx standard-version --releaseCommitMessageFormat="[skip ci] chore(release): {{currentTag}}"
+
+      - name: Start integration containers
+        run: ./build.sh start-containers
+
+      - name: Publish nuget packages
+        run: ./build.sh push --configuration Release --nuget-api-url https://baget.myprysm.fr/v3/index.json --nuget-api-key ${{ secrets.NUGET_API_KEY }} --with-coverage
+
+      - name: Teardown resources
+        run: ./build.sh stop-containers
+        
+      - name: Push release
+        run: |
+          git push
+          git push --follow-tags origin main
+
+      - name: Upload code coverage report
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./output/TestResults
+
+    

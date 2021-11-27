@@ -3,7 +3,7 @@
 using FluentAssertions;
 using Myprysm.SharedKernel.ExecutionResults;
 using Myprysm.SharedKernel.Extensions;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using NUnit.Framework;
 
 public class FailedExecutionResultTests : FixtureTests

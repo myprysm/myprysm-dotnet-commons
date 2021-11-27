@@ -5,7 +5,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Moq;
 using Myprysm.FileService.Abstractions;
 using Myprysm.FileService.Abstractions.ValueObjects;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using NodaTime;
 using NUnit.Framework;
 

@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\implementations\Azure\Myprysm.Tracing.ApplicationInsights\Myprysm.Tracing.ApplicationInsights.csproj" />
-    <ProjectReference Include="..\..\..\..\src\Myprysm.Testing\Myprysm.Testing.csproj" />
+    <ProjectReference Include="..\..\..\..\src\Myprysm.Testing.NUnit\Myprysm.Testing.NUnit.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    
+    <Description>Myprysm PubSub with Azure Storage Queues. Does not support subscription groups, supports Myprysm tracing.</Description>
+    <PackageTags>myprysm pubsub publisher subscriber subscription eventbus messagebus servicebus subscriptiongroup competingconsumer azure storage queues queue</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

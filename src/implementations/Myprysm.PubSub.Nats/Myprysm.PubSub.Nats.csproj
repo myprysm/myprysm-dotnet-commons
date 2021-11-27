@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <Description>Myprysm PubSub with NATS. Supports subscription groups and Myprysm tracing. Messages are considered non-persistent at the moment until the implementation is tested with Jetstream.</Description>
+    <PackageTags>myprysm pubsub publisher subscriber subscription eventbus messagebus servicebus subscriptiongroup competingconsumer nats</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
