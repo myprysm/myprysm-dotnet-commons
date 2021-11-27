@@ -8,13 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.13.2"/>
+    <PackageReference Include="NUnit" Version="3.13.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\abstractions\Myprysm.PubSub.Abstractions\Myprysm.PubSub.Abstractions.csproj"/>
-    <ProjectReference Include="..\..\..\src\implementations\Myprysm.Converter.NewtonsoftJson.ValueObjects\Myprysm.Converter.NewtonsoftJson.ValueObjects.csproj"/>
-    <ProjectReference Include="..\..\..\src\Myprysm.Testing\Myprysm.Testing.csproj"/>
+    <ProjectReference Include="..\..\..\src\abstractions\Myprysm.PubSub.Abstractions\Myprysm.PubSub.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\src\implementations\Myprysm.Converter.NewtonsoftJson.ValueObjects\Myprysm.Converter.NewtonsoftJson.ValueObjects.csproj" />
+    <ProjectReference Include="..\..\..\src\Myprysm.Testing.NUnit\Myprysm.Testing.NUnit.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Myprysm.Converter.Abstractions;
 using Myprysm.SharedKernel.ValueObjects;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using Newtonsoft.Json;
 using NUnit.Framework;
 

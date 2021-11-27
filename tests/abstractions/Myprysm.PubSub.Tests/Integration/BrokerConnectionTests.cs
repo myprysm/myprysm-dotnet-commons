@@ -15,7 +15,7 @@ using Myprysm.Converter.NewtonsoftJson.ValueObjects;
 using Myprysm.PubSub.Abstractions;
 using Myprysm.PubSub.Abstractions.Exceptions;
 using Myprysm.SharedKernel.Exceptions;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using Myprysm.Tracing.Abstractions;
 using NUnit.Framework;
 

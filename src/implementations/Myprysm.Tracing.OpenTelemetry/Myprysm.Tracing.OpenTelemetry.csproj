@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <Description>Enable OpenTelemetry in your application and with Myprysm components.</Description>
+    <PackageTags>myprysm tracing telemetry tracer activity diagnostics activity activitysource opentelemetry</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

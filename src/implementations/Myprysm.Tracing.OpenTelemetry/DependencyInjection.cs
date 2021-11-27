@@ -2,7 +2,6 @@
 
 using global::OpenTelemetry.Trace;
 using Microsoft.Extensions.DependencyInjection;
-using Myprysm.Tracing.Abstractions;
 using Myprysm.Tracing.ActivitySource;
 
 public static class DependencyInjection

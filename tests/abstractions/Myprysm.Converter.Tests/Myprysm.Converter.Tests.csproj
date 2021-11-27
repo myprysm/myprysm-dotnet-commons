@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\abstractions\Myprysm.Converter.Abstractions\Myprysm.Converter.Abstractions.csproj"/>
-    <ProjectReference Include="..\..\..\src\Myprysm.Testing\Myprysm.Testing.csproj"/>
+    <ProjectReference Include="..\..\..\src\abstractions\Myprysm.Converter.Abstractions\Myprysm.Converter.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\src\Myprysm.Testing.NUnit\Myprysm.Testing.NUnit.csproj" />
   </ItemGroup>
 
 </Project>

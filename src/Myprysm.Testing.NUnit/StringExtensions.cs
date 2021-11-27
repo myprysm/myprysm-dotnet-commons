@@ -1,4 +1,4 @@
-namespace Myprysm.Testing;
+namespace Myprysm.Testing.NUnit;
 
 public static class StringExtensions
 {

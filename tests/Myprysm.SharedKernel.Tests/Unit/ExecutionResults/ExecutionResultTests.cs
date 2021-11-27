@@ -2,7 +2,7 @@
 
 using FluentAssertions;
 using Myprysm.SharedKernel.ExecutionResults;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using NUnit.Framework;
 
 internal class OtherSuccessResult : ExecutionResult

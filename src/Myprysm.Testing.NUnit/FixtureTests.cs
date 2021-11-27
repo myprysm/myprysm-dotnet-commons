@@ -1,7 +1,7 @@
-namespace Myprysm.Testing;
+namespace Myprysm.Testing.NUnit;
 
 using AutoFixture;
-using NUnit.Framework;
+using global::NUnit.Framework;
 
 public abstract class FixtureTests
 {

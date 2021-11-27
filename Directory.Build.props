@@ -1,5 +1,11 @@
 <Project>
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ExcludedWarnings>NU5104</ExcludedWarnings>
+    
+    <NoWarn>$(ExcludedWarnings)</NoWarn>
+
+    <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
+    <ProjectRelativePath>$([MSBuild]::MakeRelative($(RepositoryRoot), $(MSBuildProjectDirectory)))</ProjectRelativePath>
   </PropertyGroup>
 </Project>

@@ -5,7 +5,7 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Myprysm.Converter.Abstractions;
 using Myprysm.Converter.Abstractions.Exceptions;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using NUnit.Framework;
 
 [Category(Categories.Integration)]

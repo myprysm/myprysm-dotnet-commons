@@ -9,7 +9,7 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using Myprysm.Tracing.Abstractions;
 using NUnit.Framework;
 

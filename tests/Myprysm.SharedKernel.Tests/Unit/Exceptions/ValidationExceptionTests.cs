@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Myprysm.SharedKernel.Exceptions;
-using Myprysm.Testing;
+using Myprysm.Testing.NUnit;
 using NUnit.Framework;
 
 [TestFixture]

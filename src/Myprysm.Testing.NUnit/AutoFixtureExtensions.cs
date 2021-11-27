@@ -1,4 +1,4 @@
-namespace Myprysm.Testing;
+namespace Myprysm.Testing.NUnit;
 
 using System.Collections.Concurrent;
 using System.Reflection;

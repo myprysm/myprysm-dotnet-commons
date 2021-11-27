@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{16CD561D-0551-4688-8FEA-7368D8C6525E}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F0B5D0F1-BBBD-4998-A008-8B7D758023CD}"
 EndProject
@@ -26,13 +29,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configuration", "configurat
 		docker-compose.yml = docker-compose.yml
 		Directory.Build.targets = Directory.Build.targets
 		Directory.Build.props = Directory.Build.props
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "abstractions", "abstractions", "{341B3E44-33C5-4276-B199-8DEC935CB1A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "implementations", "implementations", "{01A32BFB-AFDD-4F14-A3D1-B2672492BAF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Testing", "src\Myprysm.Testing\Myprysm.Testing.csproj", "{EDC8F576-F167-4261-BD59-F6C18A102A84}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Testing.NUnit", "src\Myprysm.Testing.NUnit\Myprysm.Testing.NUnit.csproj", "{EDC8F576-F167-4261-BD59-F6C18A102A84}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "abstractions", "abstractions", "{CCE1EE37-2453-4829-B1FE-4F2DCFC562EA}"
 EndProject
@@ -94,6 +99,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Tracing.OpenTelemet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Tracing.ApplicationInsights.Tests", "tests\implementations\Azure\Myprysm.Tracing.ApplicationInsights.Tests\Myprysm.Tracing.ApplicationInsights.Tests.csproj", "{D6916287-D844-451D-863B-34DE49197B18}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{9075F28F-ECDD-4A5C-8E67-8BEA116532AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{492C32A4-8265-4F5B-8DC6-CFDDB027D79A}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\pull-request.yml = .github\workflows\pull-request.yml
+		.github\workflows\publish.yml = .github\workflows\publish.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,6 +155,8 @@ Global
 		{3B95E052-46C1-4973-8DA8-2DB74556EB5E} = {6DF3B6BA-6554-4085-8134-ECAA8E34A674}
 		{55A717F9-F77E-4147-AD63-CEA17BF5BC6D} = {E4C2EE25-C3EF-4E14-808A-6D171FF37085}
 		{D6916287-D844-451D-863B-34DE49197B18} = {784C4AE2-8A5E-4E03-B93E-347D584E7E0C}
+		{9075F28F-ECDD-4A5C-8E67-8BEA116532AA} = {D7ACCD3E-3C48-4D30-9876-E1431676ABE4}
+		{492C32A4-8265-4F5B-8DC6-CFDDB027D79A} = {9075F28F-ECDD-4A5C-8E67-8BEA116532AA}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DFA98688-E9E0-416B-A5EF-E53EAA379A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

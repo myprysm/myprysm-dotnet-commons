@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <Description>Myprysm conversion/serde abstractions.</Description>
+    <PackageTags>myprysm converter serialization deserialization abstraction</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,10 +1,10 @@
-namespace Myprysm.Testing;
+namespace Myprysm.Testing.NUnit;
 
+using global::NUnit.Framework;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using NUnit.Framework;
 
 [Category(Categories.Integration)]
 public abstract class ServiceTests : FixtureTests
