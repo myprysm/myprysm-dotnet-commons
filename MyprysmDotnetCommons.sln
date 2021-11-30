@@ -43,11 +43,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "abstractions", "abstraction
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "implementations", "implementations", "{E4C2EE25-C3EF-4E14-808A-6D171FF37085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.Tests", "tests\abstractions\Myprysm.Converter.Tests\Myprysm.Converter.Tests.csproj", "{E4696F1A-B893-4A2D-8F5A-9BFD1616896F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.Abstractions.Tests", "tests\abstractions\Myprysm.Converter.Abstractions.Tests\Myprysm.Converter.Abstractions.Tests.csproj", "{E4696F1A-B893-4A2D-8F5A-9BFD1616896F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.NewtonsoftJson.ValueObjects", "src\implementations\Myprysm.Converter.NewtonsoftJson.ValueObjects\Myprysm.Converter.NewtonsoftJson.ValueObjects.csproj", "{000F97A1-96A7-4329-ABFC-06824B21DD21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.NewtownsoftJson.Tests", "tests\implementations\Myprysm.Converter.NewtownsoftJson.Tests\Myprysm.Converter.NewtownsoftJson.Tests.csproj", "{A8DC2571-D972-476E-A8C9-F8118C3B899D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.NewtonsoftJson.Tests", "tests\implementations\Myprysm.Converter.NewtonsoftJson.Tests\Myprysm.Converter.NewtonsoftJson.Tests.csproj", "{A8DC2571-D972-476E-A8C9-F8118C3B899D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.NewtonsoftJson.ValueObjects.Tests", "tests\implementations\Myprysm.Converter.NewtonsoftJson.ValueObjects.Tests\Myprysm.Converter.NewtonsoftJson.ValueObjects.Tests.csproj", "{0D3ED017-CE7C-41F8-B1D0-6F513E93AB22}"
 EndProject
@@ -107,6 +107,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\publish.yml = .github\workflows\publish.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.Abstractions.Testing", "src\abstractions\Myprysm.Converter.Abstractions.Testing\Myprysm.Converter.Abstractions.Testing.csproj", "{739E28EF-B318-4366-8C93-F386645817DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -157,6 +159,7 @@ Global
 		{D6916287-D844-451D-863B-34DE49197B18} = {784C4AE2-8A5E-4E03-B93E-347D584E7E0C}
 		{9075F28F-ECDD-4A5C-8E67-8BEA116532AA} = {D7ACCD3E-3C48-4D30-9876-E1431676ABE4}
 		{492C32A4-8265-4F5B-8DC6-CFDDB027D79A} = {9075F28F-ECDD-4A5C-8E67-8BEA116532AA}
+		{739E28EF-B318-4366-8C93-F386645817DB} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DFA98688-E9E0-416B-A5EF-E53EAA379A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -293,5 +296,9 @@ Global
 		{D6916287-D844-451D-863B-34DE49197B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6916287-D844-451D-863B-34DE49197B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6916287-D844-451D-863B-34DE49197B18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{739E28EF-B318-4366-8C93-F386645817DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{739E28EF-B318-4366-8C93-F386645817DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{739E28EF-B318-4366-8C93-F386645817DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{739E28EF-B318-4366-8C93-F386645817DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

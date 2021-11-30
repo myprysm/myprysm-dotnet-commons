@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\implementations\Myprysm.Converter.NewtonsoftJson.ValueObjects\Myprysm.Converter.NewtonsoftJson.ValueObjects.csproj" />
-    <ProjectReference Include="..\..\..\src\Myprysm.Testing.NUnit\Myprysm.Testing.NUnit.csproj" />
+    <ProjectReference Include="..\..\..\src\abstractions\Myprysm.Converter.Abstractions.Testing\Myprysm.Converter.Abstractions.Testing.csproj" />
+    <ProjectReference Include="..\..\..\src\implementations\Myprysm.Converter.NewtonsoftJson\Myprysm.Converter.NewtonsoftJson.csproj" />
   </ItemGroup>
 
 </Project>

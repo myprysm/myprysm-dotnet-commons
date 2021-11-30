@@ -1,27 +1,27 @@
 ﻿<Project>
   <Import Project="..\Directory.Build.props" Condition="exists('..\Directory.Build.props')" />
-  
-  <PropertyGroup>
-    <Authors>Damien Benon</Authors>
-    <RepositoryUrl>https://github.com/myprysm/myprysm-dotnet-commons</RepositoryUrl>
-    <PackageLicense>https://github.com/myprysm/myprysm-dotnet-commons/blob/main/LICENSE</PackageLicense>
-  </PropertyGroup>
-  
+
   <PropertyGroup>
     <PackageProjectUrl>https://github.com/myprysm/myprysm-dotnet-commons/tree/main/$(ProjectRelativePath)</PackageProjectUrl>
 
-    <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-
-    <!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-
-    <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- Output documentation as markdown when XML doc is generated -->
+    <DefaultDocumentationFolder>$(MSBuildProjectDirectory)\documentation</DefaultDocumentationFolder>
+    <DefaultDocumentationGeneratedAccessModifiers>Public</DefaultDocumentationGeneratedAccessModifiers>
+
+    <!-- If the library does not contain more than one namespace, use `Assembly, Types` -->
+    <DefaultDocumentationGeneratedPages>Types</DefaultDocumentationGeneratedPages>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+    <PackageReference Include="DefaultDocumentation" Version="0.7.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 </Project>

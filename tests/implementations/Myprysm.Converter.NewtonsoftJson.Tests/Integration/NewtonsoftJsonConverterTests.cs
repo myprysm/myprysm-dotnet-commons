@@ -1,18 +1,18 @@
-﻿namespace Myprysm.Converter.NewtownsoftJson.Tests.Integration;
+﻿namespace Myprysm.Converter.NewtonsoftJson.Tests.Integration;
 
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Myprysm.Converter.Abstractions.Testing.Integration;
 using Myprysm.Converter.NewtonsoftJson;
-using Myprysm.Converter.Tests.Integration;
 using NUnit.Framework;
 
 [TestFixture]
-public class NewtownsoftJsonConverterTests : ConverterTests
+public class NewtonsoftJsonConverterTests : ConverterTests
 {
     protected override void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddNewtonsoftJsonConverter(options => options.WithTracing = true, _ => { });
+        services.AddNewtonsoftJsonConverter(_ => { });
     }
 
     protected override byte[] GetInvalidData()
