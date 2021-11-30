@@ -4,10 +4,19 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using AutoFixture;
 
+/// <summary>
+/// Extensions to make AutoFixture configuration easier.
+/// </summary>
 public static class AutoFixtureExtensions
 {
     private static readonly ConcurrentDictionary<string, IEnumerable<ICustomization>> CustomizationsPerAssembly = new();
 
+    /// <summary>
+    /// Load the <see cref="ICustomization"/> available in the provided assembly.
+    /// </summary>
+    /// <param name="fixture">The fixture.</param>
+    /// <param name="customizationAssembly">The assembly to load customizations from.</param>
+    /// <returns>The fixture for fluent APIs.</returns>
     public static IFixture LoadCustomizations(this IFixture fixture, Assembly customizationAssembly)
     {
         foreach (var customization in GetCustomizations(customizationAssembly))

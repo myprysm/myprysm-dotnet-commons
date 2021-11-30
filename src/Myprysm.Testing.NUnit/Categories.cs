@@ -23,6 +23,11 @@
 
 namespace Myprysm.Testing.NUnit;
 
+/// <summary>
+/// Unit test categories.
+///
+/// Can be used to run NUnit tests by types.
+/// </summary>
 public sealed class Categories
 {
     /// <summary>

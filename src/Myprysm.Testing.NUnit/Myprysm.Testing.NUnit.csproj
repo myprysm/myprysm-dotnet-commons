@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <DefaultDocumentationGeneratedPages>Assembly, Types</DefaultDocumentationGeneratedPages>
 
     <Description>Myprysm testing utilities for NUnit with AutoFixture and dependency injection.</Description>
     <PackageTags>myprysm testing tests test nunit autofixture integration</PackageTags>
