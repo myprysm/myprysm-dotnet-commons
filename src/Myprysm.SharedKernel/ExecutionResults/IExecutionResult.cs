@@ -23,7 +23,13 @@
 
 namespace Myprysm.SharedKernel.ExecutionResults;
 
+/// <summary>
+/// Represents the execution result of a procedure.
+/// </summary>
 public interface IExecutionResult
 {
+    /// <summary>
+    /// Indicates whether the procedure executed successfully.
+    /// </summary>
     bool IsSuccess { get; }
 }

@@ -32,7 +32,14 @@ using Myprysm.SharedKernel.Extensions;
 /// </summary>
 public class FailedExecutionResult : ExecutionResult
 {
+    /// <summary>
+    /// The default error message.
+    /// </summary>
     public const string DefaultMessage = "Failed execution";
+
+    /// <summary>
+    /// The error message template.
+    /// </summary>
     public const string MessageTemplate = "Failed execution due to: {0}";
 
     internal FailedExecutionResult(
@@ -41,10 +48,15 @@ public class FailedExecutionResult : ExecutionResult
         this.Errors = errors.ToList().AsReadOnly();
     }
 
+    /// <summary>
+    /// The errors held by this failed execution.
+    /// </summary>
     public IEnumerable<string> Errors { get; }
 
+    /// <inheritdoc />
     public override bool IsSuccess => false;
 
+    /// <inheritdoc />
     public override string ToString()
     {
         return this.Errors.Any()

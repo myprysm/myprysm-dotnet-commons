@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
     <Description>Myprysm Shared Kernel with ValueObjects, ExecutionResults and ManagedExceptions.</Description>
     <PackageTags>myprysm sharedkernel kernel core common valueobject executionresult execution result reader writer commons</PackageTags>

@@ -30,14 +30,19 @@ using Myprysm.SharedKernel.Extensions;
 /// </summary>
 public class SuccessExecutionResult : ExecutionResult
 {
+    /// <summary>
+    /// The default success message.
+    /// </summary>
     public const string DefaultMessage = "Successful execution";
 
+    /// <inheritdoc />
     public override bool IsSuccess => true;
 
     internal SuccessExecutionResult()
     {
     }
 
+    /// <inheritdoc />
     public override string ToString()
     {
         return DefaultMessage;
@@ -50,6 +55,9 @@ public class SuccessExecutionResult : ExecutionResult
 /// <typeparam name="TResult">The type of the result value</typeparam>
 public class ObjectSuccessExecutionResult<TResult> : SuccessExecutionResult
 {
+    /// <summary>
+    /// The success message template.
+    /// </summary>
     public const string MessageTemplate = $"{DefaultMessage}: {{0}}";
 
     internal ObjectSuccessExecutionResult(TResult result)
@@ -57,8 +65,12 @@ public class ObjectSuccessExecutionResult<TResult> : SuccessExecutionResult
         this.Result = result;
     }
 
+    /// <summary>
+    /// The result returned by the execution.
+    /// </summary>
     public TResult Result { get; }
 
+    /// <inheritdoc />
     public override string ToString()
     {
         return MessageTemplate.Fmt(this.Result!);

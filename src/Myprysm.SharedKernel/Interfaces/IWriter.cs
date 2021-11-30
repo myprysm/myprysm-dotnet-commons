@@ -9,14 +9,14 @@ public interface IWriterRequest
 }
 
 /// <summary>
-///     Writer that writes the provided output to any medium.
+/// Writer that writes the provided output to any medium.
 /// </summary>
 /// <typeparam name="TRequest"></typeparam>
 public interface IWriter<in TRequest>
     where TRequest : IWriterRequest
 {
     /// <summary>
-    ///     Writes the provided output asynchronously.
+    /// Writes the provided output asynchronously.
     /// </summary>
     /// <param name="output">The output to write.</param>
     /// <param name="cancellation">The cancellation token.</param>
