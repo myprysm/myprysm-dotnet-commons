@@ -1,5 +1,6 @@
 ﻿namespace Myprysm.FileService.FileSystem;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Myprysm.FileService.Abstractions;
 using Myprysm.Tracing.Abstractions;
@@ -8,10 +9,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddFileSystemFileService(
         this IServiceCollection services,
-        string directory)
-    {
-        return services.AddFileSystemFileService(options => options.Directory = directory);
-    }
+        IConfiguration configurationSection) =>
+        services.AddFileSystemFileService(configurationSection.Bind);
 
     public static IServiceCollection AddFileSystemFileService(
         this IServiceCollection services,

@@ -4,18 +4,22 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-    <Description>Myprysm file service abstractions.</Description>
+    <Description>
+      Myprysm file service abstractions.
+      Check the project README for more details on how to implement a compatible file service.
+    </Description>
     <PackageTags>myprysm file files storage io abstraction</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.0"/>
-    <PackageReference Include="NodaTime" Version="3.0.9"/>
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.0" />
+    <PackageReference Include="NodaTime" Version="3.0.9" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Myprysm.SharedKernel\Myprysm.SharedKernel.csproj"/>
-    <ProjectReference Include="..\Myprysm.Tracing.Abstractions\Myprysm.Tracing.Abstractions.csproj"/>
+    <ProjectReference Include="..\..\Myprysm.SharedKernel\Myprysm.SharedKernel.csproj" />
+    <ProjectReference Include="..\Myprysm.Tracing.Abstractions\Myprysm.Tracing.Abstractions.csproj" />
   </ItemGroup>
 </Project>

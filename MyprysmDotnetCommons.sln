@@ -9,6 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{16CD561D-055
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F0B5D0F1-BBBD-4998-A008-8B7D758023CD}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.SharedKernel", "src\Myprysm.SharedKernel\Myprysm.SharedKernel.csproj", "{80E2AC23-8A29-4AF6-85E3-3BD5FDAF5D59}"
 EndProject
@@ -53,7 +56,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.Newtonsof
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.SharedKernel.Tests", "tests\Myprysm.SharedKernel.Tests\Myprysm.SharedKernel.Tests.csproj", "{4D109AD4-A1F5-44C6-975E-2EA197FF74D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.FileService.Tests", "tests\abstractions\Myprysm.FileService.Tests\Myprysm.FileService.Tests.csproj", "{C8505332-EB77-4198-BC5A-8F7F7ED7ABF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.FileService.Abstractions.Tests", "tests\abstractions\Myprysm.FileService.Abstractions.Tests\Myprysm.FileService.Abstractions.Tests.csproj", "{C8505332-EB77-4198-BC5A-8F7F7ED7ABF1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.FileService.FileSystem", "src\implementations\Myprysm.FileService.FileSystem\Myprysm.FileService.FileSystem.csproj", "{0C2FCFF4-1569-41FC-8574-8205FE142308}"
 EndProject
@@ -109,6 +112,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.Abstractions.Testing", "src\abstractions\Myprysm.Converter.Abstractions.Testing\Myprysm.Converter.Abstractions.Testing.csproj", "{739E28EF-B318-4366-8C93-F386645817DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.FileService.Abstractions.Testing", "src\abstractions\Myprysm.FileService.Abstractions.Testing\Myprysm.FileService.Abstractions.Testing.csproj", "{1479B592-9E22-41AD-BDD6-C04B25B996A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -160,6 +165,7 @@ Global
 		{9075F28F-ECDD-4A5C-8E67-8BEA116532AA} = {D7ACCD3E-3C48-4D30-9876-E1431676ABE4}
 		{492C32A4-8265-4F5B-8DC6-CFDDB027D79A} = {9075F28F-ECDD-4A5C-8E67-8BEA116532AA}
 		{739E28EF-B318-4366-8C93-F386645817DB} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
+		{1479B592-9E22-41AD-BDD6-C04B25B996A5} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DFA98688-E9E0-416B-A5EF-E53EAA379A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -300,5 +306,9 @@ Global
 		{739E28EF-B318-4366-8C93-F386645817DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{739E28EF-B318-4366-8C93-F386645817DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{739E28EF-B318-4366-8C93-F386645817DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1479B592-9E22-41AD-BDD6-C04B25B996A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1479B592-9E22-41AD-BDD6-C04B25B996A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1479B592-9E22-41AD-BDD6-C04B25B996A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1479B592-9E22-41AD-BDD6-C04B25B996A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

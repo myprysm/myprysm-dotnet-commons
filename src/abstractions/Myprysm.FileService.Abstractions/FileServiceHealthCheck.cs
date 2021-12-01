@@ -7,17 +7,26 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
+/// <summary>
+/// File service <see cref="IHealthCheck"/> to ensure a <see cref="IFileService"/> instance can work appropriately.
+/// </summary>
 public class FileServiceHealthCheck : IHealthCheck
 {
     private readonly IFileService fileService;
     private readonly string container;
 
+    /// <summary>
+    /// Creates a new <see cref="FileServiceHealthCheck"/> instance.
+    /// </summary>
+    /// <param name="fileService">The file service to check.</param>
+    /// <param name="container">The container used for the health checks (that can help to avoid container pollution).</param>
     public FileServiceHealthCheck(IFileService fileService, string container)
     {
         this.fileService = fileService;
         this.container = container;
     }
 
+    /// <inheritdoc />
     public async Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context,
         CancellationToken cancellationToken = new())

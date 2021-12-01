@@ -3,8 +3,8 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Myprysm.FileService.Abstractions.Testing.Integration;
 using Myprysm.FileService.AzureStorageBlob;
-using Myprysm.FileService.Tests.Integration;
 using NUnit.Framework;
 
 [TestFixture]

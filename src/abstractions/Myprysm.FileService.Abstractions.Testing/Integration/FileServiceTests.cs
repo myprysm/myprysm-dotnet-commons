@@ -1,4 +1,4 @@
-﻿namespace Myprysm.FileService.Tests.Integration;
+﻿namespace Myprysm.FileService.Abstractions.Testing.Integration;
 
 using System.Text;
 using FluentAssertions;
@@ -8,6 +8,9 @@ using Myprysm.FileService.Abstractions.Exceptions;
 using Myprysm.Testing.NUnit;
 using NUnit.Framework;
 
+/// <summary>
+/// Base test suite for <see cref="IFileService"/>.
+/// </summary>
 [Category(Categories.Integration)]
 public abstract class FileServiceTests : ServiceTests
 {
@@ -21,12 +24,21 @@ public abstract class FileServiceTests : ServiceTests
 
     private IFileService FileService => this.Services.GetRequiredService<IFileService>();
 
+    /// <summary>
+    /// Resets the position of the content used in the tests.
+    /// </summary>
     [SetUp]
     public void ResetContent()
     {
         Content.Position = 0;
     }
 
+    /// <summary>
+    /// You should ensure that given a container
+    /// When a file is uploaded to this container at a random path
+    /// And the file is downloaded from this container at this random path
+    /// Then the downloaded content is the same as the uploaded content.
+    /// </summary>
     [Test]
     public async Task CreateContainer_AcceptsContent()
     {
@@ -46,6 +58,13 @@ public abstract class FileServiceTests : ServiceTests
         actual.Should().Be(JsonString);
     }
 
+    /// <summary>
+    /// You should ensure that given a container
+    /// When this file is uploaded to the root of this container
+    /// And the file is downloaded from the root of this container
+    /// Then the downloaded content is the same as the uploaded content.
+    /// </summary>
+    /// <remarks>The container may or may not exist yet. The operation should succeed either way.</remarks>
     [Test]
     public async Task UploadFileAtRoot_WritesContent()
     {
@@ -63,6 +82,13 @@ public abstract class FileServiceTests : ServiceTests
         actual.Should().Be(JsonString);
     }
 
+    /// <summary>
+    /// You should ensure that given a file at a random path
+    /// When this file is uploaded to this random path
+    /// And the file is downloaded from this container at this random path
+    /// Then the downloaded content is the same as the uploaded content.
+    /// </summary>
+    /// <remarks>The container may or may not exist yet. The operation should succeed either way.</remarks>
     [Test]
     public async Task UploadFile_WritesContent()
     {
@@ -80,6 +106,12 @@ public abstract class FileServiceTests : ServiceTests
         actual.Should().Be(JsonString);
     }
 
+    /// <summary>
+    /// You should ensure that given a container
+    /// When a file is uploaded to this container at a random path
+    /// And another file is uploaded at this random path with the overwrite option disabled
+    /// Then the operation results in a <see cref="FileAlreadyExistsException"/>.
+    /// </summary>
     [Test]
     public async Task UploadFile_WhenPathAlreadyExists_ThrowsFileAlreadyExistsException()
     {
@@ -94,6 +126,13 @@ public abstract class FileServiceTests : ServiceTests
         await act.Should().ThrowAsync<FileAlreadyExistsException>();
     }
 
+    /// <summary>
+    /// You should ensure that given a container
+    /// When a file is uploaded to this container at a random path
+    /// And another file is uploaded at this random path with the overwrite option enabled
+    /// And the file is downloaded from this container at this random path
+    /// Then the downloaded content is the same as the overwriting content.
+    /// </summary>
     [Test]
     public async Task UploadFile_WhenPathAlreadyExistsAndOverrideIsAllowed_Succeeds()
     {
@@ -115,6 +154,11 @@ public abstract class FileServiceTests : ServiceTests
         actual.Should().Be(overwrittenContentString);
     }
 
+    /// <summary>
+    /// You should ensure that given a container
+    /// When a non existing file is downloaded
+    /// Then the operation results in a <see cref="FileNotFoundException"/>.
+    /// </summary>
     [Test]
     public async Task DownloadFile_WhenFileDoesNotExist_ThrowsFileNotFoundException()
     {
@@ -128,6 +172,11 @@ public abstract class FileServiceTests : ServiceTests
         await act.Should().ThrowAsync<FileNotFoundException>();
     }
 
+    /// <summary>
+    /// You should ensure that given a container
+    /// When a non existing file is deleted
+    /// Then the operation should succeed.
+    /// </summary>
     [Test]
     public async Task RemoveFile_WhenFileDoesNotExist_Succeeds()
     {
@@ -141,6 +190,13 @@ public abstract class FileServiceTests : ServiceTests
         await act.Should().NotThrowAsync();
     }
 
+    /// <summary>
+    /// You should ensure that given a container
+    /// When a file is uploaded to this container at a random path
+    /// And the file is deleted
+    /// And the file is downloaded from this container at this random path
+    /// Then the operation results in a <see cref="FileNotFoundException"/>.
+    /// </summary>
     [Test]
     public async Task RemoveFile_WhenFileExists_Succeeds()
     {
@@ -156,6 +212,13 @@ public abstract class FileServiceTests : ServiceTests
         await act.Should().ThrowAsync<FileNotFoundException>();
     }
 
+    /// <summary>
+    /// You should ensure that given a container
+    /// When a file is uploaded to this container at a random path
+    /// And the container is deleted
+    /// And the file is downloaded from this container at this random path
+    /// Then the operation results in a <see cref="FileNotFoundException"/>.
+    /// </summary>
     [Test]
     public async Task RemoveContainer_WhenContainerContainsFiles_Succeeds()
     {

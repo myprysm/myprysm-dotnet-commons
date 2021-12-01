@@ -1,6 +1,7 @@
 ﻿namespace Myprysm.FileService.Abstractions;
 
 using System;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,6 +34,9 @@ internal class TracedFileService : IFileService
         using var trace = this.tracer.StartTrace(nameof(this.UploadFile));
         trace?.AddTag("file_service.container", container);
         trace?.AddTag("file_service.path", path);
+        trace?.AddTag("file_service.content_type", contentType);
+        trace?.AddTag("file_service.content_length", contentLength.ToString(CultureInfo.InvariantCulture));
+        trace?.AddTag("file_service.overwrite_existing_file", overwriteExistingFile.ToString(CultureInfo.InvariantCulture));
 
         try
         {

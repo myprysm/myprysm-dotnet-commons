@@ -1,4 +1,4 @@
-﻿namespace Myprysm.FileService.Tests.Unit;
+﻿namespace Myprysm.FileService.Abstractions.Tests.Unit;
 
 using FluentAssertions;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
