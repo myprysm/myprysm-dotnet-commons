@@ -1,5 +1,6 @@
 ﻿namespace Myprysm.ImageService.ImageSharp;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Myprysm.ImageService.Abstractions;
 using Myprysm.Tracing.Abstractions;
@@ -8,6 +9,13 @@ using SixLabors.ImageSharp.Memory;
 
 public static class DependencyInjection
 {
+    public static IServiceCollection AddImageSharpImageService(
+        this IServiceCollection services,
+        IConfiguration configurationSection)
+    {
+        return services.AddImageSharpImageService(configurationSection.Bind);
+    }
+
     public static IServiceCollection AddImageSharpImageService(
         this IServiceCollection services,
         MemoryPoolKind memoryPool = MemoryPoolKind.Default)

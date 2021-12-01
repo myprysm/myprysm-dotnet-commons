@@ -1,4 +1,4 @@
-namespace Myprysm.ImageService.Tests.Integration;
+namespace Myprysm.ImageService.Abstractions.Testing.Integration;
 
 using System.IO;
 using System.Text;
@@ -10,6 +10,9 @@ using Myprysm.ImageService.Abstractions.Exceptions;
 using Myprysm.Testing.NUnit;
 using NUnit.Framework;
 
+/// <summary>
+/// Base test suite for <see cref="IImageService"/>.
+/// </summary>
 [Category(Categories.Integration)]
 public abstract class ImageServiceTests : ServiceTests
 {
@@ -20,6 +23,11 @@ public abstract class ImageServiceTests : ServiceTests
         return new MemoryStream(Encoding.UTF8.GetBytes("a normal string"));
     }
 
+    /// <summary>
+    /// You should ensure that given an invalid image stream
+    /// When the metadata of the image stream are extracted
+    /// Then the operations throws an <see cref="ImageProcessingException"/>.
+    /// </summary>
     [Test]
     public async Task GetMetadata_WhenImageIsInvalid_ShouldThrow()
     {
@@ -32,7 +40,12 @@ public abstract class ImageServiceTests : ServiceTests
         // Assert
         await act.Should().ThrowAsync<ImageProcessingException>();
     }
-
+    
+    /// <summary>
+    /// You should ensure that given a valid image stream
+    /// When the metadata of the image stream are extracted
+    /// Then the metadata matches the test image.
+    /// </summary>
     [Test]
     public async Task GetMetadata()
     {
@@ -47,7 +60,12 @@ public abstract class ImageServiceTests : ServiceTests
         metadata.Size.Should().BeEquivalentTo(new Size(1280, 784));
         metadata.ContentType.Should().Be("image/jpeg");
     }
-
+    
+    /// <summary>
+    /// You should ensure that given an invalid image stream
+    /// When the image stream is resized
+    /// Then the operations throws an <see cref="ImageProcessingException"/>.
+    /// </summary>
     [Test]
     public async Task ResizeImage_WhenImageIsInvalid_ShouldThrow()
     {
@@ -61,7 +79,12 @@ public abstract class ImageServiceTests : ServiceTests
         // Assert
         await act.Should().ThrowAsync<ImageProcessingException>();
     }
-
+    
+    /// <summary>
+    /// You should ensure that given a valid image stream
+    /// When the image stream is resized
+    /// Then the output stream has the expected size.
+    /// </summary>
     [Test]
     [TestCase(640, 392)]
     [TestCase(1920, 1176)]
@@ -79,7 +102,12 @@ public abstract class ImageServiceTests : ServiceTests
 
         actualMetadata.Size.Should().BeEquivalentTo(size);
     }
-
+    
+    /// <summary>
+    /// You should ensure that given a valid image stream
+    /// When the image stream is resized with the provided output format
+    /// Then the output stream has the expected format.
+    /// </summary>
     [Test]
     [TestCase(ImageFormat.Gif)]
     [TestCase(ImageFormat.Png)]
@@ -97,7 +125,12 @@ public abstract class ImageServiceTests : ServiceTests
 
         actualMetadata.Format.Should().Be(format);
     }
-
+    
+    /// <summary>
+    /// You should ensure that given an invalid image stream
+    /// When the image stream is cropped
+    /// Then the operations throws an <see cref="ImageProcessingException"/>.
+    /// </summary>
     [Test]
     public async Task CropImage_WhenImageIsInvalid_ShouldThrow()
     {
@@ -112,6 +145,11 @@ public abstract class ImageServiceTests : ServiceTests
         await act.Should().ThrowAsync<ImageProcessingException>();
     }
 
+    /// <summary>
+    /// You should ensure that given a valid image stream
+    /// When the image stream is cropped
+    /// Then the output stream has the expected size.
+    /// </summary>
     [Test]
     public async Task CropImage()
     {
@@ -129,7 +167,12 @@ public abstract class ImageServiceTests : ServiceTests
 
         actualMetadata.Size.Should().BeEquivalentTo(size);
     }
-
+    
+    /// <summary>
+    /// You should ensure that given a valid image stream
+    /// When the image stream is cropped with the provided output format
+    /// Then the output stream has the expected format.
+    /// </summary>
     [Test]
     [TestCase(ImageFormat.Gif)]
     [TestCase(ImageFormat.Png)]

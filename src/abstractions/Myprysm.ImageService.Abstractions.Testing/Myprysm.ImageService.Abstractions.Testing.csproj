@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <DefaultDocumentationGeneratedPages>Assembly, Types</DefaultDocumentationGeneratedPages>
+    
+    <Description>
+      Myprysm image processing abstractions.
+      Check the project README for more details on how to test an image service implementation.
+    </Description>
+    <PackageTags>myprysm image resize crop metadata abstraction tests base</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Integration\bender.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Myprysm.Testing.NUnit\Myprysm.Testing.NUnit.csproj" />
+    <ProjectReference Include="..\Myprysm.ImageService.Abstractions\Myprysm.ImageService.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

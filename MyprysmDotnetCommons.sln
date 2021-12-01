@@ -66,7 +66,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.FileService.Minio",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.FileService.Minio.Tests", "tests\implementations\Myprysm.FileService.Minio.Tests\Myprysm.FileService.Minio.Tests.csproj", "{FFA09742-46CA-420E-BF35-89208F9BF310}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.ImageService.Tests", "tests\abstractions\Myprysm.ImageService.Tests\Myprysm.ImageService.Tests.csproj", "{DD800F99-782C-4D90-BAD1-2039485464DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.ImageService.Abstractions.Tests", "tests\abstractions\Myprysm.ImageService.Abstractions.Tests\Myprysm.ImageService.Abstractions.Tests.csproj", "{DD800F99-782C-4D90-BAD1-2039485464DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.ImageService.ImageSharp", "src\implementations\Myprysm.ImageService.ImageSharp\Myprysm.ImageService.ImageSharp.csproj", "{CDD49B82-D740-46B1-8F10-E303F3E3BE72}"
 EndProject
@@ -113,6 +113,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.Abstractions.Testing", "src\abstractions\Myprysm.Converter.Abstractions.Testing\Myprysm.Converter.Abstractions.Testing.csproj", "{739E28EF-B318-4366-8C93-F386645817DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.FileService.Abstractions.Testing", "src\abstractions\Myprysm.FileService.Abstractions.Testing\Myprysm.FileService.Abstractions.Testing.csproj", "{1479B592-9E22-41AD-BDD6-C04B25B996A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.ImageService.Abstractions.Testing", "src\abstractions\Myprysm.ImageService.Abstractions.Testing\Myprysm.ImageService.Abstractions.Testing.csproj", "{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -166,6 +168,7 @@ Global
 		{492C32A4-8265-4F5B-8DC6-CFDDB027D79A} = {9075F28F-ECDD-4A5C-8E67-8BEA116532AA}
 		{739E28EF-B318-4366-8C93-F386645817DB} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
 		{1479B592-9E22-41AD-BDD6-C04B25B996A5} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
+		{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DFA98688-E9E0-416B-A5EF-E53EAA379A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -310,5 +313,9 @@ Global
 		{1479B592-9E22-41AD-BDD6-C04B25B996A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1479B592-9E22-41AD-BDD6-C04B25B996A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1479B592-9E22-41AD-BDD6-C04B25B996A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
