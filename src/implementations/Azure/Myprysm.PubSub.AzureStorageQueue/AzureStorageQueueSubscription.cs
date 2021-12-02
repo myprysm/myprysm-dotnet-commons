@@ -9,7 +9,7 @@ using Myprysm.PubSub.Abstractions.Exceptions;
 using Myprysm.Tracing.Abstractions;
 using Polly.Retry;
 
-public sealed class AzureStorageQueueSubscription : ISubscription
+internal sealed class AzureStorageQueueSubscription : ISubscription
 {
     private readonly QueueClient queueClient;
     private readonly QueueClient poisonQueueClient;

@@ -12,7 +12,7 @@ using Myprysm.Tracing.Abstractions;
 using Polly;
 using Polly.Retry;
 
-public class AzureStorageQueueBrokerConnection : IBrokerConnection
+internal class AzureStorageQueueBrokerConnection : IBrokerConnection
 {
     private const string PoisonQueueSuffix = "-poison";
     private const int MaxTriesPerStep = 4;
@@ -117,6 +117,11 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
 
         try
         {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(nameof(AzureStorageQueueBrokerConnection));
+            }
+
             var client = await this.GetClient(publication.Topic.Value, cancellation).ConfigureAwait(false);
 
             var serializedTrace = SerializedTrace.GetSerializedTrace(trace);
@@ -154,6 +159,11 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
         SubscriptionExceptionHandler? exceptionHandler = null,
         CancellationToken cancellation = default)
     {
+        if (this.disposed)
+        {
+            throw new ObjectDisposedException(nameof(AzureStorageQueueBrokerConnection));
+        }
+
         if (group != null)
         {
             throw new IllegalOperationException("Subscription groups are not supported with Azure Storage Queue broker.");

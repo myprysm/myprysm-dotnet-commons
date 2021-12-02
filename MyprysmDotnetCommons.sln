@@ -74,8 +74,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.ImageService.ImageS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.PubSub.Nats", "src\implementations\Myprysm.PubSub.Nats\Myprysm.PubSub.Nats.csproj", "{CA7F0577-B055-4FCD-8F95-2CCB2D633ED3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.PubSub.Tests", "tests\abstractions\Myprysm.PubSub.Tests\Myprysm.PubSub.Tests.csproj", "{4B73072B-FA1C-4F75-B760-8208533A9F53}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.PubSub.Nats.Tests", "tests\implementations\Myprysm.PubSub.Nats.Tests\Myprysm.PubSub.Nats.Tests.csproj", "{929EDA87-D6A6-494F-8EBC-AF934792A817}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Tracing.ActivitySource", "src\implementations\Myprysm.Tracing.ActivitySource\Myprysm.Tracing.ActivitySource.csproj", "{9900A691-5C8D-43AE-8BF1-5EBACB4E2B97}"
@@ -116,6 +114,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.FileService.Abstrac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.ImageService.Abstractions.Testing", "src\abstractions\Myprysm.ImageService.Abstractions.Testing\Myprysm.ImageService.Abstractions.Testing.csproj", "{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.PubSub.Abstractions.Testing", "src\abstractions\Myprysm.PubSub.Abstractions.Testing\Myprysm.PubSub.Abstractions.Testing.csproj", "{0BCC0834-0BA9-4577-8BFE-542AAA13AC8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,7 +151,6 @@ Global
 		{CDD49B82-D740-46B1-8F10-E303F3E3BE72} = {01A32BFB-AFDD-4F14-A3D1-B2672492BAF0}
 		{5B0CF54B-38DC-4D77-A8BF-7B269B711AA8} = {E4C2EE25-C3EF-4E14-808A-6D171FF37085}
 		{CA7F0577-B055-4FCD-8F95-2CCB2D633ED3} = {01A32BFB-AFDD-4F14-A3D1-B2672492BAF0}
-		{4B73072B-FA1C-4F75-B760-8208533A9F53} = {CCE1EE37-2453-4829-B1FE-4F2DCFC562EA}
 		{929EDA87-D6A6-494F-8EBC-AF934792A817} = {E4C2EE25-C3EF-4E14-808A-6D171FF37085}
 		{9900A691-5C8D-43AE-8BF1-5EBACB4E2B97} = {01A32BFB-AFDD-4F14-A3D1-B2672492BAF0}
 		{93F50E44-C6E9-4EBC-BD84-0DA20E28AE85} = {01A32BFB-AFDD-4F14-A3D1-B2672492BAF0}
@@ -169,6 +168,7 @@ Global
 		{739E28EF-B318-4366-8C93-F386645817DB} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
 		{1479B592-9E22-41AD-BDD6-C04B25B996A5} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
 		{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
+		{0BCC0834-0BA9-4577-8BFE-542AAA13AC8D} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DFA98688-E9E0-416B-A5EF-E53EAA379A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -261,10 +261,6 @@ Global
 		{CA7F0577-B055-4FCD-8F95-2CCB2D633ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA7F0577-B055-4FCD-8F95-2CCB2D633ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA7F0577-B055-4FCD-8F95-2CCB2D633ED3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4B73072B-FA1C-4F75-B760-8208533A9F53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B73072B-FA1C-4F75-B760-8208533A9F53}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B73072B-FA1C-4F75-B760-8208533A9F53}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B73072B-FA1C-4F75-B760-8208533A9F53}.Release|Any CPU.Build.0 = Release|Any CPU
 		{929EDA87-D6A6-494F-8EBC-AF934792A817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{929EDA87-D6A6-494F-8EBC-AF934792A817}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{929EDA87-D6A6-494F-8EBC-AF934792A817}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -317,5 +313,9 @@ Global
 		{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BCC0834-0BA9-4577-8BFE-542AAA13AC8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BCC0834-0BA9-4577-8BFE-542AAA13AC8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BCC0834-0BA9-4577-8BFE-542AAA13AC8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BCC0834-0BA9-4577-8BFE-542AAA13AC8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -6,7 +6,7 @@ using AutoFixture;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Myprysm.PubSub.Abstractions;
-using Myprysm.PubSub.Tests.Integration;
+using Myprysm.PubSub.Abstractions.Testing.Integration;
 using Myprysm.Testing.NUnit;
 using NUnit.Framework;
 
