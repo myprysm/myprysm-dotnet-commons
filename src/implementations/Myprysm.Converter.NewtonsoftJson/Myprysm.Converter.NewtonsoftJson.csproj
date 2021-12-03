@@ -3,6 +3,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <DefaultDocumentationGeneratedPages>Assembly, Types</DefaultDocumentationGeneratedPages>
 
     <Description>Myprysm JSON converter with Newtownsoft.Json.</Description>
     <PackageTags>myprysm converter serialization deserialization json newtonsoft newtonsoftjson</PackageTags>
