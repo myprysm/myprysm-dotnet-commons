@@ -9,7 +9,10 @@ using Myprysm.PubSub.Abstractions.Exceptions;
 using Myprysm.Tracing.Abstractions;
 using Polly.Retry;
 
-internal sealed class AzureStorageQueueSubscription : ISubscription
+/// <summary>
+/// <see cref="ISubscription"/> that receives <see cref="Publication"/> sent by an Azure Storage Queue.
+/// </summary>
+public sealed class AzureStorageQueueSubscription : ISubscription
 {
     private readonly QueueClient queueClient;
     private readonly QueueClient poisonQueueClient;
@@ -186,6 +189,7 @@ internal sealed class AzureStorageQueueSubscription : ISubscription
         return messages.Value;
     }
 
+    /// <inheritdoc />
     public void Dispose()
     {
         if (this.disposed)

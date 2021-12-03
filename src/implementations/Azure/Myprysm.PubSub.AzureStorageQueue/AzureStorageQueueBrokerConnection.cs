@@ -12,7 +12,10 @@ using Myprysm.Tracing.Abstractions;
 using Polly;
 using Polly.Retry;
 
-internal class AzureStorageQueueBrokerConnection : IBrokerConnection
+/// <summary>
+/// <see cref="IBrokerConnection"/> with Azure Storage Queues. 
+/// </summary>
+public class AzureStorageQueueBrokerConnection : IBrokerConnection
 {
     private const string PoisonQueueSuffix = "-poison";
     private const int MaxTriesPerStep = 4;
@@ -35,6 +38,14 @@ internal class AzureStorageQueueBrokerConnection : IBrokerConnection
     private bool disposed;
     private readonly SubscriptionExceptionHandler globalExceptionHandler;
 
+    /// <summary>
+    /// Creates a new <see cref="AzureStorageQueueBrokerConnection"/> with the given dependencies.
+    /// </summary>
+    /// <param name="converter">The converter used to send the publications over the wire.</param>
+    /// <param name="tracerFactory">The tracer factory to trace the publications.</param>
+    /// <param name="options">The options.</param>
+    /// <param name="logger">The logger.</param>
+    /// <param name="subscriptionLogger">The logger for subscriptions.</param>
     public AzureStorageQueueBrokerConnection(
         IConverter converter,
         ITracerFactory tracerFactory,
@@ -106,8 +117,10 @@ internal class AzureStorageQueueBrokerConnection : IBrokerConnection
         return IntervalStep * (factor < 1 ? 1 : factor);
     }
 
+    /// <inheritdoc />
     public BrokerCapabilities Capabilities => CapabilitiesInstance;
 
+    /// <inheritdoc />
     public async Task Publish(Publication publication, CancellationToken cancellation = default)
     {
         using var trace = this.tracer.StartTrace(nameof(this.Publish), TraceKind.Producer, publication.Trace);
@@ -152,6 +165,7 @@ internal class AzureStorageQueueBrokerConnection : IBrokerConnection
         return this.queueClients.GetOrAdd(queue, client);
     }
 
+    /// <inheritdoc />
     public async Task<ISubscription> Subscribe(
         Topic topic,
         PublicationHandler handler,
@@ -197,6 +211,7 @@ internal class AzureStorageQueueBrokerConnection : IBrokerConnection
         return subscription;
     }
 
+    /// <inheritdoc />
     public void Dispose()
     {
         if (this.disposed)
