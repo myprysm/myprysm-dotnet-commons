@@ -3,7 +3,7 @@ namespace Myprysm.Tracing.ActivitySource;
 using System.Diagnostics;
 using Myprysm.Tracing.Abstractions;
 
-public static class Extensions
+internal static class Extensions
 {
     public static ActivityKind MapTraceKind(this TraceKind kind) => kind switch
     {

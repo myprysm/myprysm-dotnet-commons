@@ -6,7 +6,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Myprysm.Tracing.Abstractions;
 
-public class OperationTelemetryTrace : ITrace
+internal class OperationTelemetryTrace : ITrace
 {
     private readonly TelemetryClientTracer tracer;
 
@@ -22,7 +22,7 @@ public class OperationTelemetryTrace : ITrace
         this.tracer = tracer;
     }
 
-    internal IOperationHolder<OperationTelemetry> Operation { get; }
+    private IOperationHolder<OperationTelemetry> Operation { get; }
 
     public string Name => this.Operation.Telemetry.Name;
 
