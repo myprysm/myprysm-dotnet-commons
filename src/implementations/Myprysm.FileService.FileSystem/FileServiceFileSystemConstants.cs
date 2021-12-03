@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Reflection;
 using Myprysm.Tracing.Abstractions;
 
-public static class FileServiceFileSystemConstants
+internal static class FileServiceFileSystemConstants
 {
     public static readonly Assembly Assembly = typeof(FileServiceFileSystemConstants).Assembly;
     public static readonly FileVersionInfo FileVersionInfo = FileVersionInfo.GetVersionInfo(Assembly.Location);

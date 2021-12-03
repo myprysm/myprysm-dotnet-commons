@@ -4,20 +4,23 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <DefaultDocumentationGeneratedPages>Assembly, Types</DefaultDocumentationGeneratedPages>
 
     <Description>Myprysm file service implementation with Azure Storage Blobs.</Description>
     <PackageTags>myprysm file files storage io azure storage blob container</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.10.0"/>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0"/>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.10.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\abstractions\Myprysm.FileService.Abstractions\Myprysm.FileService.Abstractions.csproj"/>
-    <ProjectReference Include="..\..\..\abstractions\Myprysm.Tracing.Abstractions\Myprysm.Tracing.Abstractions.csproj"/>
+    <ProjectReference Include="..\..\..\abstractions\Myprysm.FileService.Abstractions\Myprysm.FileService.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\abstractions\Myprysm.Tracing.Abstractions\Myprysm.Tracing.Abstractions.csproj" />
   </ItemGroup>
 </Project>

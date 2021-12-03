@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Reflection;
 using Myprysm.Tracing.Abstractions;
 
-public class FileServiceAzureStorageBlobConstants
+internal class FileServiceAzureStorageBlobConstants
 {
     public static readonly Assembly Assembly = typeof(FileServiceAzureStorageBlobConstants).Assembly;
     public static readonly FileVersionInfo FileVersionInfo = FileVersionInfo.GetVersionInfo(Assembly.Location);

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Reflection;
 using Myprysm.Tracing.Abstractions;
 
-public class FileServiceMinioConstants
+internal class FileServiceMinioConstants
 {
     public static readonly Assembly Assembly = typeof(FileServiceMinioConstants).Assembly;
     public static readonly FileVersionInfo FileVersionInfo = FileVersionInfo.GetVersionInfo(Assembly.Location);
