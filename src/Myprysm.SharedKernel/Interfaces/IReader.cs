@@ -15,7 +15,6 @@ public interface IReaderInput
 /// <typeparam name="TResponse">The response type.</typeparam>
 public interface IReader<in TRequest, TResponse>
     where TRequest : IReaderInput
-    where TResponse : notnull
 {
     /// <summary>
     /// Read asynchronously the output for the given request.
@@ -23,5 +22,5 @@ public interface IReader<in TRequest, TResponse>
     /// <param name="request">The request.</param>
     /// <param name="cancellation">The cancellation token.</param>
     /// <returns>The output corresponding to the request.</returns>
-    Task<TResponse> ReadAsync(TRequest request, CancellationToken cancellation = default);
+    Task<TResponse?> ReadAsync(TRequest request, CancellationToken cancellation = default);
 }
