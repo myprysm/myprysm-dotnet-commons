@@ -11,12 +11,19 @@ using Myprysm.FileService.Abstractions.Exceptions;
 using Myprysm.FileService.Abstractions.ValueObjects;
 using NodaTime;
 
-/// <inheritdoc cref="IFileService"/>
+/// <summary>
+/// Manages files with a remote MinIO/S3 instance.
+/// </summary>
 public class MinioFileService : IFileService
 {
     private readonly ILogger<MinioFileService> logger;
     private readonly MinioClient client;
 
+    /// <summary>
+    /// Creates a new <see cref="MinioFileService"/> with the given options an logger.
+    /// </summary>
+    /// <param name="options">The options.</param>
+    /// <param name="logger">The logger.</param>
     public MinioFileService(
         IOptions<MinioFileServiceOptions> options,
         ILogger<MinioFileService> logger)
@@ -37,7 +44,7 @@ public class MinioFileService : IFileService
         this.client = minio;
     }
 
-    /// <inheritdoc cref="IFileService.UploadFile"/>
+    /// <inheritdoc />
     public async Task UploadFile(string container,
         string path,
         Stream content,
@@ -64,46 +71,7 @@ public class MinioFileService : IFileService
             .ConfigureAwait(false);
     }
 
-    private async Task EnsureObjectDoesNotExist(
-        string container,
-        string path,
-        CancellationToken cancellation)
-    {
-        try
-        {
-            await this.client
-                .StatObjectAsync(
-                    container,
-                    path,
-                    cancellationToken: cancellation)
-                .ConfigureAwait(false);
-        }
-        catch (ObjectNotFoundException)
-        {
-            return;
-        }
-
-        throw new FileAlreadyExistsException(container, path);
-    }
-
-    private async Task EnsureBucketExists(
-        string container,
-        CancellationToken cancellation)
-    {
-        var bucketExists = await this.client
-            .BucketExistsAsync(container, cancellation)
-            .ConfigureAwait(false);
-
-        if (!bucketExists)
-        {
-            this.logger.LogInformation("Creating container {Container}", container);
-            await this.client
-                .MakeBucketAsync(container, cancellationToken: cancellation)
-                .ConfigureAwait(false);
-        }
-    }
-
-    /// <inheritdoc cref="IFileService.DownloadFile"/>
+    /// <inheritdoc />
     public async Task<FileDownload> DownloadFile(
         string container,
         string path,
@@ -144,7 +112,7 @@ public class MinioFileService : IFileService
             temporaryFile);
     }
 
-    /// <inheritdoc cref="IFileService.RemoveFile"/>
+    /// <inheritdoc />
     public async Task RemoveFile(string container, string path, CancellationToken cancellation = default)
     {
         try
@@ -161,11 +129,13 @@ public class MinioFileService : IFileService
         await this.client.RemoveObjectAsync(container, path, cancellation).ConfigureAwait(false);
     }
 
+    /// <inheritdoc />
     public Task CreateContainer(string container, CancellationToken cancellation = default)
     {
         return this.EnsureBucketExists(container, cancellation);
     }
 
+    /// <inheritdoc />
     public async Task RemoveContainer(string container, CancellationToken cancellation = default)
     {
         var bucketExists = await this.client.BucketExistsAsync(container, cancellation).ConfigureAwait(false);
@@ -188,5 +158,44 @@ public class MinioFileService : IFileService
 
         await this.client.RemoveBucketAsync(container, cancellation).ConfigureAwait(false);
         this.logger.LogInformation("Removed container {Container}", container);
+    }
+
+    private async Task EnsureObjectDoesNotExist(
+        string container,
+        string path,
+        CancellationToken cancellation)
+    {
+        try
+        {
+            await this.client
+                .StatObjectAsync(
+                    container,
+                    path,
+                    cancellationToken: cancellation)
+                .ConfigureAwait(false);
+        }
+        catch (ObjectNotFoundException)
+        {
+            return;
+        }
+
+        throw new FileAlreadyExistsException(container, path);
+    }
+
+    private async Task EnsureBucketExists(
+        string container,
+        CancellationToken cancellation)
+    {
+        var bucketExists = await this.client
+            .BucketExistsAsync(container, cancellation)
+            .ConfigureAwait(false);
+
+        if (!bucketExists)
+        {
+            this.logger.LogInformation("Creating container {Container}", container);
+            await this.client
+                .MakeBucketAsync(container, cancellationToken: cancellation)
+                .ConfigureAwait(false);
+        }
     }
 }

@@ -1,5 +1,8 @@
 namespace Myprysm.PubSub.Abstractions;
 
+/// <summary>
+/// The kind of transport supported by a broker.
+/// </summary>
 public enum Transport
 {
     /// <summary>

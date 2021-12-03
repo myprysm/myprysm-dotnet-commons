@@ -6,7 +6,7 @@ using Myprysm.Converter.Abstractions;
 using Myprysm.Converter.Abstractions.Exceptions;
 using Newtonsoft.Json;
 
-public class NewtonsoftJsonConverter : IConverter
+internal class NewtonsoftJsonConverter : IConverter
 {
     private readonly ILogger<NewtonsoftJsonConverter> logger;
     private readonly JsonSerializer serializer;

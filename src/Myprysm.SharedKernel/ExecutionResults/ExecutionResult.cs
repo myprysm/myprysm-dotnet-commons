@@ -23,6 +23,9 @@
 
 namespace Myprysm.SharedKernel.ExecutionResults;
 
+/// <summary>
+/// Represents the execution result of a procedure.
+/// </summary>
 public abstract class ExecutionResult : IExecutionResult
 {
     private static readonly IExecutionResult SuccessResult = new SuccessExecutionResult();
@@ -32,33 +35,62 @@ public abstract class ExecutionResult : IExecutionResult
     {
     }
 
+    /// <inheritdoc />
     public abstract bool IsSuccess { get; }
 
+    /// <summary>
+    /// Returns a successful execution result. 
+    /// </summary>
+    /// <returns>The successful execution result.</returns>
     public static IExecutionResult Success()
     {
         return SuccessResult;
     }
 
+    /// <summary>
+    /// Returns a successful execution result holding a value.
+    /// </summary>
+    /// <param name="result">The value held by the result.</param>
+    /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <returns>An object representing the success of a procedure with the provided result as a context.</returns>
     public static ObjectSuccessExecutionResult<TResult> Success<TResult>(TResult result)
     {
         return new ObjectSuccessExecutionResult<TResult>(result);
     }
 
+    /// <summary>
+    /// Returns a failed execution result.
+    /// </summary>
+    /// <returns>The failed execution result.</returns>
     public static IExecutionResult Failed()
     {
         return FailedResult;
     }
 
+    /// <summary>
+    /// Returns a failed execution result with the provided errors.
+    /// </summary>
+    /// <param name="errors">The errors to report.</param>
+    /// <returns>A failed execution result containing the provided errors as a reason.</returns>
     public static IExecutionResult Failed(IEnumerable<string> errors)
     {
         return new FailedExecutionResult(errors);
     }
 
+    /// <summary>
+    /// Returns a failed execution result with the provided errors.
+    /// </summary>
+    /// <param name="errors">The errors to report.</param>
+    /// <returns>A failed execution result containing the provided errors as a reason.</returns>
     public static IExecutionResult Failed(params string[] errors)
     {
         return Failed((IEnumerable<string>)errors);
     }
 
+    /// <summary>
+    /// Returns a string representation of this <see cref="ExecutionResult"/>.
+    /// </summary>
+    /// <returns>The string representation of this result.</returns>
     public override string ToString()
     {
         return $"ExecutionResult - IsSuccess:{this.IsSuccess}";

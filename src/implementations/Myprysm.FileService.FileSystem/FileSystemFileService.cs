@@ -8,10 +8,17 @@ using Myprysm.FileService.Abstractions.ValueObjects;
 using Myprysm.SharedKernel.Exceptions;
 using NodaTime;
 
+/// <summary>
+/// An <see cref="IFileService"/> implementation that manages files in a local directory.
+/// </summary>
 public class FileSystemFileService : IFileService
 {
     private readonly DirectoryInfo rootDirectory;
 
+    /// <summary>
+    /// Creates a new <see cref="FileSystemFileService"/> with the given options.
+    /// </summary>
+    /// <param name="options">The options for the file service.</param>
     public FileSystemFileService(IOptions<FileSystemFileServiceOptions> options)
     {
         this.rootDirectory = new DirectoryInfo(options.Value.Directory);
@@ -27,6 +34,7 @@ public class FileSystemFileService : IFileService
         }
     }
 
+    /// <inheritdoc />
     public async Task UploadFile(
         string container,
         string path,
@@ -45,6 +53,58 @@ public class FileSystemFileService : IFileService
 
         this.EnsureBasePathExist(container, path);
         await this.WriteContent(container, path, content, contentLength, cancellation).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
+    public Task<FileDownload> DownloadFile(string container, string path, CancellationToken cancellation = default)
+    {
+        var fileInfo = new FileInfo(Path.Join(this.rootDirectory.FullName, container, path));
+
+        if (!fileInfo.Exists)
+        {
+            throw new FileNotFoundException(container, path);
+        }
+
+        var fileStream = fileInfo.OpenRead();
+        var fileDownload = new FileDownload(
+            fileStream,
+            ETag.From(fileInfo.LastWriteTimeUtc.Ticks.ToString()),
+            Instant.FromDateTimeUtc(fileInfo.LastWriteTimeUtc),
+            fileInfo.Length);
+
+        return Task.FromResult(fileDownload);
+    }
+
+    /// <inheritdoc />
+    public Task RemoveFile(string container, string path, CancellationToken cancellation = default)
+    {
+        var fileInfo = new FileInfo(Path.Join(this.rootDirectory.FullName, container, path));
+        if (fileInfo.Exists)
+        {
+            fileInfo.Delete();
+        }
+
+        return Task.CompletedTask;
+    }
+
+    /// <inheritdoc />
+    public Task CreateContainer(string container, CancellationToken cancellation = default)
+    {
+        this.EnsureContainerExists(container);
+        return Task.CompletedTask;
+    }
+
+    /// <inheritdoc />
+    public Task RemoveContainer(string container, CancellationToken cancellation = default)
+    {
+        var directoryInfo = new DirectoryInfo(Path.Join(this.rootDirectory.FullName, container));
+
+        if (directoryInfo.Exists)
+        {
+            directoryInfo.Delete(true);
+        }
+
+        return Task.CompletedTask;
     }
 
     private async Task WriteContent(string container, string path, Stream content, long contentLength, CancellationToken cancellation)
@@ -101,56 +161,5 @@ public class FileSystemFileService : IFileService
     {
         var filePath = Path.Join(this.rootDirectory.FullName, container, path);
         return new FileInfo(filePath);
-    }
-
-    public Task<FileDownload> DownloadFile(string container, string path, CancellationToken cancellation = default)
-    {
-        var fileInfo = new FileInfo(Path.Join(this.rootDirectory.FullName, container, path));
-
-        if (!fileInfo.Exists)
-        {
-            throw new FileNotFoundException(container, path);
-        }
-
-        var fileStream = fileInfo.OpenRead();
-        var fileDownload = new FileDownload(
-            fileStream,
-            ETag.From(fileInfo.LastWriteTimeUtc.Ticks.ToString()),
-            Instant.FromDateTimeUtc(fileInfo.LastWriteTimeUtc),
-            fileInfo.Length);
-
-        return Task.FromResult(fileDownload);
-    }
-
-    /// <inheritdoc cref="IFileService.RemoveFile"/>
-    public Task RemoveFile(string container, string path, CancellationToken cancellation = default)
-    {
-        var fileInfo = new FileInfo(Path.Join(this.rootDirectory.FullName, container, path));
-        if (fileInfo.Exists)
-        {
-            fileInfo.Delete();
-        }
-
-        return Task.CompletedTask;
-    }
-
-    /// <inheritdoc cref="IFileService.CreateContainer"/>
-    public Task CreateContainer(string container, CancellationToken cancellation = default)
-    {
-        this.EnsureContainerExists(container);
-        return Task.CompletedTask;
-    }
-
-    /// <inheritdoc cref="IFileService.RemoveContainer"/>
-    public Task RemoveContainer(string container, CancellationToken cancellation = default)
-    {
-        var directoryInfo = new DirectoryInfo(Path.Join(this.rootDirectory.FullName, container));
-
-        if (directoryInfo.Exists)
-        {
-            directoryInfo.Delete(true);
-        }
-
-        return Task.CompletedTask;
     }
 }

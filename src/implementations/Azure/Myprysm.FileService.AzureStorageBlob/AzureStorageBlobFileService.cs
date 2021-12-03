@@ -10,11 +10,19 @@ using Myprysm.FileService.Abstractions.Exceptions;
 using NodaTime;
 using ETag = Myprysm.FileService.Abstractions.ValueObjects.ETag;
 
+/// <summary>
+/// Manages files with a remote Azure Storage account.
+/// </summary>
 public class AzureStorageBlobFileService : IFileService
 {
     private readonly BlobServiceClient client;
     private readonly ILogger<AzureStorageBlobFileService> logger;
-
+    
+    /// <summary>
+    /// Creates a new <see cref="AzureStorageBlobFileService"/> with the given options an logger.
+    /// </summary>
+    /// <param name="options">The options.</param>
+    /// <param name="logger">The logger.</param>
     public AzureStorageBlobFileService(
         IOptions<AzureStorageBlobFileServiceOptions> options,
         ILogger<AzureStorageBlobFileService> logger)
@@ -23,7 +31,7 @@ public class AzureStorageBlobFileService : IFileService
         this.logger = logger;
     }
 
-    /// <inheritdoc cref="IFileService.UploadFile"/>
+    /// <inheritdoc />
     public async Task UploadFile(
         string container,
         string path,
@@ -88,7 +96,7 @@ public class AzureStorageBlobFileService : IFileService
         }
     }
 
-    /// <inheritdoc cref="IFileService.DownloadFile"/>
+    /// <inheritdoc />
     public async Task<FileDownload> DownloadFile(string container, string path, CancellationToken cancellation = default)
     {
         var blobClient = this.client.GetBlobContainerClient(container).GetBlobClient(path);
@@ -109,21 +117,21 @@ public class AzureStorageBlobFileService : IFileService
         return new FileDownload(fileStream, ETag.From(eTag), lastModified, contentLength);
     }
 
-    /// <inheritdoc cref="IFileService.RemoveFile"/>
+    /// <inheritdoc />
     public async Task RemoveFile(string container, string path, CancellationToken cancellation = default)
     {
         var blobClient = this.client.GetBlobContainerClient(container).GetBlobClient(path);
         await blobClient.DeleteIfExistsAsync(cancellationToken: cancellation).ConfigureAwait(false);
     }
 
-    /// <inheritdoc cref="IFileService.CreateContainer"/>
+    /// <inheritdoc />
     public async Task CreateContainer(string container, CancellationToken cancellation = default)
     {
         var containerClient = this.client.GetBlobContainerClient(container);
         await containerClient.CreateIfNotExistsAsync(cancellationToken: cancellation).ConfigureAwait(false);
     }
 
-    /// <inheritdoc cref="IFileService.RemoveContainer"/>
+    /// <inheritdoc />
     public async Task RemoveContainer(string container, CancellationToken cancellation = default)
     {
         var containerClient = this.client.GetBlobContainerClient(container);

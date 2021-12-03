@@ -3,7 +3,7 @@
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Options;
 
-public class DefaultTracerFactory : ITracerFactory
+internal class DefaultTracerFactory : ITracerFactory
 {
     private readonly ConcurrentDictionary<TracerIdentity, DefaultTracer> tracers = new();
 

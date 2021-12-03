@@ -4,12 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-    <Description>Myprysm conversion/serde abstractions.</Description>
+    <Description>
+      Myprysm conversion/serde abstractions.
+      Check the project README for more details on how to implement a compatible converter.
+    </Description>
     <PackageTags>myprysm converter serialization deserialization abstraction</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Myprysm.Tracing.Abstractions\Myprysm.Tracing.Abstractions.csproj"/>
+    <ProjectReference Include="..\Myprysm.Tracing.Abstractions\Myprysm.Tracing.Abstractions.csproj" />
   </ItemGroup>
+
 </Project>

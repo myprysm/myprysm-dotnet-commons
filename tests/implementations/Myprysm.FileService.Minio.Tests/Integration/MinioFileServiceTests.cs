@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Myprysm.FileService.Tests.Integration;
+using Myprysm.FileService.Abstractions.Testing.Integration;
 using NUnit.Framework;
 
 [TestFixture]
@@ -13,7 +13,6 @@ public class MinioFileServiceTests : FileServiceTests
     {
         var config = new Dictionary<string, string>
         {
-            [nameof(MinioFileServiceOptions.WithTracing)] = "true",
             [nameof(MinioFileServiceOptions.Endpoint)] = "localhost:9001",
             [nameof(MinioFileServiceOptions.AccessKey)] = "integration-minio",
             [nameof(MinioFileServiceOptions.SecretKey)] = "integration-minio-secret",

@@ -1,10 +1,11 @@
 ﻿namespace Myprysm.FileService.FileSystem.Tests.Integration;
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Myprysm.FileService.Tests.Integration;
+using Myprysm.FileService.Abstractions.Testing.Integration;
 using NUnit.Framework;
 
 [TestFixture]
@@ -25,12 +26,18 @@ public class FileSystemFileServiceTests : FileServiceTests
         Directory.Delete(this.testDirectory, true);
     }
 
+    protected override void Configure(ConfigurationBuilder configuration)
+    {
+        var config = new Dictionary<string, string>
+        {
+            [nameof(FileSystemFileServiceOptions.Directory)] = this.testDirectory,
+        };
+
+        configuration.AddInMemoryCollection(config);
+    }
+
     protected override void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddFileSystemFileService(options =>
-        {
-            options.Directory = this.testDirectory;
-            options.WithTracing = true;
-        });
+        services.AddFileSystemFileService(configuration);
     }
 }

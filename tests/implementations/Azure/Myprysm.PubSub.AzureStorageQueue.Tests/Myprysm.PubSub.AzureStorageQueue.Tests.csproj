@@ -3,19 +3,17 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
-
-    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0"/>
-    <PackageReference Include="NUnit" Version="3.13.2"/>
-    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0"/>
-    <PackageReference Include="coverlet.collector" Version="3.1.0"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
+    <PackageReference Include="coverlet.collector" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\implementations\Azure\Myprysm.PubSub.AzureStorageQueue\Myprysm.PubSub.AzureStorageQueue.csproj"/>
-    <ProjectReference Include="..\..\..\abstractions\Myprysm.PubSub.Tests\Myprysm.PubSub.Tests.csproj"/>
+    <ProjectReference Include="..\..\..\..\src\abstractions\Myprysm.PubSub.Abstractions.Testing\Myprysm.PubSub.Abstractions.Testing.csproj" />
+    <ProjectReference Include="..\..\..\..\src\implementations\Azure\Myprysm.PubSub.AzureStorageQueue\Myprysm.PubSub.AzureStorageQueue.csproj" />
   </ItemGroup>
 </Project>

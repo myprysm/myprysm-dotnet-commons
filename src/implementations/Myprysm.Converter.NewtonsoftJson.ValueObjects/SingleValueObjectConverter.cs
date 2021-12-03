@@ -5,7 +5,7 @@ using System.Reflection;
 using Myprysm.SharedKernel.ValueObjects;
 using Newtonsoft.Json;
 
-public class SingleValueObjectConverter : JsonConverter
+internal class SingleValueObjectConverter : JsonConverter
 {
     private static readonly ConcurrentDictionary<Type, Type> ConstructorArgumentTypes = new();
 
@@ -25,7 +25,7 @@ public class SingleValueObjectConverter : JsonConverter
         object? existingValue,
         JsonSerializer serializer)
     {
-        if (reader.Value == null)
+        if (reader.Value is null)
         {
             return null;
         }

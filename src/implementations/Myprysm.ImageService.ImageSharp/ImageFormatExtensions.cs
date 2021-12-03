@@ -7,7 +7,7 @@ using SixLabors.ImageSharp.Formats.Gif;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Formats.Png;
 
-public static class ImageFormatExtensions
+internal static class ImageFormatExtensions
 {
     public static IImageFormat GetImageFormat(this ImageFormat format, IImageFormat originalFormat)
     {

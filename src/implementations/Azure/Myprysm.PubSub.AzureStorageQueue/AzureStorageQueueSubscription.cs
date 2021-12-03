@@ -9,6 +9,9 @@ using Myprysm.PubSub.Abstractions.Exceptions;
 using Myprysm.Tracing.Abstractions;
 using Polly.Retry;
 
+/// <summary>
+/// <see cref="ISubscription"/> that receives <see cref="Publication"/> sent by an Azure Storage Queue.
+/// </summary>
 public sealed class AzureStorageQueueSubscription : ISubscription
 {
     private readonly QueueClient queueClient;
@@ -186,6 +189,7 @@ public sealed class AzureStorageQueueSubscription : ISubscription
         return messages.Value;
     }
 
+    /// <inheritdoc />
     public void Dispose()
     {
         if (this.disposed)

@@ -1,14 +1,15 @@
 ﻿namespace Myprysm.ImageService.Abstractions;
 
 using System.Globalization;
+using Myprysm.ImageService.Abstractions.Exceptions;
 using Myprysm.Tracing.Abstractions;
 
-public class TracedImageService : IImageService
+internal class TracedImageService : IImageService
 {
     private readonly IImageService delegated;
     private readonly ITracer tracer;
 
-    public TracedImageService(
+    internal TracedImageService(
         IImageService delegated,
         ITracer tracer)
     {
@@ -25,6 +26,12 @@ public class TracedImageService : IImageService
         try
         {
             return await this.delegated.GetMetadataAsync(source, cancellation).ConfigureAwait(false);
+        }
+        catch (ImageProcessingException exception)
+        {
+            trace?.AddTag("otel.status_code", "ERROR");
+            trace?.AddTag("otel.status_description", $"Image processing exception: {exception.Message}");
+            throw;
         }
         catch (Exception exception)
         {
@@ -51,6 +58,12 @@ public class TracedImageService : IImageService
         {
             return await this.delegated.CropAsync(source, cropArea, format, cancellation).ConfigureAwait(false);
         }
+        catch (ImageProcessingException exception)
+        {
+            trace?.AddTag("otel.status_code", "ERROR");
+            trace?.AddTag("otel.status_description", $"Image processing exception: {exception.Message}");
+            throw;
+        }
         catch (Exception exception)
         {
             trace?.AddTag("otel.status_code", "ERROR");
@@ -73,6 +86,12 @@ public class TracedImageService : IImageService
         try
         {
             return await this.delegated.ResizeAsync(source, size, format, cancellation).ConfigureAwait(false);
+        }
+        catch (ImageProcessingException exception)
+        {
+            trace?.AddTag("otel.status_code", "ERROR");
+            trace?.AddTag("otel.status_description", $"Image processing exception: {exception.Message}");
+            throw;
         }
         catch (Exception exception)
         {

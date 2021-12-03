@@ -4,7 +4,7 @@ using Myprysm.FileService.Abstractions;
 using Myprysm.FileService.Abstractions.ValueObjects;
 using NodaTime;
 
-public sealed record MinioFileDownload(
+internal sealed record MinioFileDownload(
     Stream Stream,
     ETag ETag,
     Instant LastModified,

@@ -1,0 +1,7 @@
+﻿<Project>
+  <PropertyGroup>
+    <!-- Ensure that no test project will be packed by default. -->
+    <!-- Test suites should be provided next to the abstractions -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+</Project>

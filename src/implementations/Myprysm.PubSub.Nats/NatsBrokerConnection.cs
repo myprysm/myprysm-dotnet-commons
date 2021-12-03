@@ -16,6 +16,9 @@ using Myprysm.Tracing.Abstractions;
 using NATS.Client;
 using ISubscription = Myprysm.PubSub.Abstractions.ISubscription;
 
+/// <summary>
+/// <see cref="IBrokerConnection"/> with <see href="https://nats.io/">NATS</see> for a volatile but crazy quick PubSub. 
+/// </summary>
 public class NatsBrokerConnection : IBrokerConnection
 {
     private static readonly BrokerCapabilities CapabilitiesInstance = new(Transport.Transient, Replay: false, SubscriptionGroups: true);
@@ -30,6 +33,14 @@ public class NatsBrokerConnection : IBrokerConnection
     private readonly bool tracingEnabled;
     private bool disposed;
 
+    /// <summary>
+    /// Creates a new <see cref="NatsBrokerConnection"/> with the given dependencies.
+    /// </summary>
+    /// <param name="converter">The converter used to send the publications over the wire.</param>
+    /// <param name="tracerFactory">The tracer factory to trace the publications.</param>
+    /// <param name="options">The options.</param>
+    /// <param name="logger">The logger.</param>
+    /// <param name="subscriptionLogger">The logger for subscriptions.</param>
     public NatsBrokerConnection(
         IConverter converter,
         ITracerFactory tracerFactory,
@@ -47,8 +58,13 @@ public class NatsBrokerConnection : IBrokerConnection
         this.tracingEnabled = options.Value.WithTracing;
     }
 
+    /// <inheritdoc />
+    /// <remarks>
+    /// This implementation only supports <see cref="Transport.Transient"/> transport.
+    /// </remarks>
     public BrokerCapabilities Capabilities => CapabilitiesInstance;
 
+    /// <inheritdoc />
     public Task Publish(Publication publication, CancellationToken cancellation = default)
     {
         using var trace = this.tracingEnabled
@@ -76,6 +92,7 @@ public class NatsBrokerConnection : IBrokerConnection
         }
     }
 
+    /// <inheritdoc />
     public Task<ISubscription> Subscribe(
         Topic topic,
         PublicationHandler handler,

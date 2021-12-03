@@ -12,6 +12,9 @@ using Myprysm.Tracing.Abstractions;
 using Polly;
 using Polly.Retry;
 
+/// <summary>
+/// <see cref="IBrokerConnection"/> with Azure Storage Queues. 
+/// </summary>
 public class AzureStorageQueueBrokerConnection : IBrokerConnection
 {
     private const string PoisonQueueSuffix = "-poison";
@@ -35,6 +38,14 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
     private bool disposed;
     private readonly SubscriptionExceptionHandler globalExceptionHandler;
 
+    /// <summary>
+    /// Creates a new <see cref="AzureStorageQueueBrokerConnection"/> with the given dependencies.
+    /// </summary>
+    /// <param name="converter">The converter used to send the publications over the wire.</param>
+    /// <param name="tracerFactory">The tracer factory to trace the publications.</param>
+    /// <param name="options">The options.</param>
+    /// <param name="logger">The logger.</param>
+    /// <param name="subscriptionLogger">The logger for subscriptions.</param>
     public AzureStorageQueueBrokerConnection(
         IConverter converter,
         ITracerFactory tracerFactory,
@@ -106,8 +117,10 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
         return IntervalStep * (factor < 1 ? 1 : factor);
     }
 
+    /// <inheritdoc />
     public BrokerCapabilities Capabilities => CapabilitiesInstance;
 
+    /// <inheritdoc />
     public async Task Publish(Publication publication, CancellationToken cancellation = default)
     {
         using var trace = this.tracer.StartTrace(nameof(this.Publish), TraceKind.Producer, publication.Trace);
@@ -117,6 +130,11 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
 
         try
         {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(nameof(AzureStorageQueueBrokerConnection));
+            }
+
             var client = await this.GetClient(publication.Topic.Value, cancellation).ConfigureAwait(false);
 
             var serializedTrace = SerializedTrace.GetSerializedTrace(trace);
@@ -147,6 +165,7 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
         return this.queueClients.GetOrAdd(queue, client);
     }
 
+    /// <inheritdoc />
     public async Task<ISubscription> Subscribe(
         Topic topic,
         PublicationHandler handler,
@@ -154,6 +173,11 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
         SubscriptionExceptionHandler? exceptionHandler = null,
         CancellationToken cancellation = default)
     {
+        if (this.disposed)
+        {
+            throw new ObjectDisposedException(nameof(AzureStorageQueueBrokerConnection));
+        }
+
         if (group != null)
         {
             throw new IllegalOperationException("Subscription groups are not supported with Azure Storage Queue broker.");
@@ -187,6 +211,7 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
         return subscription;
     }
 
+    /// <inheritdoc />
     public void Dispose()
     {
         if (this.disposed)

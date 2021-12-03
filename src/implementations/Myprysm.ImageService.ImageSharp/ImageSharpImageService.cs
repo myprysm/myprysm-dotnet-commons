@@ -8,16 +8,24 @@ using Point = SixLabors.ImageSharp.Point;
 using Rectangle = Myprysm.ImageService.Abstractions.Rectangle;
 using Size = Myprysm.ImageService.Abstractions.Size;
 
+/// <summary>
+/// <see cref="IImageService"/> implementation with <see href="https://github.com/SixLabors/ImageSharp">ImageSharp</see>.
+/// </summary>
 public class ImageSharpImageService : IImageService
 {
     private readonly ILogger<ImageSharpImageService> logger;
 
+    /// <summary>
+    /// Creates a new <see cref="ImageSharpImageService"/> with the given logger.
+    /// </summary>
+    /// <param name="logger">The logger.</param>
     public ImageSharpImageService(
         ILogger<ImageSharpImageService> logger)
     {
         this.logger = logger;
     }
 
+    /// <inheritdoc />
     public async Task<ImageMetadata> GetMetadataAsync(Stream source, CancellationToken cancellation = default)
     {
         try
@@ -36,6 +44,7 @@ public class ImageSharpImageService : IImageService
         }
     }
 
+    /// <inheritdoc />
     public async Task<Stream> CropAsync(
         Stream source,
         Rectangle cropArea,
@@ -79,6 +88,7 @@ public class ImageSharpImageService : IImageService
         }
     }
 
+    /// <inheritdoc />
     public async Task<Stream> ResizeAsync(
         Stream source,
         Size size,

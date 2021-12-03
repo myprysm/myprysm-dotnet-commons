@@ -4,21 +4,24 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <DefaultDocumentationGeneratedPages>Assembly, Types</DefaultDocumentationGeneratedPages>
 
     <Description>Myprysm PubSub with NATS. Supports subscription groups and Myprysm tracing. Messages are considered non-persistent at the moment until the implementation is tested with Jetstream.</Description>
     <PackageTags>myprysm pubsub publisher subscriber subscription eventbus messagebus servicebus subscriptiongroup competingconsumer nats</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0"/>
-    <PackageReference Include="NATS.Client" Version="0.14.2"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+    <PackageReference Include="NATS.Client" Version="0.14.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\abstractions\Myprysm.Converter.Abstractions\Myprysm.Converter.Abstractions.csproj"/>
-    <ProjectReference Include="..\..\abstractions\Myprysm.PubSub.Abstractions\Myprysm.PubSub.Abstractions.csproj"/>
+    <ProjectReference Include="..\..\abstractions\Myprysm.Converter.Abstractions\Myprysm.Converter.Abstractions.csproj" />
+    <ProjectReference Include="..\..\abstractions\Myprysm.PubSub.Abstractions\Myprysm.PubSub.Abstractions.csproj" />
   </ItemGroup>
 </Project>

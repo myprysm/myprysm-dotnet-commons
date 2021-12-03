@@ -27,6 +27,9 @@ using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
+/// <summary>
+/// <see cref="Type"/> extensions.
+/// </summary>
 public static class TypeExtensions
 {
     private static readonly ConcurrentDictionary<Type, string> PrettyPrintCache = new();
@@ -52,6 +55,11 @@ public static class TypeExtensions
                select type;
     }
 
+    /// <summary>
+    /// Pretty print this type as a human-readable string.
+    /// </summary>
+    /// <param name="type">The type to print.</param>
+    /// <returns>The human-readable representation of this type.</returns>
     [ExcludeFromCodeCoverage]
     public static string PrettyPrint(this Type type)
     {

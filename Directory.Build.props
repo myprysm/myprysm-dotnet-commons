@@ -1,8 +1,14 @@
 <Project>
   <PropertyGroup>
+    <Authors>Damien Benon</Authors>
+    <RepositoryUrl>https://github.com/myprysm/myprysm-dotnet-commons</RepositoryUrl>
+    <PackageLicense>https://github.com/myprysm/myprysm-dotnet-commons/blob/main/LICENSE</PackageLicense>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <ExcludedWarnings>NU5104</ExcludedWarnings>
-    
+
     <NoWarn>$(ExcludedWarnings)</NoWarn>
 
     <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>

@@ -9,7 +9,7 @@ public interface IReaderInput
 }
 
 /// <summary>
-///     Reader that reads the requested output from the given request asynchronously.
+/// Reader that reads the requested output from the given request asynchronously.
 /// </summary>
 /// <typeparam name="TRequest">The request type.</typeparam>
 /// <typeparam name="TResponse">The response type.</typeparam>
@@ -18,7 +18,7 @@ public interface IReader<in TRequest, TResponse>
     where TResponse : notnull
 {
     /// <summary>
-    ///     Read asynchronously the output for the given request.
+    /// Read asynchronously the output for the given request.
     /// </summary>
     /// <param name="request">The request.</param>
     /// <param name="cancellation">The cancellation token.</param>

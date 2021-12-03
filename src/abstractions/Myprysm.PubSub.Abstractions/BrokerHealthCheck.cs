@@ -2,6 +2,9 @@ namespace Myprysm.PubSub.Abstractions;
 
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
+/// <summary>
+/// Broker <see cref="IHealthCheck"/> to ensure a <see cref="IBrokerConnection"/> instance can work appropriately.
+/// </summary>
 public class BrokerHealthCheck : IHealthCheck
 {
     private static readonly byte[] Message = { 0x01, };
@@ -11,6 +14,10 @@ public class BrokerHealthCheck : IHealthCheck
     private readonly PublicationCollectorHandler collector;
     private readonly Topic topic;
 
+    /// <summary>
+    /// Creates a new <see cref="BrokerHealthCheck"/>.
+    /// </summary>
+    /// <param name="broker">The broker to verify the health.</param>
     public BrokerHealthCheck(IBrokerConnection broker)
     {
         this.broker = broker;
@@ -18,6 +25,8 @@ public class BrokerHealthCheck : IHealthCheck
         this.topic = new Topic(Guid.NewGuid().ToString().Replace("-", string.Empty));
     }
 
+
+    /// <inheritdoc />
     public async Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context,
         CancellationToken cancellationToken = new())

@@ -9,6 +9,9 @@ using Myprysm.Tracing.Abstractions;
 using NATS.Client;
 using ISubscription = Myprysm.PubSub.Abstractions.ISubscription;
 
+/// <summary>
+/// <see cref="ISubscription"/> that receives <see cref="Publication"/> sent by a <see href="https://nats.io/">NATS</see> <see cref="IBrokerConnection"/>.
+/// </summary>
 public sealed class NatsSubscription : ISubscription
 {
     private readonly IAsyncSubscription subscription;
@@ -21,7 +24,7 @@ public sealed class NatsSubscription : ISubscription
     private readonly Action onDispose;
     private bool disposed;
 
-    public NatsSubscription(PublicationHandler handler,
+    internal NatsSubscription(PublicationHandler handler,
         SubscriptionExceptionHandler exceptionHandler,
         IAsyncSubscription subscription,
         bool tracingEnabled,
@@ -95,6 +98,7 @@ public sealed class NatsSubscription : ISubscription
         }
     }
 
+    /// <inheritdoc />
     public void Dispose()
     {
         if (this.disposed)

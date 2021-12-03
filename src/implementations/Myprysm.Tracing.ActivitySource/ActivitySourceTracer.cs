@@ -3,26 +3,38 @@ namespace Myprysm.Tracing.ActivitySource;
 using System.Diagnostics;
 using Myprysm.Tracing.Abstractions;
 
-internal sealed class ActivitySourceTracer : ITracer
+/// <summary>
+/// A tracer wrapping an <see cref="System.Diagnostics.ActivitySource"/> for application telemetry.
+/// </summary>
+public sealed class ActivitySourceTracer : ITracer
 {
+    /// <summary>
+    /// Creates a new <see cref="ActivitySourceTracer"/>.
+    /// </summary>
+    /// <param name="identity">The tracer identity.</param>
     public ActivitySourceTracer(TracerIdentity identity)
     {
         this.Identity = identity;
         this.ActivitySource = new ActivitySource(identity.Name, identity.Version);
     }
 
+    /// <inheritdoc />
     public TracerIdentity Identity { get; }
 
+    
+    /// <summary>
+    /// Gets the underlying <see cref="ActivitySource"/> of this tracer.
+    /// </summary>
     public ActivitySource ActivitySource { get; }
 
-    public string Name => this.ActivitySource.Name;
-
+    /// <inheritdoc />
     public ITrace? CurrentTrace => Activity.Current switch
     {
         null => null,
         _ => new ActivityTrace(Activity.Current, this),
     };
 
+    /// <inheritdoc />
     public ITrace? StartTrace(string name, TraceKind kind = TraceKind.Internal, ITrace? parent = null)
     {
         var parentContext = this.GetParentContext(parent);

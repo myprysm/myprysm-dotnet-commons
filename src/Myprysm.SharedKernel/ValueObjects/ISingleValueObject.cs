@@ -23,7 +23,14 @@
 
 namespace Myprysm.SharedKernel.ValueObjects;
 
+/// <summary>
+/// Represents an object holding a single value.
+/// </summary>
 public interface ISingleValueObject
 {
+    /// <summary>
+    /// The value held.
+    /// </summary>
+    /// <returns>The value held.</returns>
     object GetValue();
 }

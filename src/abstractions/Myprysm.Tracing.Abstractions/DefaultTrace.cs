@@ -2,7 +2,7 @@ namespace Myprysm.Tracing.Abstractions;
 
 using System.Collections.Concurrent;
 
-public sealed class DefaultTrace : ITrace
+internal sealed class DefaultTrace : ITrace
 {
     private readonly DefaultTracer tracer;
     private readonly ConcurrentDictionary<string, string?> baggage;

@@ -4,17 +4,20 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <DefaultDocumentationGeneratedPages>Assembly, Types</DefaultDocumentationGeneratedPages>
 
     <Description>Enable OpenTelemetry in your application and with Myprysm components.</Description>
     <PackageTags>myprysm tracing telemetry tracer activity diagnostics activity activitysource opentelemetry</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Myprysm.Tracing.ActivitySource\Myprysm.Tracing.ActivitySource.csproj"/>
+    <ProjectReference Include="..\Myprysm.Tracing.ActivitySource\Myprysm.Tracing.ActivitySource.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc8"/>
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc8" />
   </ItemGroup>
 
 </Project>

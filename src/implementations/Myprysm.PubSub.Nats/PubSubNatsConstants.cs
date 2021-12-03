@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Reflection;
 using Myprysm.Tracing.Abstractions;
 
-public static class PubSubNatsConstants
+internal static class PubSubNatsConstants
 {
     public static readonly Assembly Assembly = typeof(PubSubNatsConstants).Assembly;
     public static readonly FileVersionInfo FileVersionInfo = FileVersionInfo.GetVersionInfo(Assembly.Location);
