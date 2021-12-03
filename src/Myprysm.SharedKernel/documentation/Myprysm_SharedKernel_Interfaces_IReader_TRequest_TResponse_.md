@@ -5,7 +5,6 @@ Reader that reads the requested output from the given request asynchronously.
 ```csharp
 public interface IReader<in TRequest,TResponse>
     where TRequest : Myprysm.SharedKernel.Interfaces.IReaderInput
-    where TResponse : notnull
 ```
 #### Type parameters
 <a name='Myprysm_SharedKernel_Interfaces_IReader_TRequest_TResponse__TRequest'></a>
@@ -21,7 +20,7 @@ The response type.
 ## IReader&lt;TRequest,TResponse&gt;.ReadAsync(TRequest, CancellationToken) Method
 Read asynchronously the output for the given request.  
 ```csharp
-System.Threading.Tasks.Task<TResponse> ReadAsync(TRequest request, System.Threading.CancellationToken cancellation=default(System.Threading.CancellationToken));
+System.Threading.Tasks.Task<TResponse?> ReadAsync(TRequest request, System.Threading.CancellationToken cancellation=default(System.Threading.CancellationToken));
 ```
 #### Parameters
 <a name='Myprysm_SharedKernel_Interfaces_IReader_TRequest_TResponse__ReadAsync(TRequest_System_Threading_CancellationToken)_request'></a>
