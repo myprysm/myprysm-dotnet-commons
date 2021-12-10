@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.0.2...v1.1.0) (2021-12-10)
+
+
+### Features
+
+* **testing:** Add `Myprysm.AspNetCore.Testing` for easier API testing ([9661885](https://github.com/myprysm/myprysm-dotnet-commons/commit/9661885f32cd428b29adf3ebe8de69b606215ed1))
+
 ### [1.0.2](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.0.1...v1.0.2) (2021-12-04)
 
 
