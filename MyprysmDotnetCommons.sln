@@ -116,6 +116,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.ImageService.Abstra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.PubSub.Abstractions.Testing", "src\abstractions\Myprysm.PubSub.Abstractions.Testing\Myprysm.PubSub.Abstractions.Testing.csproj", "{0BCC0834-0BA9-4577-8BFE-542AAA13AC8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.AspNetCore.Testing", "src\Myprysm.AspNetCore.Testing\Myprysm.AspNetCore.Testing.csproj", "{FB5005E7-06F2-483B-B85D-67239F240E3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.AspNetCore.Testing.Tests", "tests\Myprysm.AspNetCore.Testing.Tests\Myprysm.AspNetCore.Testing.Tests.csproj", "{3567CB15-DBAF-4068-A13E-6930D6EDAE48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.AspNetCore.Testing.TestApi", "tests\Myprysm.AspNetCore.Testing.TestApi\Myprysm.AspNetCore.Testing.TestApi.csproj", "{557EBC3B-CFB1-48B5-A0BC-1F8E74284B7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +175,9 @@ Global
 		{1479B592-9E22-41AD-BDD6-C04B25B996A5} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
 		{D5FA51AD-D8E4-408C-8F2E-0C6CAB768B54} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
 		{0BCC0834-0BA9-4577-8BFE-542AAA13AC8D} = {341B3E44-33C5-4276-B199-8DEC935CB1A9}
+		{FB5005E7-06F2-483B-B85D-67239F240E3F} = {16CD561D-0551-4688-8FEA-7368D8C6525E}
+		{3567CB15-DBAF-4068-A13E-6930D6EDAE48} = {F0B5D0F1-BBBD-4998-A008-8B7D758023CD}
+		{557EBC3B-CFB1-48B5-A0BC-1F8E74284B7F} = {F0B5D0F1-BBBD-4998-A008-8B7D758023CD}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DFA98688-E9E0-416B-A5EF-E53EAA379A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -317,5 +326,17 @@ Global
 		{0BCC0834-0BA9-4577-8BFE-542AAA13AC8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BCC0834-0BA9-4577-8BFE-542AAA13AC8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BCC0834-0BA9-4577-8BFE-542AAA13AC8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB5005E7-06F2-483B-B85D-67239F240E3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB5005E7-06F2-483B-B85D-67239F240E3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB5005E7-06F2-483B-B85D-67239F240E3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB5005E7-06F2-483B-B85D-67239F240E3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3567CB15-DBAF-4068-A13E-6930D6EDAE48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3567CB15-DBAF-4068-A13E-6930D6EDAE48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3567CB15-DBAF-4068-A13E-6930D6EDAE48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3567CB15-DBAF-4068-A13E-6930D6EDAE48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{557EBC3B-CFB1-48B5-A0BC-1F8E74284B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{557EBC3B-CFB1-48B5-A0BC-1F8E74284B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{557EBC3B-CFB1-48B5-A0BC-1F8E74284B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{557EBC3B-CFB1-48B5-A0BC-1F8E74284B7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
