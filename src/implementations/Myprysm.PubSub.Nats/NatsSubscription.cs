@@ -1,6 +1,7 @@
 namespace Myprysm.PubSub.Nats;
 
 using System;
+using System.Collections.Immutable;
 using Microsoft.Extensions.Logging;
 using Myprysm.Converter.Abstractions;
 using Myprysm.PubSub.Abstractions;
@@ -56,27 +57,47 @@ public sealed class NatsSubscription : ISubscription
         try
         {
             var subject = args.Message.Subject;
+
+            var headers = default(IDictionary<string, string?>?);
             var topic = new Topic(subject);
-            var envelope = this.converter.Read<Envelope>(args.Message.Data);
-
-            if (envelope is null)
+            if (args.Message.HasHeaders)
             {
-                this.logger.LogError("Envelope is null in handler for subject {Subject}", args.Message.Subject);
-                throw new SubscriptionHandlerException($"Envelope is null in handler for subject {args.Message.Subject}");
-            }
-
-            if (envelope.Trace is not null && trace is not null)
-            {
-                trace.SetParentId(envelope.Trace.Id);
-                foreach (var (key, value) in envelope.Trace.Baggage)
+                if (args.Message.Header[PubSubNatsConstants.TraceIdHeader] is not null)
                 {
-                    trace.AddBaggage(key, value);
+                    var traceId = args.Message.Header[PubSubNatsConstants.TraceIdHeader];
+                    var traceBaggageValue = args.Message.Header[PubSubNatsConstants.TraceBaggageHeader];
+                    var traceBaggage = this.converter.Read<IDictionary<string, string?>>(traceBaggageValue) ?? ImmutableDictionary<string, string?>.Empty;
+
+                    trace?.SetParentId(traceId);
+                    foreach (var (key, value) in traceBaggage)
+                    {
+                        trace?.AddBaggage(key, value);
+                    }
+                }
+
+                headers = new Dictionary<string, string?>(args.Message.Header.Count);
+                foreach (string h in args.Message.Header)
+                {
+                    if (PubSubNatsConstants.ProtectedHeaders.Contains(h))
+                    {
+                        continue;
+                    }
+
+                    if (args.Message.Header[h] == string.Empty)
+                    {
+                        headers[h] = null;
+                    }
+                    else
+                    {
+                        headers[h] = args.Message.Header[h];
+                    }
                 }
             }
 
             var message = new Publication(
                 topic,
-                envelope.Payload,
+                args.Message.Data,
+                Headers: headers,
                 Trace: trace);
 
             await this.handler.Invoke(message).ConfigureAwait(false);

@@ -23,7 +23,7 @@ internal sealed class ActivityTrace : ITrace, IEquatable<ActivityTrace>
 
     public override bool Equals(object? obj)
     {
-        return ReferenceEquals(this, obj) || obj is ActivityTrace other && Equals(other);
+        return ReferenceEquals(this, obj) || obj is ActivityTrace other && this.Equals(other);
     }
 
     public override int GetHashCode()

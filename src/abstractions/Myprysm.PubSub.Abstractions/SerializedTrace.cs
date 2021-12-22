@@ -22,7 +22,7 @@ public sealed record SerializedTrace : ITrace
     public SerializedTrace(
         string? parentId,
         string id,
-        Dictionary<string, string?>? baggage)
+        IReadOnlyDictionary<string, string?>? baggage)
     {
         this.ParentId = parentId;
         this.Id = id;

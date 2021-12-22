@@ -138,7 +138,7 @@ public class AzureStorageQueueBrokerConnection : IBrokerConnection
             var client = await this.GetClient(publication.Topic.Value, cancellation).ConfigureAwait(false);
 
             var serializedTrace = SerializedTrace.GetSerializedTrace(trace);
-            var envelope = new Envelope(publication.Message, serializedTrace);
+            var envelope = new Envelope(publication.Message, publication.Headers, serializedTrace);
             var payload = this.converter.WriteBytes(envelope);
 
             _ = await client.SendMessageAsync(new BinaryData(payload), cancellationToken: cancellation).ConfigureAwait(false);

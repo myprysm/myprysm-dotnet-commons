@@ -7,6 +7,7 @@ using Myprysm.Tracing.Abstractions;
 /// </summary>
 /// <param name="Topic">The topic to send the publication.</param>
 /// <param name="Message">The content of the publication.</param>
+/// <param name="Headers">The headers of the publication.</param>
 /// <param name="IsVolatile">
 /// Whether this publication is volatile or persistent.
 /// Some brokers only support volatile or persistent publications. You should verify the underlying <see cref="IBrokerConnection.Capabilities"/>.
@@ -18,5 +19,6 @@ using Myprysm.Tracing.Abstractions;
 public record Publication(
     Topic Topic,
     byte[] Message,
+    IDictionary<string, string?>? Headers = null,
     bool IsVolatile = true,
     ITrace? Trace = null);

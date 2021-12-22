@@ -121,6 +121,7 @@ public sealed class AzureStorageQueueSubscription : ISubscription
             var publication = new Publication(
                 this.topic,
                 envelope.Payload,
+                envelope.Headers,
                 false,
                 trace);
             await this.handler(publication).ConfigureAwait(false);
