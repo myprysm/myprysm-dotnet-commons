@@ -14,9 +14,9 @@ public static class DependencyInjection
     /// <summary>
     /// Adds a NewtonsoftJson <see cref="IConverter"/>
     /// </summary>
-    /// <param name="services"></param>
-    /// <param name="configureOptions"></param>
-    /// <param name="configureJson"></param>
+    /// <param name="services">The service collection.</param>
+    /// <param name="configureOptions">The options configuration action.</param>
+    /// <param name="configureJson">The serializer options configuration.</param>
     /// <returns></returns>
     public static IServiceCollection AddNewtonsoftJsonConverter(
         this IServiceCollection services,
@@ -30,10 +30,10 @@ public static class DependencyInjection
                 configureJson?.Invoke(options.JsonSerializerSettings);
             })
             .TryAddDefaultTracer()
-            .RegisterTracerOnStartup(ConverterNewtonsoftJsonConstants.TracerIdentity)
+            .RegisterTracerOnStartup(NewtonsoftJsonConverterConstants.TracerIdentity)
             .AddSingleton<NewtonsoftJsonConverter>()
             .AddSingleton(sp => sp.CreateConverter<NewtonsoftJsonConverterOptions>(
-                ConverterNewtonsoftJsonConstants.TracerIdentity,
+                NewtonsoftJsonConverterConstants.TracerIdentity,
                 p => p.GetRequiredService<NewtonsoftJsonConverter>()));
     }
 

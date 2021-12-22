@@ -41,12 +41,15 @@ public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddNew
 #### Parameters
 <a name='Myprysm_Converter_NewtonsoftJson_DependencyInjection_AddNewtonsoftJsonConverter(Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Myprysm_Converter_NewtonsoftJson_NewtonsoftJsonConverterOptions__System_Action_Newtonsoft_Json_JsonSerializerSettings__)_services'></a>
 `services` [Microsoft.Extensions.DependencyInjection.IServiceCollection](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.Extensions.DependencyInjection.IServiceCollection 'Microsoft.Extensions.DependencyInjection.IServiceCollection')  
+The service collection.
   
 <a name='Myprysm_Converter_NewtonsoftJson_DependencyInjection_AddNewtonsoftJsonConverter(Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Myprysm_Converter_NewtonsoftJson_NewtonsoftJsonConverterOptions__System_Action_Newtonsoft_Json_JsonSerializerSettings__)_configureOptions'></a>
 `configureOptions` [System.Action&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Action-1 'System.Action`1')[NewtonsoftJsonConverterOptions](Myprysm_Converter_NewtonsoftJson_NewtonsoftJsonConverterOptions.md 'Myprysm.Converter.NewtonsoftJson.NewtonsoftJsonConverterOptions')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Action-1 'System.Action`1')  
+The options configuration action.
   
 <a name='Myprysm_Converter_NewtonsoftJson_DependencyInjection_AddNewtonsoftJsonConverter(Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Myprysm_Converter_NewtonsoftJson_NewtonsoftJsonConverterOptions__System_Action_Newtonsoft_Json_JsonSerializerSettings__)_configureJson'></a>
 `configureJson` [System.Action&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Action-1 'System.Action`1')[Newtonsoft.Json.JsonSerializerSettings](https://docs.microsoft.com/en-us/dotnet/api/Newtonsoft.Json.JsonSerializerSettings 'Newtonsoft.Json.JsonSerializerSettings')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Action-1 'System.Action`1')  
+The serializer options configuration.
   
 #### Returns
 [Microsoft.Extensions.DependencyInjection.IServiceCollection](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.Extensions.DependencyInjection.IServiceCollection 'Microsoft.Extensions.DependencyInjection.IServiceCollection')  
