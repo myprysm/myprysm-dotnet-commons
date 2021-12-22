@@ -40,7 +40,7 @@ public abstract class PersistentBrokerConnectionTests<TOptions> : BrokerConnecti
         var topic = this.A<Topic>();
         var message = this.A<string>();
         var encodedMessage = EncodeString(message);
-        var publication = new Publication(topic, encodedMessage, false);
+        var publication = new Publication(topic, encodedMessage, IsVolatile: false);
         var handler = new PublicationCollectorHandler();
         await connection.Subscribe(topic, handler.HandleAsync);
 
@@ -67,7 +67,7 @@ public abstract class PersistentBrokerConnectionTests<TOptions> : BrokerConnecti
         var topic = this.A<Topic>();
         var message = this.A<string>();
         var encodedMessage = EncodeString(message);
-        var publication = new Publication(topic, encodedMessage, false);
+        var publication = new Publication(topic, encodedMessage, IsVolatile: false);
         var handler = new PublicationCollectorHandler();
 
         // Act

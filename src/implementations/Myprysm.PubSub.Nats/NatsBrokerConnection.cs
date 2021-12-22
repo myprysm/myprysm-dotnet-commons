@@ -76,11 +76,16 @@ public class NatsBrokerConnection : IBrokerConnection
 
         try
         {
-            var serializedTrace = SerializedTrace.GetSerializedTrace(trace);
-            var envelope = new Envelope(publication.Message, serializedTrace);
-            var payload = this.converter.WriteBytes(envelope);
+            var header = this.CreateHeader(publication, trace);
 
-            this.Connection.Publish(publication.Topic.Value, payload);
+            var message = new Msg
+            {
+                Subject = publication.Topic.Value,
+                Data = publication.Message,
+                Header = header,
+            };
+
+            this.Connection.Publish(message);
             return Task.CompletedTask;
         }
         catch (Exception exception)
@@ -90,6 +95,44 @@ public class NatsBrokerConnection : IBrokerConnection
             trace?.AddTag("otel.status_description", $"Unhandled exception: {exception.Message}");
             throw;
         }
+    }
+
+    private MsgHeader? CreateHeader(
+        Publication publication,
+        ITrace? trace)
+    {
+        var messageHeader = new MsgHeader();
+
+        if (publication.Headers is null && trace is null)
+        {
+            return messageHeader;
+        }
+
+
+        if (publication.Headers is not null)
+        {
+            foreach (var (key, value) in publication.Headers)
+            {
+                if (PubSubNatsConstants.ProtectedHeaders.Contains(key))
+                {
+                    this.logger.LogWarning(
+                        "Publication {@Publication} contains the protected header {ProtectedHeader}. Please update your code not to use this header name",
+                        publication,
+                        key);
+                    continue;
+                }
+
+                messageHeader.Add(key, value ?? string.Empty);
+            }
+        }
+
+        if (trace is not null)
+        {
+            messageHeader[PubSubNatsConstants.TraceIdHeader] = trace.Id;
+            messageHeader[PubSubNatsConstants.TraceBaggageHeader] = this.converter.WriteString(trace.Baggage);
+        }
+
+        return messageHeader;
     }
 
     /// <inheritdoc />

@@ -15,23 +15,23 @@ Implements [Myprysm.Tracing.Abstractions.ITrace](https://docs.microsoft.com/en-u
 ### Remarks
 This trace should only be used in [ISubscription](Myprysm_PubSub_Abstractions_ISubscription.md 'Myprysm.PubSub.Abstractions.ISubscription') to initiate the consumer trace.  
 ### Constructors
-<a name='Myprysm_PubSub_Abstractions_SerializedTrace_SerializedTrace(string__string_System_Collections_Generic_Dictionary_string_string___)'></a>
-## SerializedTrace.SerializedTrace(string?, string, Dictionary&lt;string,string?&gt;?) Constructor
+<a name='Myprysm_PubSub_Abstractions_SerializedTrace_SerializedTrace(string__string_System_Collections_Generic_IReadOnlyDictionary_string_string___)'></a>
+## SerializedTrace.SerializedTrace(string?, string, IReadOnlyDictionary&lt;string,string?&gt;?) Constructor
 Creates a new [SerializedTrace](Myprysm_PubSub_Abstractions_SerializedTrace.md 'Myprysm.PubSub.Abstractions.SerializedTrace').  
 ```csharp
-public SerializedTrace(string? parentId, string id, System.Collections.Generic.Dictionary<string,string?>? baggage);
+public SerializedTrace(string? parentId, string id, System.Collections.Generic.IReadOnlyDictionary<string,string?>? baggage);
 ```
 #### Parameters
-<a name='Myprysm_PubSub_Abstractions_SerializedTrace_SerializedTrace(string__string_System_Collections_Generic_Dictionary_string_string___)_parentId'></a>
+<a name='Myprysm_PubSub_Abstractions_SerializedTrace_SerializedTrace(string__string_System_Collections_Generic_IReadOnlyDictionary_string_string___)_parentId'></a>
 `parentId` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')  
 The optional parent id of the original trace.
   
-<a name='Myprysm_PubSub_Abstractions_SerializedTrace_SerializedTrace(string__string_System_Collections_Generic_Dictionary_string_string___)_id'></a>
+<a name='Myprysm_PubSub_Abstractions_SerializedTrace_SerializedTrace(string__string_System_Collections_Generic_IReadOnlyDictionary_string_string___)_id'></a>
 `id` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')  
 The id of the original trace.
   
-<a name='Myprysm_PubSub_Abstractions_SerializedTrace_SerializedTrace(string__string_System_Collections_Generic_Dictionary_string_string___)_baggage'></a>
-`baggage` [System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')  
+<a name='Myprysm_PubSub_Abstractions_SerializedTrace_SerializedTrace(string__string_System_Collections_Generic_IReadOnlyDictionary_string_string___)_baggage'></a>
+`baggage` [System.Collections.Generic.IReadOnlyDictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IReadOnlyDictionary-2 'System.Collections.Generic.IReadOnlyDictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IReadOnlyDictionary-2 'System.Collections.Generic.IReadOnlyDictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IReadOnlyDictionary-2 'System.Collections.Generic.IReadOnlyDictionary`2')  
 The optional baggage of the original trace.
   
   

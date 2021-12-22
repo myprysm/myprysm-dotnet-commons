@@ -2,7 +2,6 @@ namespace Myprysm.PubSub.Abstractions.Testing.Integration;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -11,7 +10,6 @@ using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Options;
 using Myprysm.Converter.NewtonsoftJson;
 using Myprysm.Converter.NewtonsoftJson.ValueObjects;
 using Myprysm.PubSub.Abstractions;
@@ -87,18 +85,17 @@ public abstract class BrokerConnectionTests<TOptions> : ServiceTests
             latch.Signal();
         }
 
+        Task PublicationHandler(Publication _)
+        {
+            latch.Signal();
+            return Task.CompletedTask;
+        }
+
         this.subscriptionExceptionHandler = ExceptionHandler;
         var connection = this.BrokerConnection;
         var topic = this.A<Topic>();
 
-
-        [ExcludeFromCodeCoverage]
-        Task NotCalled(Publication _)
-        {
-            return Task.CompletedTask;
-        }
-
-        using var _ = connection.Subscribe(topic, NotCalled);
+        using var _ = connection.Subscribe(topic, PublicationHandler);
 
         // Act
         await this.SendNullMessage(topic);
@@ -266,7 +263,7 @@ public abstract class BrokerConnectionTests<TOptions> : ServiceTests
     /// Then the <see cref="BrokerHealthCheck"/> returns Unhealthy
     /// </summary>
     [Test]
-    public async Task When_broker_connection_is_down_health_check_returns_healthy()
+    public async Task When_broker_connection_is_down_health_check_returns_unhealthy()
     {
         // Arrange
         var connection = this.BrokerConnection;
@@ -278,6 +275,43 @@ public abstract class BrokerConnectionTests<TOptions> : ServiceTests
 
         // Assert
         actual.Status.Should().Be(HealthStatus.Unhealthy);
+    }
+
+    /// <summary>
+    /// You should ensure that given a <see cref="Topic"/>
+    /// When a <see cref="ISubscription"/> is made on this <see cref="Topic"/>
+    /// And a <see cref="Publication"/> is published on this <see cref="Topic"/> without a <see cref="ITrace"/>
+    /// Then the <see cref="Publication"/> contains a <see cref="ITrace"/> with a parent.
+    /// </summary>
+    [Test]
+    public async Task When_header_is_provided_then_header_is_available_to_consume()
+    {
+        // Arrange
+        var connection = this.BrokerConnection;
+        var topic = this.A<Topic>();
+        var message = this.A<string>();
+        var encodedMessage = EncodeString(message);
+        var headers = new Dictionary<string, string?>
+        {
+            ["a"] = "value",
+            ["b"] = "another value",
+            ["c"] = null,
+        };
+        
+        var publication = new Publication(topic, encodedMessage, headers);
+        var handler = new PublicationCollectorHandler();
+        await connection.Subscribe(topic, handler.HandleAsync);
+
+        // Act
+        await connection.Publish(publication);
+
+        // Assert
+        var publications = handler.GetMessages(TimeSpan.FromSeconds(1));
+
+        publications.Should().HaveCount(1);
+
+        var actual = publications.First();
+        actual.Headers.Should().BeEquivalentTo(headers);
     }
 
     /// <summary>
