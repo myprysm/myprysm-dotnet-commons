@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.1.0...v1.2.0) (2021-12-22)
+
+
+### Features
+
+* **pubsub:** Handle publication headers ([a63de43](https://github.com/myprysm/myprysm-dotnet-commons/commit/a63de439f7b9417506d4d45fbeaba29d27b9c717))
+
 ## [1.1.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.0.2...v1.1.0) (2021-12-10)
 
 
