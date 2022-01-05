@@ -52,13 +52,13 @@ public System.Threading.Tasks.Task When_a_null_message_comes_from_an_external_so
 #### Returns
 [System.Threading.Tasks.Task](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task 'System.Threading.Tasks.Task')  
   
-<a name='Myprysm_PubSub_Abstractions_Testing_Integration_BrokerConnectionTests_TOptions__When_broker_connection_is_down_health_check_returns_healthy()'></a>
-## BrokerConnectionTests&lt;TOptions&gt;.When_broker_connection_is_down_health_check_returns_healthy() Method
+<a name='Myprysm_PubSub_Abstractions_Testing_Integration_BrokerConnectionTests_TOptions__When_broker_connection_is_down_health_check_returns_unhealthy()'></a>
+## BrokerConnectionTests&lt;TOptions&gt;.When_broker_connection_is_down_health_check_returns_unhealthy() Method
 You should ensure that given a disposed [Myprysm.PubSub.Abstractions.IBrokerConnection](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.PubSub.Abstractions.IBrokerConnection 'Myprysm.PubSub.Abstractions.IBrokerConnection')  
 When the [Myprysm.PubSub.Abstractions.BrokerHealthCheck](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.PubSub.Abstractions.BrokerHealthCheck 'Myprysm.PubSub.Abstractions.BrokerHealthCheck') verifies the health.  
 Then the [Myprysm.PubSub.Abstractions.BrokerHealthCheck](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.PubSub.Abstractions.BrokerHealthCheck 'Myprysm.PubSub.Abstractions.BrokerHealthCheck') returns Unhealthy  
 ```csharp
-public System.Threading.Tasks.Task When_broker_connection_is_down_health_check_returns_healthy();
+public System.Threading.Tasks.Task When_broker_connection_is_down_health_check_returns_unhealthy();
 ```
 #### Returns
 [System.Threading.Tasks.Task](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task 'System.Threading.Tasks.Task')  
@@ -70,6 +70,18 @@ When the [Myprysm.PubSub.Abstractions.BrokerHealthCheck](https://docs.microsoft.
 Then the [Myprysm.PubSub.Abstractions.BrokerHealthCheck](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.PubSub.Abstractions.BrokerHealthCheck 'Myprysm.PubSub.Abstractions.BrokerHealthCheck') returns Healthy  
 ```csharp
 public System.Threading.Tasks.Task When_broker_connection_is_up_health_check_returns_healthy();
+```
+#### Returns
+[System.Threading.Tasks.Task](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task 'System.Threading.Tasks.Task')  
+  
+<a name='Myprysm_PubSub_Abstractions_Testing_Integration_BrokerConnectionTests_TOptions__When_header_is_provided_then_header_is_available_to_consume()'></a>
+## BrokerConnectionTests&lt;TOptions&gt;.When_header_is_provided_then_header_is_available_to_consume() Method
+You should ensure that given a [Myprysm.PubSub.Abstractions.Topic](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.PubSub.Abstractions.Topic 'Myprysm.PubSub.Abstractions.Topic')  
+When a [Myprysm.PubSub.Abstractions.ISubscription](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.PubSub.Abstractions.ISubscription 'Myprysm.PubSub.Abstractions.ISubscription') is made on this [Myprysm.PubSub.Abstractions.Topic](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.PubSub.Abstractions.Topic 'Myprysm.PubSub.Abstractions.Topic')  
+And a [Myprysm.PubSub.Abstractions.Publication](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.PubSub.Abstractions.Publication 'Myprysm.PubSub.Abstractions.Publication') is published on this [Myprysm.PubSub.Abstractions.Topic](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.PubSub.Abstractions.Topic 'Myprysm.PubSub.Abstractions.Topic') without a [Myprysm.Tracing.Abstractions.ITrace](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.Tracing.Abstractions.ITrace 'Myprysm.Tracing.Abstractions.ITrace')  
+Then the [Myprysm.PubSub.Abstractions.Publication](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.PubSub.Abstractions.Publication 'Myprysm.PubSub.Abstractions.Publication') contains a [Myprysm.Tracing.Abstractions.ITrace](https://docs.microsoft.com/en-us/dotnet/api/Myprysm.Tracing.Abstractions.ITrace 'Myprysm.Tracing.Abstractions.ITrace') with a parent.  
+```csharp
+public System.Threading.Tasks.Task When_header_is_provided_then_header_is_available_to_consume();
 ```
 #### Returns
 [System.Threading.Tasks.Task](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task 'System.Threading.Tasks.Task')  

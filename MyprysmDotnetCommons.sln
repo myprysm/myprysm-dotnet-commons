@@ -122,6 +122,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.AspNetCore.Testing.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.AspNetCore.Testing.TestApi", "tests\Myprysm.AspNetCore.Testing.TestApi\Myprysm.AspNetCore.Testing.TestApi.csproj", "{557EBC3B-CFB1-48B5-A0BC-1F8E74284B7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.SystemTextJson", "src\implementations\Myprysm.Converter.SystemTextJson\Myprysm.Converter.SystemTextJson.csproj", "{6171462F-6094-493E-8A47-DDA718806940}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.SystemTextJson.Tests", "tests\implementations\Myprysm.Converter.SystemTextJson.Tests\Myprysm.Converter.SystemTextJson.Tests.csproj", "{A7AE8A34-D040-43D8-ADEB-5BB90EE60CAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.SystemTextJson.ValueObjects", "src\implementations\Myprysm.Converter.SystemTextJson.ValueObjects\Myprysm.Converter.SystemTextJson.ValueObjects.csproj", "{ACC1663E-069A-49FB-B2CB-75D33111DCDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Myprysm.Converter.SystemTextJson.ValueObjects.Tests", "tests\implementations\Myprysm.Converter.SystemTextJson.ValueObjects.Tests\Myprysm.Converter.SystemTextJson.ValueObjects.Tests.csproj", "{25BE0DF3-93D8-47AC-80AC-C09E9CF9D80E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -178,6 +186,10 @@ Global
 		{FB5005E7-06F2-483B-B85D-67239F240E3F} = {16CD561D-0551-4688-8FEA-7368D8C6525E}
 		{3567CB15-DBAF-4068-A13E-6930D6EDAE48} = {F0B5D0F1-BBBD-4998-A008-8B7D758023CD}
 		{557EBC3B-CFB1-48B5-A0BC-1F8E74284B7F} = {F0B5D0F1-BBBD-4998-A008-8B7D758023CD}
+		{6171462F-6094-493E-8A47-DDA718806940} = {01A32BFB-AFDD-4F14-A3D1-B2672492BAF0}
+		{A7AE8A34-D040-43D8-ADEB-5BB90EE60CAD} = {E4C2EE25-C3EF-4E14-808A-6D171FF37085}
+		{ACC1663E-069A-49FB-B2CB-75D33111DCDA} = {01A32BFB-AFDD-4F14-A3D1-B2672492BAF0}
+		{25BE0DF3-93D8-47AC-80AC-C09E9CF9D80E} = {E4C2EE25-C3EF-4E14-808A-6D171FF37085}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DFA98688-E9E0-416B-A5EF-E53EAA379A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -338,5 +350,21 @@ Global
 		{557EBC3B-CFB1-48B5-A0BC-1F8E74284B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{557EBC3B-CFB1-48B5-A0BC-1F8E74284B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{557EBC3B-CFB1-48B5-A0BC-1F8E74284B7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6171462F-6094-493E-8A47-DDA718806940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6171462F-6094-493E-8A47-DDA718806940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6171462F-6094-493E-8A47-DDA718806940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6171462F-6094-493E-8A47-DDA718806940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7AE8A34-D040-43D8-ADEB-5BB90EE60CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7AE8A34-D040-43D8-ADEB-5BB90EE60CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7AE8A34-D040-43D8-ADEB-5BB90EE60CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7AE8A34-D040-43D8-ADEB-5BB90EE60CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC1663E-069A-49FB-B2CB-75D33111DCDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC1663E-069A-49FB-B2CB-75D33111DCDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC1663E-069A-49FB-B2CB-75D33111DCDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC1663E-069A-49FB-B2CB-75D33111DCDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25BE0DF3-93D8-47AC-80AC-C09E9CF9D80E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25BE0DF3-93D8-47AC-80AC-C09E9CF9D80E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25BE0DF3-93D8-47AC-80AC-C09E9CF9D80E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25BE0DF3-93D8-47AC-80AC-C09E9CF9D80E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

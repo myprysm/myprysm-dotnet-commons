@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <DefaultDocumentationGeneratedPages>Assembly, Types</DefaultDocumentationGeneratedPages>
+
+    <Description>Myprysm JSON converter extension to support SingleValueObjects with System.Text.Json.</Description>
+    <PackageTags>myprysm converter serialization deserialization json text systemtextjson extension converter</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Myprysm.SharedKernel\Myprysm.SharedKernel.csproj" />
+    <ProjectReference Include="..\Myprysm.Converter.SystemTextJson\Myprysm.Converter.SystemTextJson.csproj" />
+  </ItemGroup>
+
+</Project>
