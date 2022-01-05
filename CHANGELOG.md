@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.2.0...v1.3.0) (2022-01-05)
+
+
+### Features
+
+* **converter:** Add System.Text.Json implementation ([9fb9a64](https://github.com/myprysm/myprysm-dotnet-commons/commit/9fb9a64eb3de45e7adeebf03fe8647f5b783a822))
+
 ## [1.2.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.1.0...v1.2.0) (2021-12-22)
 
 
