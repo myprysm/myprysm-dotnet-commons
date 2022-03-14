@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.3.0...v1.4.0) (2022-03-14)
+
+
+### Features
+
+* **image:** Upgrade ImageSharp to 2.0 ([a3d84bc](https://github.com/myprysm/myprysm-dotnet-commons/commit/a3d84bcffc1823746f09af8f6bb7a1df7c7d8725))
+
 ## [1.3.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.2.0...v1.3.0) (2022-01-05)
 
 
