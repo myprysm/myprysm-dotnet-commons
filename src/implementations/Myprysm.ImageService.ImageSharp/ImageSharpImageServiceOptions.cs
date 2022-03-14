@@ -7,8 +7,4 @@ using Myprysm.ImageService.Abstractions;
 /// </summary>
 public class ImageSharpImageServiceOptions : ImageServiceOptions
 {
-    /// <summary>
-    /// The memory pool kind.
-    /// </summary>
-    public MemoryPoolKind MemoryPoolKind { get; set; } = MemoryPoolKind.Default;
 }
