@@ -53,8 +53,8 @@ public class ImageSharpImageService : IImageService
     {
         try
         {
-            var originalFormat = await Image.DetectFormatAsync(source).ConfigureAwait(false);
-            using var sourceImage = await Image.LoadAsync(source).ConfigureAwait(false);
+            var originalFormat = await Image.DetectFormatAsync(source, cancellation).ConfigureAwait(false);
+            using var sourceImage = await Image.LoadAsync(source, cancellation).ConfigureAwait(false);
 
             var (point, size) = cropArea;
 
@@ -97,8 +97,8 @@ public class ImageSharpImageService : IImageService
     {
         try
         {
-            var originalFormat = await Image.DetectFormatAsync(source).ConfigureAwait(false);
-            using var sourceImage = await Image.LoadAsync(source).ConfigureAwait(false);
+            var originalFormat = await Image.DetectFormatAsync(source, cancellation).ConfigureAwait(false);
+            using var sourceImage = await Image.LoadAsync(source, cancellation).ConfigureAwait(false);
 
             var newSize = new SixLabors.ImageSharp.Size(size.WidthAsInt, size.HeightAsInt);
 
