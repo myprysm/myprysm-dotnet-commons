@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.4.0...v1.4.1) (2022-03-15)
+
+
+### Bug Fixes
+
+* **image:** Pass cancellation token when detecting format or loading image ([b822ffe](https://github.com/myprysm/myprysm-dotnet-commons/commit/b822ffe7c5a5baaf995c67f6259e19afdcfbb30c))
+
 ## [1.4.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.3.0...v1.4.0) (2022-03-14)
 
 
