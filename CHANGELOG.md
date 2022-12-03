@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.4.1...v1.5.0) (2022-12-03)
+
+
+### Features
+
+* Upgrade to net7.0 with centrally managed versions ([7fd72b4](https://github.com/myprysm/myprysm-dotnet-commons/commit/7fd72b417832d992995643b3428789c1e7d2ccca))
+
 ### [1.4.1](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.4.0...v1.4.1) (2022-03-15)
 
 
