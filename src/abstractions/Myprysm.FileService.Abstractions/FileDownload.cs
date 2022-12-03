@@ -1,7 +1,5 @@
 ﻿namespace Myprysm.FileService.Abstractions;
 
-using System;
-using System.IO;
 using Myprysm.FileService.Abstractions.ValueObjects;
 using NodaTime;
 

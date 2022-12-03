@@ -9,7 +9,6 @@ using Myprysm.Tracing.ActivitySource;
 /// </summary>
 public static class DependencyInjection
 {
-
     /// <summary>
     /// Adds OpenTelemetry TracerProvider configures with Myprysm Tracing enabled libraries into the specified <see cref="IServiceCollection" />.
     /// </summary>
@@ -25,8 +24,8 @@ public static class DependencyInjection
             .AddOpenTelemetryTracing(builder =>
             {
                 builder
-                    .Configure((sp, b) => b.ConfigureMyprysmTracers(sp))
-                    .Configure(configure);
+                    .ConfigureBuilder((sp, b) => b.ConfigureMyprysmTracers(sp))
+                    .ConfigureBuilder(configure);
             });
     }
 

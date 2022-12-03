@@ -14,7 +14,7 @@ public class AzureStorageQueuePersistentBrokerConnectionTests : PersistentBroker
 {
     protected override void Configure(ConfigurationBuilder configuration)
     {
-        var config = new Dictionary<string, string>
+        var config = new Dictionary<string, string?>
         {
             [nameof(AzureStorageQueuePubSubOptions.ConnectionString)] = "UseDevelopmentStorage=true",
         };

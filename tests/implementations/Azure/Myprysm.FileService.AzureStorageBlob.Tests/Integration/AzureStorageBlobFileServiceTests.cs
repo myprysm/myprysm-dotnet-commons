@@ -12,7 +12,7 @@ public class AzureStorageBlobFileServiceTests : FileServiceTests
 {
     protected override void Configure(ConfigurationBuilder configuration)
     {
-        var config = new Dictionary<string, string>
+        var config = new Dictionary<string, string?>
         {
             [nameof(AzureStorageBlobFileServiceOptions.WithTracing)] = "true",
             [nameof(AzureStorageBlobFileServiceOptions.ConnectionString)] = "UseDevelopmentStorage=true",

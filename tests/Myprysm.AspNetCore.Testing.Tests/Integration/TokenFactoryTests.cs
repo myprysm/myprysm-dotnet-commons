@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Myprysm.AspNetCore.Testing.TestApi;
 using NUnit.Framework;
 
 [TestFixture]

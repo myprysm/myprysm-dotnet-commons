@@ -13,13 +13,13 @@ internal class SingleValueObjectConverter<TSvo, TWrapped> : JsonConverter<TSvo>
     // ReSharper disable once StaticMemberInGenericType
     private static readonly Type UnderlyingType;
     private static readonly TypeInfo SvoTypeInfo;
-    
+
     static SingleValueObjectConverter()
     {
         SvoTypeInfo = typeof(TSvo).GetTypeInfo();
         UnderlyingType = typeof(TWrapped);
     }
-    
+
     public override bool CanConvert(Type typeToConvert)
     {
         return SvoTypeInfo.IsAssignableFrom(typeToConvert);

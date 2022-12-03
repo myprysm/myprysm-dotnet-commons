@@ -26,7 +26,7 @@ public abstract class VolatileBrokerConnectionTests<TOptions> : BrokerConnection
             Assert.Ignore("Broker does not support volatile messages.");
         }
     }
-    
+
     /// <summary>
     /// You should ensure that given a <see cref="Topic"/>
     /// When a <see cref="Publication"/> is published on this <see cref="Topic"/>
@@ -62,7 +62,7 @@ public abstract class VolatileBrokerConnectionTests<TOptions> : BrokerConnection
                 IsVolatile = true,
             });
     }
-    
+
     /// <summary>
     /// You should ensure that given a <see cref="Topic"/>
     /// When a <see cref="Publication"/> is published on this <see cref="Topic"/>

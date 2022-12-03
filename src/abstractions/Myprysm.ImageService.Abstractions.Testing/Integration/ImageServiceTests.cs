@@ -1,11 +1,8 @@
 namespace Myprysm.ImageService.Abstractions.Testing.Integration;
 
-using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Myprysm.ImageService.Abstractions;
 using Myprysm.ImageService.Abstractions.Exceptions;
 using Myprysm.Testing.NUnit;
 using NUnit.Framework;
@@ -40,7 +37,7 @@ public abstract class ImageServiceTests : ServiceTests
         // Assert
         await act.Should().ThrowAsync<ImageProcessingException>();
     }
-    
+
     /// <summary>
     /// You should ensure that given a valid image stream
     /// When the metadata of the image stream are extracted
@@ -60,7 +57,7 @@ public abstract class ImageServiceTests : ServiceTests
         metadata.Size.Should().BeEquivalentTo(new Size(1280, 784));
         metadata.ContentType.Should().Be("image/jpeg");
     }
-    
+
     /// <summary>
     /// You should ensure that given an invalid image stream
     /// When the image stream is resized
@@ -79,7 +76,7 @@ public abstract class ImageServiceTests : ServiceTests
         // Assert
         await act.Should().ThrowAsync<ImageProcessingException>();
     }
-    
+
     /// <summary>
     /// You should ensure that given a valid image stream
     /// When the image stream is resized
@@ -102,7 +99,7 @@ public abstract class ImageServiceTests : ServiceTests
 
         actualMetadata.Size.Should().BeEquivalentTo(size);
     }
-    
+
     /// <summary>
     /// You should ensure that given a valid image stream
     /// When the image stream is resized with the provided output format
@@ -125,7 +122,7 @@ public abstract class ImageServiceTests : ServiceTests
 
         actualMetadata.Format.Should().Be(format);
     }
-    
+
     /// <summary>
     /// You should ensure that given an invalid image stream
     /// When the image stream is cropped
@@ -167,7 +164,7 @@ public abstract class ImageServiceTests : ServiceTests
 
         actualMetadata.Size.Should().BeEquivalentTo(size);
     }
-    
+
     /// <summary>
     /// You should ensure that given a valid image stream
     /// When the image stream is cropped with the provided output format

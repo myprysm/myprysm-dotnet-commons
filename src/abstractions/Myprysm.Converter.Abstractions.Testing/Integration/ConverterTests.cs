@@ -1,10 +1,8 @@
 ﻿namespace Myprysm.Converter.Abstractions.Testing.Integration;
 
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Myprysm.Converter.Abstractions;
 using Myprysm.Converter.Abstractions.Exceptions;
 using Myprysm.Testing.NUnit;
 using NUnit.Framework;

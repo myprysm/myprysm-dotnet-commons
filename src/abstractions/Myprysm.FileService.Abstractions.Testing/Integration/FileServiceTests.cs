@@ -3,7 +3,6 @@
 using System.Text;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Myprysm.FileService.Abstractions;
 using Myprysm.FileService.Abstractions.Exceptions;
 using Myprysm.Testing.NUnit;
 using NUnit.Framework;

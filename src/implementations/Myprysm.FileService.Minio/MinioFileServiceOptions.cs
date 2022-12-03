@@ -20,13 +20,13 @@ public class MinioFileServiceOptions : FileServiceOptions
     /// <summary>
     /// Gets or sets the remote MinIO/S3 region.
     /// </summary>
-    public string Region { get; set; } = string.Empty;
+    public string Region { get; set; } = "us-east-1";
 
     /// <summary>
     /// Gets or sets the remote MinIO/S3 access key.
     /// </summary>
     public string AccessKey { get; set; } = string.Empty;
-    
+
     /// <summary>
     /// Gets or sets the remote MinIO/S3 secret key.
     /// </summary>

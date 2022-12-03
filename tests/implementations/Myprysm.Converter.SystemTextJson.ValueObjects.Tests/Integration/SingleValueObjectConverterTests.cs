@@ -1,6 +1,5 @@
 ﻿namespace Myprysm.Converter.SystemTextJson.ValueObjects.Tests.Integration;
 
-using System.Text.Json;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +7,6 @@ using Myprysm.Converter.Abstractions;
 using Myprysm.SharedKernel.ValueObjects;
 using Myprysm.Testing.NUnit;
 using NUnit.Framework;
-
 
 [TestFixture]
 [Category(Categories.Integration)]

@@ -30,7 +30,7 @@ public static class DependencyInjection
     /// <returns>The service collection for fluent APIs.</returns>
     public static IServiceCollection AddImageSharpImageService(this IServiceCollection services)
     {
-        return services.AddImageSharpImageService(_ => {});
+        return services.AddImageSharpImageService(_ => { });
     }
 
     /// <summary>

@@ -28,7 +28,7 @@ public class FileSystemFileServiceTests : FileServiceTests
 
     protected override void Configure(ConfigurationBuilder configuration)
     {
-        var config = new Dictionary<string, string>
+        var config = new Dictionary<string, string?>
         {
             [nameof(FileSystemFileServiceOptions.Directory)] = this.testDirectory,
         };
