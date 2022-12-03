@@ -20,7 +20,7 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configurationSection) =>
         services.AddFileServiceAzureStorageBlob(configurationSection.Bind);
-    
+
     /// <summary>
     /// Registers a <see cref="AzureStorageBlobFileService"/> in the service collection and configure it from the given action.
     /// </summary>

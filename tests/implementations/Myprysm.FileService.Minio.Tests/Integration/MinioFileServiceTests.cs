@@ -11,7 +11,7 @@ public class MinioFileServiceTests : FileServiceTests
 {
     protected override void Configure(ConfigurationBuilder configuration)
     {
-        var config = new Dictionary<string, string>
+        var config = new Dictionary<string, string?>
         {
             [nameof(MinioFileServiceOptions.Endpoint)] = "localhost:9001",
             [nameof(MinioFileServiceOptions.AccessKey)] = "integration-minio",

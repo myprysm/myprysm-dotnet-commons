@@ -53,28 +53,29 @@ public class ImageSharpImageService : IImageService
     {
         try
         {
-            var originalFormat = await Image.DetectFormatAsync(source, cancellation).ConfigureAwait(false);
-            using var sourceImage = await Image.LoadAsync(source, cancellation).ConfigureAwait(false);
+            var (sourceImage, originalFormat) = await Image.LoadWithFormatAsync(source, cancellation).ConfigureAwait(false);
+            using (sourceImage)
+            {
+                var (point, size) = cropArea;
 
-            var (point, size) = cropArea;
+                var rectangle = new SixLabors.ImageSharp.Rectangle(
+                    new Point(point.XAsInt, point.YAsInt),
+                    new SixLabors.ImageSharp.Size(size.WidthAsInt, size.HeightAsInt));
 
-            var rectangle = new SixLabors.ImageSharp.Rectangle(
-                new Point(point.XAsInt, point.YAsInt),
-                new SixLabors.ImageSharp.Size(size.WidthAsInt, size.HeightAsInt));
+                await Task.Run(
+                        // ReSharper disable once AccessToDisposedClosure
+                        () => sourceImage.Mutate(i => i.Crop(rectangle)),
+                        cancellation)
+                    .ConfigureAwait(false);
 
-            await Task.Run(
-                    // ReSharper disable once AccessToDisposedClosure
-                    () => sourceImage.Mutate(i => i.Crop(rectangle)),
-                    cancellation)
-                .ConfigureAwait(false);
+                var outputFormat = format.GetImageFormat(originalFormat);
 
-            var outputFormat = format.GetImageFormat(originalFormat);
+                var outputStream = new MemoryStream();
+                await sourceImage.SaveAsync(outputStream, outputFormat, cancellation).ConfigureAwait(false);
 
-            var outputStream = new MemoryStream();
-            await sourceImage.SaveAsync(outputStream, outputFormat, cancellation).ConfigureAwait(false);
-
-            outputStream.Position = 0;
-            return outputStream;
+                outputStream.Position = 0;
+                return outputStream;
+            }
         }
         catch (Exception exception)
         {
@@ -97,23 +98,24 @@ public class ImageSharpImageService : IImageService
     {
         try
         {
-            var originalFormat = await Image.DetectFormatAsync(source, cancellation).ConfigureAwait(false);
-            using var sourceImage = await Image.LoadAsync(source, cancellation).ConfigureAwait(false);
+            var (sourceImage, originalFormat) = await Image.LoadWithFormatAsync(source, cancellation).ConfigureAwait(false);
+            using (sourceImage)
+            {
+                var newSize = new SixLabors.ImageSharp.Size(size.WidthAsInt, size.HeightAsInt);
 
-            var newSize = new SixLabors.ImageSharp.Size(size.WidthAsInt, size.HeightAsInt);
+                await Task.Run(
+                        // ReSharper disable once AccessToDisposedClosure
+                        () => sourceImage.Mutate(i => i.Resize(newSize)),
+                        cancellation)
+                    .ConfigureAwait(false);
 
-            await Task.Run(
-                    // ReSharper disable once AccessToDisposedClosure
-                    () => sourceImage.Mutate(i => i.Resize(newSize)),
-                    cancellation)
-                .ConfigureAwait(false);
+                var outputFormat = format.GetImageFormat(originalFormat);
+                var outputStream = new MemoryStream();
+                await sourceImage.SaveAsync(outputStream, outputFormat, cancellation).ConfigureAwait(false);
 
-            var outputFormat = format.GetImageFormat(originalFormat);
-            var outputStream = new MemoryStream();
-            await sourceImage.SaveAsync(outputStream, outputFormat, cancellation).ConfigureAwait(false);
-
-            outputStream.Position = 0;
-            return outputStream;
+                outputStream.Position = 0;
+                return outputStream;
+            }
         }
         catch (Exception exception)
         {

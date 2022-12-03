@@ -1,6 +1,5 @@
 ﻿namespace Myprysm.FileService.Abstractions;
 
-using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Myprysm.Tracing.Abstractions;

@@ -17,7 +17,7 @@ public class AzureStorageBlobFileService : IFileService
 {
     private readonly BlobServiceClient client;
     private readonly ILogger<AzureStorageBlobFileService> logger;
-    
+
     /// <summary>
     /// Creates a new <see cref="AzureStorageBlobFileService"/> with the given options an logger.
     /// </summary>

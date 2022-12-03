@@ -26,7 +26,7 @@ public interface ITrace : IDisposable
     /// Gets a readonly view of the trace baggage.
     /// </summary>
     IReadOnlyDictionary<string, string?> Baggage { get; }
-    
+
     /// <summary>
     /// Gets a readonly view of the trace tags.
     /// </summary>
@@ -56,7 +56,7 @@ public interface ITrace : IDisposable
     /// <param name="value">The baggage value.</param>
     void AddBaggage(string key, string? value);
 
-    
+
     /// <summary>
     /// Adds a tag item with a key and a value to this trace.
     /// </summary>

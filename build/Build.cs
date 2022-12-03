@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Nuke.Common;
 using Nuke.Common.CI;
-using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
@@ -14,7 +13,6 @@ using static Nuke.Common.Tools.Docker.DockerTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 [ExcludeFromCodeCoverage]
-[CheckBuildProjectConfigurations(TimeoutInMilliseconds = 1000)]
 [ShutdownDotNetAfterServerBuild]
 class Build : NukeBuild
 {
@@ -115,16 +113,16 @@ class Build : NukeBuild
         .Requires(() => Configuration.Equals(Configuration.Release))
         .Executes(() =>
         {
-            PackOutputDirectory.GlobFiles("*.nupkg", "*.snupkg")
-                .NotEmpty()
-                .ForEach(x =>
-                {
-                    DotNetNuGetPush(s => s
-                        .SetTargetPath(x)
-                        .SetSource(NugetApiUrl)
-                        .SetApiKey(NugetApiKey)
-                    );
-                });
+            var files = PackOutputDirectory.GlobFiles("*.nupkg", "*.snupkg");
+            Assert.NotEmpty(files);
+            files.ForEach(x =>
+            {
+                DotNetNuGetPush(s => s
+                    .SetTargetPath(x)
+                    .SetSource(NugetApiUrl)
+                    .SetApiKey(NugetApiKey)
+                );
+            });
         });
 
     Target StartContainers => _ => _

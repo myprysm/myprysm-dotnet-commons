@@ -1,4 +1,4 @@
-namespace Myprysm.AspNetCore.Testing.Tests;
+namespace Myprysm.AspNetCore.Testing.TestApi.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 

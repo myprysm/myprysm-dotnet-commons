@@ -17,7 +17,7 @@ public sealed record Point
         this.xAsInt = new Lazy<int>(() => Convert.ToInt32(x));
         this.yAsInt = new Lazy<int>(() => Convert.ToInt32(y));
     }
-    
+
     /// <summary>
     /// Gets the x coordinate as double.
     /// </summary>

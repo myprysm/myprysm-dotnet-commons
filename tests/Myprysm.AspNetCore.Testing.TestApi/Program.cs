@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Myprysm.AspNetCore.Testing.Tests;
+using Myprysm.AspNetCore.Testing.TestApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +34,9 @@ app.MapControllers();
 
 app.Run();
 
-public partial class Program
+namespace Myprysm.AspNetCore.Testing.TestApi
 {
+    public partial class Program
+    {
+    }
 }

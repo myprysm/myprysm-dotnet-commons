@@ -297,7 +297,7 @@ public abstract class BrokerConnectionTests<TOptions> : ServiceTests
             ["b"] = "another value",
             ["c"] = null,
         };
-        
+
         var publication = new Publication(topic, encodedMessage, headers);
         var handler = new PublicationCollectorHandler();
         await connection.Subscribe(topic, handler.HandleAsync);

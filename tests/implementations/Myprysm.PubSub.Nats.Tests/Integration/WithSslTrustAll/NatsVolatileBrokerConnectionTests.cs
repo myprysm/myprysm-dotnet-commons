@@ -9,7 +9,7 @@ public class NatsVolatileBrokerConnectionTests : Default.NatsVolatileBrokerConne
 {
     protected override void Configure(ConfigurationBuilder configuration)
     {
-        var config = new Dictionary<string, string>
+        var config = new Dictionary<string, string?>
         {
             [nameof(NatsPubSubOptions.Url)] = "nats://localhost:4223",
             [nameof(NatsPubSubOptions.WithSsl)] = "true",

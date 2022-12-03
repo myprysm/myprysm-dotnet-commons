@@ -1,4 +1,4 @@
-﻿namespace Myprysm.AspNetCore.Testing.Tests;
+﻿namespace Myprysm.AspNetCore.Testing.TestApi.Controllers;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,7 @@ public class AuthenticatedController : ControllerBase
     {
         return this.Ok(new Response(42));
     }
-    
+
     [Authorize("custom-policy")]
     [HttpGet("scoped")]
     public IActionResult GetScopeAuthorizedResource()

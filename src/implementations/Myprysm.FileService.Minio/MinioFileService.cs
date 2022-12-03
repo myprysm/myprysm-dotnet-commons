@@ -30,22 +30,24 @@ public class MinioFileService : IFileService
     {
         this.logger = logger;
         var config = options.Value;
-        var minio = new MinioClient(
-            config.Endpoint,
-            config.AccessKey,
-            config.SecretKey,
-            config.Region);
+
+
+        var minio = new MinioClient()
+            .WithEndpoint(config.Endpoint)
+            .WithCredentials(config.AccessKey, config.SecretKey)
+            .WithRegion(config.Region);
 
         if (config.WithSsl)
         {
             minio = minio.WithSSL();
         }
 
-        this.client = minio;
+        this.client = minio.Build();
     }
 
     /// <inheritdoc />
-    public async Task UploadFile(string container,
+    public async Task UploadFile(
+        string container,
         string path,
         Stream content,
         string contentType,
@@ -60,14 +62,14 @@ public class MinioFileService : IFileService
             await this.EnsureObjectDoesNotExist(container, path, cancellation).ConfigureAwait(false);
         }
 
+        var args = new PutObjectArgs()
+            .WithBucket(container)
+            .WithObject(path)
+            .WithStreamData(content)
+            .WithObjectSize(contentLength)
+            .WithContentType(contentType);
         await this.client
-            .PutObjectAsync(
-                container,
-                path,
-                content,
-                contentLength,
-                contentType,
-                cancellationToken: cancellation)
+            .PutObjectAsync(args, cancellation)
             .ConfigureAwait(false);
     }
 
@@ -82,9 +84,10 @@ public class MinioFileService : IFileService
         {
             fileStats = await this.client
                 .StatObjectAsync(
-                    container,
-                    path,
-                    cancellationToken: cancellation)
+                    new StatObjectArgs()
+                        .WithBucket(container)
+                        .WithObject(path),
+                    cancellation)
                 .ConfigureAwait(false);
         }
         catch (MinioException)
@@ -97,10 +100,11 @@ public class MinioFileService : IFileService
 
         await this.client
             .GetObjectAsync(
-                container,
-                path,
-                temporaryFile,
-                cancellationToken: cancellation)
+                new GetObjectArgs()
+                    .WithBucket(container)
+                    .WithObject(path)
+                    .WithFile(temporaryFile),
+                cancellation)
             .ConfigureAwait(false);
 
         var lastModified = Instant.FromDateTimeUtc(DateTime.SpecifyKind(fileStats.LastModified, DateTimeKind.Utc));
@@ -118,7 +122,11 @@ public class MinioFileService : IFileService
         try
         {
             await this.client
-                .StatObjectAsync(container, path, cancellationToken: cancellation)
+                .StatObjectAsync(
+                    new StatObjectArgs()
+                        .WithBucket(container)
+                        .WithObject(path),
+                    cancellation)
                 .ConfigureAwait(false);
         }
         catch (MinioException)
@@ -126,7 +134,12 @@ public class MinioFileService : IFileService
             return;
         }
 
-        await this.client.RemoveObjectAsync(container, path, cancellation).ConfigureAwait(false);
+        await this.client.RemoveObjectAsync(
+                new RemoveObjectArgs()
+                    .WithBucket(container)
+                    .WithObject(path),
+                cancellation)
+            .ConfigureAwait(false);
     }
 
     /// <inheritdoc />
@@ -138,7 +151,9 @@ public class MinioFileService : IFileService
     /// <inheritdoc />
     public async Task RemoveContainer(string container, CancellationToken cancellation = default)
     {
-        var bucketExists = await this.client.BucketExistsAsync(container, cancellation).ConfigureAwait(false);
+        var bucketExists = await this.client
+            .BucketExistsAsync(new BucketExistsArgs().WithBucket(container), cancellation)
+            .ConfigureAwait(false);
 
         if (!bucketExists)
         {
@@ -151,12 +166,12 @@ public class MinioFileService : IFileService
     private async Task CleanupAndRemoveContainer(string container, CancellationToken cancellation)
     {
         var _ = await this.client
-            .ListObjectsAsync(container, recursive: true, cancellationToken: cancellation)
-            .SelectMany(file => Observable.FromAsync(ct => this.client.RemoveObjectAsync(container, file.Key, ct)))
+            .ListObjectsAsync(new ListObjectsArgs().WithBucket(container).WithRecursive(true), cancellation)
+            .SelectMany(file => Observable.FromAsync(ct => this.client.RemoveObjectAsync(new RemoveObjectArgs().WithBucket(container).WithObject(file.Key), ct)))
             .LastOrDefaultAsync();
 
 
-        await this.client.RemoveBucketAsync(container, cancellation).ConfigureAwait(false);
+        await this.client.RemoveBucketAsync(new RemoveBucketArgs().WithBucket(container), cancellation).ConfigureAwait(false);
         this.logger.LogInformation("Removed container {Container}", container);
     }
 
@@ -169,9 +184,10 @@ public class MinioFileService : IFileService
         {
             await this.client
                 .StatObjectAsync(
-                    container,
-                    path,
-                    cancellationToken: cancellation)
+                    new StatObjectArgs()
+                        .WithBucket(container)
+                        .WithObject(path),
+                    cancellation)
                 .ConfigureAwait(false);
         }
         catch (ObjectNotFoundException)
@@ -187,14 +203,14 @@ public class MinioFileService : IFileService
         CancellationToken cancellation)
     {
         var bucketExists = await this.client
-            .BucketExistsAsync(container, cancellation)
+            .BucketExistsAsync(new BucketExistsArgs().WithBucket(container), cancellation)
             .ConfigureAwait(false);
 
         if (!bucketExists)
         {
             this.logger.LogInformation("Creating container {Container}", container);
             await this.client
-                .MakeBucketAsync(container, cancellationToken: cancellation)
+                .MakeBucketAsync(new MakeBucketArgs().WithBucket(container), cancellationToken: cancellation)
                 .ConfigureAwait(false);
         }
     }

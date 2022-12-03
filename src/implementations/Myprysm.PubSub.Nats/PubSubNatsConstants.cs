@@ -8,6 +8,7 @@ internal static class PubSubNatsConstants
 {
     internal const string TraceIdHeader = "mpm-trace-id";
     internal const string TraceBaggageHeader = "mpm-trace-baggage";
+
     internal static readonly IEnumerable<string> ProtectedHeaders = new[]
     {
         TraceIdHeader,

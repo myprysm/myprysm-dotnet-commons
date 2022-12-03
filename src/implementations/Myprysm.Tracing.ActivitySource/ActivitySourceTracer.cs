@@ -21,7 +21,7 @@ public sealed class ActivitySourceTracer : ITracer
     /// <inheritdoc />
     public TracerIdentity Identity { get; }
 
-    
+
     /// <summary>
     /// Gets the underlying <see cref="ActivitySource"/> of this tracer.
     /// </summary>

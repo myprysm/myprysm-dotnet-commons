@@ -24,7 +24,7 @@ public abstract class SubscriptionGroupBrokerConnectionTests<TOptions> : BrokerC
             Assert.Ignore("Broker does not support persistent messages.");
         }
     }
-    
+
     /// <summary>
     /// You should ensure that given a <see cref="Topic"/>
     /// When a <see cref="Publication"/> is published on this <see cref="Topic"/>
@@ -53,7 +53,7 @@ public abstract class SubscriptionGroupBrokerConnectionTests<TOptions> : BrokerC
         var publications = handler.GetMessages(TimeSpan.FromSeconds(1), 2);
         publications.Should().HaveCount(2);
     }
-    
+
     /// <summary>
     /// You should ensure that given a <see cref="Topic"/>
     /// When a <see cref="Publication"/> is published on this <see cref="Topic"/>
@@ -88,7 +88,7 @@ public abstract class SubscriptionGroupBrokerConnectionTests<TOptions> : BrokerC
         var action = handler.Invoking(h => h.GetMessages(TimeSpan.FromMilliseconds(500)));
         action.Should().Throw<TimeoutException>();
     }
-    
+
     /// <summary>
     /// You should ensure that given a <see cref="Topic"/>
     /// When a <see cref="Publication"/> is published on this <see cref="Topic"/>

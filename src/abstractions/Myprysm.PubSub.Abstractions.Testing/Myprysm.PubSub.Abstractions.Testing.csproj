@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
     <DefaultDocumentationGeneratedPages>Assembly, Types</DefaultDocumentationGeneratedPages>
-    
+
     <Description>
       Myprysm PubSub abstractions.
       Check the project README for more details on how to test a broker connection implementation.
@@ -16,7 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\implementations\Myprysm.Converter.NewtonsoftJson.ValueObjects\Myprysm.Converter.NewtonsoftJson.ValueObjects.csproj" />
+    <ProjectReference
+      Include="..\..\implementations\Myprysm.Converter.NewtonsoftJson.ValueObjects\Myprysm.Converter.NewtonsoftJson.ValueObjects.csproj" />
     <ProjectReference Include="..\..\Myprysm.Testing.NUnit\Myprysm.Testing.NUnit.csproj" />
     <ProjectReference Include="..\Myprysm.PubSub.Abstractions\Myprysm.PubSub.Abstractions.csproj" />
   </ItemGroup>
