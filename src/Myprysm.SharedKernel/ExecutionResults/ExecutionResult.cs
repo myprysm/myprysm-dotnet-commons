@@ -29,10 +29,10 @@ namespace Myprysm.SharedKernel.ExecutionResults;
 public abstract class ExecutionResult : IExecutionResult
 {
     private static readonly IExecutionResult SuccessResult = new SuccessExecutionResult();
-    private static readonly IExecutionResult FailedResult = new FailedExecutionResult(Enumerable.Empty<string>());
-    private static readonly IExecutionResult NotFoundResult = new NotFoundExecutionResult(Enumerable.Empty<string>());
-    private static readonly IExecutionResult ForbiddenResult = new ForbiddenExecutionResult(Enumerable.Empty<string>());
-    private static readonly IExecutionResult ConflictResult = new ConflictExecutionResult(Enumerable.Empty<string>());
+    private static readonly FailedExecutionResult FailedResult = new(Enumerable.Empty<string>());
+    private static readonly NotFoundExecutionResult NotFoundResult = new(Enumerable.Empty<string>());
+    private static readonly ForbiddenExecutionResult ForbiddenResult = new(Enumerable.Empty<string>());
+    private static readonly ConflictExecutionResult ConflictResult = new(Enumerable.Empty<string>());
 
     internal ExecutionResult()
     {
@@ -65,7 +65,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// Returns a failed execution result.
     /// </summary>
     /// <returns>The failed execution result.</returns>
-    public static IExecutionResult Failed()
+    public static FailedExecutionResult Failed()
     {
         return FailedResult;
     }
@@ -75,7 +75,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// </summary>
     /// <param name="errors">The errors to report.</param>
     /// <returns>A failed execution result containing the provided errors as a reason.</returns>
-    public static IExecutionResult Failed(IEnumerable<string> errors)
+    public static FailedExecutionResult Failed(IEnumerable<string> errors)
     {
         return new FailedExecutionResult(errors);
     }
@@ -85,7 +85,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// </summary>
     /// <param name="errors">The errors to report.</param>
     /// <returns>A failed execution result containing the provided errors as a reason.</returns>
-    public static IExecutionResult Failed(params string[] errors)
+    public static FailedExecutionResult Failed(params string[] errors)
     {
         return Failed((IEnumerable<string>)errors);
     }
@@ -94,7 +94,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// Returns a not found execution result.
     /// </summary>
     /// <returns>The not found execution result.</returns>
-    public static IExecutionResult NotFound()
+    public static NotFoundExecutionResult NotFound()
     {
         return NotFoundResult;
     }
@@ -104,7 +104,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// </summary>
     /// <param name="errors">The errors to report.</param>
     /// <returns>A not found execution result containing the provided errors as a reason.</returns>
-    public static IExecutionResult NotFound(IEnumerable<string> errors)
+    public static NotFoundExecutionResult NotFound(IEnumerable<string> errors)
     {
         return new NotFoundExecutionResult(errors);
     }
@@ -114,7 +114,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// </summary>
     /// <param name="errors">The errors to report.</param>
     /// <returns>A not found execution result containing the provided errors as a reason.</returns>
-    public static IExecutionResult NotFound(params string[] errors)
+    public static NotFoundExecutionResult NotFound(params string[] errors)
     {
         return NotFound((IEnumerable<string>)errors);
     }
@@ -123,7 +123,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// Returns a forbidden execution result.
     /// </summary>
     /// <returns>The forbidden execution result.</returns>
-    public static IExecutionResult Forbidden()
+    public static ForbiddenExecutionResult Forbidden()
     {
         return ForbiddenResult;
     }
@@ -133,7 +133,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// </summary>
     /// <param name="errors">The errors to report.</param>
     /// <returns>A forbidden execution result containing the provided errors as a reason.</returns>
-    public static IExecutionResult Forbidden(IEnumerable<string> errors)
+    public static ForbiddenExecutionResult Forbidden(IEnumerable<string> errors)
     {
         return new ForbiddenExecutionResult(errors);
     }
@@ -143,7 +143,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// </summary>
     /// <param name="errors">The errors to report.</param>
     /// <returns>A forbidden execution result containing the provided errors as a reason.</returns>
-    public static IExecutionResult Forbidden(params string[] errors)
+    public static ForbiddenExecutionResult Forbidden(params string[] errors)
     {
         return Forbidden((IEnumerable<string>)errors);
     }
@@ -152,7 +152,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// Returns a conflict execution result.
     /// </summary>
     /// <returns>The conflict execution result.</returns>
-    public static IExecutionResult Conflict()
+    public static ConflictExecutionResult Conflict()
     {
         return ConflictResult;
     }
@@ -162,7 +162,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// </summary>
     /// <param name="errors">The errors to report.</param>
     /// <returns>A conflict execution result containing the provided errors as a reason.</returns>
-    public static IExecutionResult Conflict(IEnumerable<string> errors)
+    public static ConflictExecutionResult Conflict(IEnumerable<string> errors)
     {
         return new ConflictExecutionResult(errors);
     }
@@ -172,7 +172,7 @@ public abstract class ExecutionResult : IExecutionResult
     /// </summary>
     /// <param name="errors">The errors to report.</param>
     /// <returns>A conflict execution result containing the provided errors as a reason.</returns>
-    public static IExecutionResult Conflict(params string[] errors)
+    public static ConflictExecutionResult Conflict(params string[] errors)
     {
         return Conflict((IEnumerable<string>)errors);
     }

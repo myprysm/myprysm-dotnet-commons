@@ -23,7 +23,7 @@ public interface IWriter<in TRequest>
 Writes the provided output asynchronously.
 
 ```csharp
-System.Threading.Tasks.Task WriteAsync(TRequest output, System.Threading.CancellationToken cancellation=default(System.Threading.CancellationToken));
+System.Threading.Tasks.Task<Myprysm.SharedKernel.ExecutionResults.IExecutionResult> WriteAsync(TRequest output, System.Threading.CancellationToken cancellation=default(System.Threading.CancellationToken));
 ```
 #### Parameters
 
@@ -40,5 +40,5 @@ The output to write.
 The cancellation token.
 
 #### Returns
-[System.Threading.Tasks.Task](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task 'System.Threading.Tasks.Task')  
-Completes when the output is written.
+[System.Threading.Tasks.Task&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Threading.Tasks.Task-1 'System.Threading.Tasks.Task`1')  
+An [IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult') indicating whether the operation succeeded.
