@@ -22,5 +22,5 @@ public interface IReader<in TRequest, TResponse>
     /// <param name="request">The request.</param>
     /// <param name="cancellation">The cancellation token.</param>
     /// <returns>The output corresponding to the request.</returns>
-    Task<TResponse?> ReadAsync(TRequest request, CancellationToken cancellation = default);
+    Task<TResponse> ReadAsync(TRequest request, CancellationToken cancellation = default);
 }
