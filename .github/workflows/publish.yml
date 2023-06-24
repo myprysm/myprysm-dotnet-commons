@@ -48,7 +48,8 @@ jobs:
         run: ./build.sh start-containers
 
       - name: Publish nuget packages
-        run: ./build.sh push --configuration Release --nuget-api-url https://baget.myprysm.fr/v3/index.json --nuget-api-key "$NUGET_API_KEY" --with-coverage
+        shell: bash
+        run: ./build.sh push --configuration Release --nuget-api-url https://baget.myprysm.fr/v3/index.json --nuget-api-key $NUGET_API_KEY --with-coverage
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 
