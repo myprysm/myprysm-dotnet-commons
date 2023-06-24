@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v2.0.0...v2.1.0) (2023-06-24)
+
+
+### Features
+
+* **kernel:** Add more specific failed execution results ([b77d2b3](https://github.com/myprysm/myprysm-dotnet-commons/commit/b77d2b3c489e616294b30af6cb6e4dc3975d14d4))
+
 ## [2.0.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.5.0...v2.0.0) (2023-06-24)
 
 
