@@ -12,33 +12,11 @@ public class FailedExecutionResult : Myprysm.SharedKernel.ExecutionResults.Execu
 ```
 
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [ExecutionResult](Myprysm.SharedKernel.ExecutionResults.ExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ExecutionResult') &#129106; FailedExecutionResult
-### Fields
 
-<a name='Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult.DefaultMessage'></a>
-
-## FailedExecutionResult.DefaultMessage Field
-
-The default error message.
-
-```csharp
-public const string DefaultMessage = "Failed execution";
-```
-
-#### Field Value
-[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
-
-<a name='Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult.MessageTemplate'></a>
-
-## FailedExecutionResult.MessageTemplate Field
-
-The error message template.
-
-```csharp
-public const string MessageTemplate = "Failed execution due to: {0}";
-```
-
-#### Field Value
-[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+Derived  
+&#8627; [ConflictExecutionResult](Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult')  
+&#8627; [ForbiddenExecutionResult](Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult')  
+&#8627; [NotFoundExecutionResult](Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult')
 ### Properties
 
 <a name='Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult.Errors'></a>

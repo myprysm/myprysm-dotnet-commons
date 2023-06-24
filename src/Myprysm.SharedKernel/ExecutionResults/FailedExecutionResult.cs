@@ -35,12 +35,12 @@ public class FailedExecutionResult : ExecutionResult
     /// <summary>
     /// The default error message.
     /// </summary>
-    public const string DefaultMessage = "Failed execution";
+    internal const string DefaultMessage = "Failed execution";
 
     /// <summary>
     /// The error message template.
     /// </summary>
-    public const string MessageTemplate = "Failed execution due to: {0}";
+    internal const string MessageTemplate = "Failed execution due to: {0}";
 
     internal FailedExecutionResult(
         IEnumerable<string> errors)
