@@ -30,6 +30,9 @@ public abstract class ExecutionResult : IExecutionResult
 {
     private static readonly IExecutionResult SuccessResult = new SuccessExecutionResult();
     private static readonly IExecutionResult FailedResult = new FailedExecutionResult(Enumerable.Empty<string>());
+    private static readonly IExecutionResult NotFoundResult = new NotFoundExecutionResult(Enumerable.Empty<string>());
+    private static readonly IExecutionResult ForbiddenResult = new ForbiddenExecutionResult(Enumerable.Empty<string>());
+    private static readonly IExecutionResult ConflictResult = new ConflictExecutionResult(Enumerable.Empty<string>());
 
     internal ExecutionResult()
     {
@@ -85,6 +88,93 @@ public abstract class ExecutionResult : IExecutionResult
     public static IExecutionResult Failed(params string[] errors)
     {
         return Failed((IEnumerable<string>)errors);
+    }
+    
+    /// <summary>
+    /// Returns a not found execution result.
+    /// </summary>
+    /// <returns>The not found execution result.</returns>
+    public static IExecutionResult NotFound()
+    {
+        return NotFoundResult;
+    }
+
+    /// <summary>
+    /// Returns a not found execution result with the provided errors.
+    /// </summary>
+    /// <param name="errors">The errors to report.</param>
+    /// <returns>A not found execution result containing the provided errors as a reason.</returns>
+    public static IExecutionResult NotFound(IEnumerable<string> errors)
+    {
+        return new NotFoundExecutionResult(errors);
+    }
+
+    /// <summary>
+    /// Returns a not found execution result with the provided errors.
+    /// </summary>
+    /// <param name="errors">The errors to report.</param>
+    /// <returns>A not found execution result containing the provided errors as a reason.</returns>
+    public static IExecutionResult NotFound(params string[] errors)
+    {
+        return NotFound((IEnumerable<string>)errors);
+    }
+    
+    /// <summary>
+    /// Returns a forbidden execution result.
+    /// </summary>
+    /// <returns>The forbidden execution result.</returns>
+    public static IExecutionResult Forbidden()
+    {
+        return ForbiddenResult;
+    }
+
+    /// <summary>
+    /// Returns a forbidden execution result with the provided errors.
+    /// </summary>
+    /// <param name="errors">The errors to report.</param>
+    /// <returns>A forbidden execution result containing the provided errors as a reason.</returns>
+    public static IExecutionResult Forbidden(IEnumerable<string> errors)
+    {
+        return new ForbiddenExecutionResult(errors);
+    }
+
+    /// <summary>
+    /// Returns a forbidden execution result with the provided errors.
+    /// </summary>
+    /// <param name="errors">The errors to report.</param>
+    /// <returns>A forbidden execution result containing the provided errors as a reason.</returns>
+    public static IExecutionResult Forbidden(params string[] errors)
+    {
+        return Forbidden((IEnumerable<string>)errors);
+    }
+    
+    /// <summary>
+    /// Returns a conflict execution result.
+    /// </summary>
+    /// <returns>The conflict execution result.</returns>
+    public static IExecutionResult Conflict()
+    {
+        return ConflictResult;
+    }
+
+    /// <summary>
+    /// Returns a conflict execution result with the provided errors.
+    /// </summary>
+    /// <param name="errors">The errors to report.</param>
+    /// <returns>A conflict execution result containing the provided errors as a reason.</returns>
+    public static IExecutionResult Conflict(IEnumerable<string> errors)
+    {
+        return new ConflictExecutionResult(errors);
+    }
+
+    /// <summary>
+    /// Returns a conflict execution result with the provided errors.
+    /// </summary>
+    /// <param name="errors">The errors to report.</param>
+    /// <returns>A conflict execution result containing the provided errors as a reason.</returns>
+    public static IExecutionResult Conflict(params string[] errors)
+    {
+        return Conflict((IEnumerable<string>)errors);
     }
 
     /// <summary>

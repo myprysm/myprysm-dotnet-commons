@@ -25,8 +25,11 @@
 
 | Classes | |
 | :--- | :--- |
+| [ConflictExecutionResult](Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult') | Represents a failed execution because the current operation created a conflict between some resource.<br/><br/>Can carry errors associated with the failure. |
 | [ExecutionResult](Myprysm.SharedKernel.ExecutionResults.ExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ExecutionResult') | Represents the execution result of a procedure. |
 | [FailedExecutionResult](Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult') | Represents a failed execution for a task/process/handler.<br/><br/>Can carry errors associated with the failure. |
+| [ForbiddenExecutionResult](Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult') | Represents a failed execution because the current user is forbidden to access a resource.<br/><br/>Can carry errors associated with the failure. |
+| [NotFoundExecutionResult](Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult') | Represents a failed execution because a resource could not be found.<br/><br/>Can carry errors associated with the failure. |
 | [ObjectSuccessExecutionResult&lt;TResult&gt;](Myprysm.SharedKernel.ExecutionResults.ObjectSuccessExecutionResult_TResult_.md 'Myprysm.SharedKernel.ExecutionResults.ObjectSuccessExecutionResult<TResult>') | Success execution result with a value. |
 | [SuccessExecutionResult](Myprysm.SharedKernel.ExecutionResults.SuccessExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.SuccessExecutionResult') | Generic success execution result |
 

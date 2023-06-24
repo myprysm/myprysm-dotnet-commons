@@ -35,6 +35,62 @@ Implements [IsSuccess](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md
 [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
 ### Methods
 
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Conflict()'></a>
+
+## ExecutionResult.Conflict() Method
+
+Returns a conflict execution result.
+
+```csharp
+public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Conflict();
+```
+
+#### Returns
+[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+The conflict execution result.
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Conflict(string[])'></a>
+
+## ExecutionResult.Conflict(string[]) Method
+
+Returns a conflict execution result with the provided errors.
+
+```csharp
+public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Conflict(params string[] errors);
+```
+#### Parameters
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Conflict(string[]).errors'></a>
+
+`errors` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[[]](https://docs.microsoft.com/en-us/dotnet/api/System.Array 'System.Array')
+
+The errors to report.
+
+#### Returns
+[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+A conflict execution result containing the provided errors as a reason.
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Conflict(System.Collections.Generic.IEnumerable_string_)'></a>
+
+## ExecutionResult.Conflict(IEnumerable<string>) Method
+
+Returns a conflict execution result with the provided errors.
+
+```csharp
+public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Conflict(System.Collections.Generic.IEnumerable<string> errors);
+```
+#### Parameters
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Conflict(System.Collections.Generic.IEnumerable_string_).errors'></a>
+
+`errors` [System.Collections.Generic.IEnumerable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System.Collections.Generic.IEnumerable`1')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System.Collections.Generic.IEnumerable`1')
+
+The errors to report.
+
+#### Returns
+[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+A conflict execution result containing the provided errors as a reason.
+
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Failed()'></a>
 
 ## ExecutionResult.Failed() Method
@@ -90,6 +146,118 @@ The errors to report.
 #### Returns
 [IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
 A failed execution result containing the provided errors as a reason.
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Forbidden()'></a>
+
+## ExecutionResult.Forbidden() Method
+
+Returns a forbidden execution result.
+
+```csharp
+public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Forbidden();
+```
+
+#### Returns
+[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+The forbidden execution result.
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Forbidden(string[])'></a>
+
+## ExecutionResult.Forbidden(string[]) Method
+
+Returns a forbidden execution result with the provided errors.
+
+```csharp
+public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Forbidden(params string[] errors);
+```
+#### Parameters
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Forbidden(string[]).errors'></a>
+
+`errors` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[[]](https://docs.microsoft.com/en-us/dotnet/api/System.Array 'System.Array')
+
+The errors to report.
+
+#### Returns
+[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+A forbidden execution result containing the provided errors as a reason.
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Forbidden(System.Collections.Generic.IEnumerable_string_)'></a>
+
+## ExecutionResult.Forbidden(IEnumerable<string>) Method
+
+Returns a forbidden execution result with the provided errors.
+
+```csharp
+public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Forbidden(System.Collections.Generic.IEnumerable<string> errors);
+```
+#### Parameters
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Forbidden(System.Collections.Generic.IEnumerable_string_).errors'></a>
+
+`errors` [System.Collections.Generic.IEnumerable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System.Collections.Generic.IEnumerable`1')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System.Collections.Generic.IEnumerable`1')
+
+The errors to report.
+
+#### Returns
+[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+A forbidden execution result containing the provided errors as a reason.
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.NotFound()'></a>
+
+## ExecutionResult.NotFound() Method
+
+Returns a not found execution result.
+
+```csharp
+public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult NotFound();
+```
+
+#### Returns
+[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+The not found execution result.
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.NotFound(string[])'></a>
+
+## ExecutionResult.NotFound(string[]) Method
+
+Returns a not found execution result with the provided errors.
+
+```csharp
+public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult NotFound(params string[] errors);
+```
+#### Parameters
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.NotFound(string[]).errors'></a>
+
+`errors` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[[]](https://docs.microsoft.com/en-us/dotnet/api/System.Array 'System.Array')
+
+The errors to report.
+
+#### Returns
+[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+A not found execution result containing the provided errors as a reason.
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.NotFound(System.Collections.Generic.IEnumerable_string_)'></a>
+
+## ExecutionResult.NotFound(IEnumerable<string>) Method
+
+Returns a not found execution result with the provided errors.
+
+```csharp
+public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult NotFound(System.Collections.Generic.IEnumerable<string> errors);
+```
+#### Parameters
+
+<a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.NotFound(System.Collections.Generic.IEnumerable_string_).errors'></a>
+
+`errors` [System.Collections.Generic.IEnumerable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System.Collections.Generic.IEnumerable`1')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System.Collections.Generic.IEnumerable`1')
+
+The errors to report.
+
+#### Returns
+[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+A not found execution result containing the provided errors as a reason.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Success()'></a>
 
