@@ -31,7 +31,7 @@ The response type.
 Read asynchronously the output for the given request.
 
 ```csharp
-System.Threading.Tasks.Task<TResponse?> ReadAsync(TRequest request, System.Threading.CancellationToken cancellation=default(System.Threading.CancellationToken));
+System.Threading.Tasks.Task<TResponse> ReadAsync(TRequest request, System.Threading.CancellationToken cancellation=default(System.Threading.CancellationToken));
 ```
 #### Parameters
 
