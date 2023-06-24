@@ -42,11 +42,11 @@ Implements [IsSuccess](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md
 Returns a conflict execution result.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Conflict();
+public static Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult Conflict();
 ```
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[ConflictExecutionResult](Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult')  
 The conflict execution result.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Conflict(string[])'></a>
@@ -56,7 +56,7 @@ The conflict execution result.
 Returns a conflict execution result with the provided errors.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Conflict(params string[] errors);
+public static Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult Conflict(params string[] errors);
 ```
 #### Parameters
 
@@ -67,7 +67,7 @@ public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Conflict(pa
 The errors to report.
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[ConflictExecutionResult](Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult')  
 A conflict execution result containing the provided errors as a reason.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Conflict(System.Collections.Generic.IEnumerable_string_)'></a>
@@ -77,7 +77,7 @@ A conflict execution result containing the provided errors as a reason.
 Returns a conflict execution result with the provided errors.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Conflict(System.Collections.Generic.IEnumerable<string> errors);
+public static Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult Conflict(System.Collections.Generic.IEnumerable<string> errors);
 ```
 #### Parameters
 
@@ -88,7 +88,7 @@ public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Conflict(Sy
 The errors to report.
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[ConflictExecutionResult](Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ConflictExecutionResult')  
 A conflict execution result containing the provided errors as a reason.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Failed()'></a>
@@ -98,11 +98,11 @@ A conflict execution result containing the provided errors as a reason.
 Returns a failed execution result.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Failed();
+public static Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult Failed();
 ```
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[FailedExecutionResult](Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult')  
 The failed execution result.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Failed(string[])'></a>
@@ -112,7 +112,7 @@ The failed execution result.
 Returns a failed execution result with the provided errors.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Failed(params string[] errors);
+public static Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult Failed(params string[] errors);
 ```
 #### Parameters
 
@@ -123,7 +123,7 @@ public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Failed(para
 The errors to report.
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[FailedExecutionResult](Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult')  
 A failed execution result containing the provided errors as a reason.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Failed(System.Collections.Generic.IEnumerable_string_)'></a>
@@ -133,7 +133,7 @@ A failed execution result containing the provided errors as a reason.
 Returns a failed execution result with the provided errors.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Failed(System.Collections.Generic.IEnumerable<string> errors);
+public static Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult Failed(System.Collections.Generic.IEnumerable<string> errors);
 ```
 #### Parameters
 
@@ -144,7 +144,7 @@ public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Failed(Syst
 The errors to report.
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[FailedExecutionResult](Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.FailedExecutionResult')  
 A failed execution result containing the provided errors as a reason.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Forbidden()'></a>
@@ -154,11 +154,11 @@ A failed execution result containing the provided errors as a reason.
 Returns a forbidden execution result.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Forbidden();
+public static Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult Forbidden();
 ```
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[ForbiddenExecutionResult](Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult')  
 The forbidden execution result.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Forbidden(string[])'></a>
@@ -168,7 +168,7 @@ The forbidden execution result.
 Returns a forbidden execution result with the provided errors.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Forbidden(params string[] errors);
+public static Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult Forbidden(params string[] errors);
 ```
 #### Parameters
 
@@ -179,7 +179,7 @@ public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Forbidden(p
 The errors to report.
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[ForbiddenExecutionResult](Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult')  
 A forbidden execution result containing the provided errors as a reason.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Forbidden(System.Collections.Generic.IEnumerable_string_)'></a>
@@ -189,7 +189,7 @@ A forbidden execution result containing the provided errors as a reason.
 Returns a forbidden execution result with the provided errors.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Forbidden(System.Collections.Generic.IEnumerable<string> errors);
+public static Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult Forbidden(System.Collections.Generic.IEnumerable<string> errors);
 ```
 #### Parameters
 
@@ -200,7 +200,7 @@ public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult Forbidden(S
 The errors to report.
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[ForbiddenExecutionResult](Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.ForbiddenExecutionResult')  
 A forbidden execution result containing the provided errors as a reason.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.NotFound()'></a>
@@ -210,11 +210,11 @@ A forbidden execution result containing the provided errors as a reason.
 Returns a not found execution result.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult NotFound();
+public static Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult NotFound();
 ```
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[NotFoundExecutionResult](Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult')  
 The not found execution result.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.NotFound(string[])'></a>
@@ -224,7 +224,7 @@ The not found execution result.
 Returns a not found execution result with the provided errors.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult NotFound(params string[] errors);
+public static Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult NotFound(params string[] errors);
 ```
 #### Parameters
 
@@ -235,7 +235,7 @@ public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult NotFound(pa
 The errors to report.
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[NotFoundExecutionResult](Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult')  
 A not found execution result containing the provided errors as a reason.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.NotFound(System.Collections.Generic.IEnumerable_string_)'></a>
@@ -245,7 +245,7 @@ A not found execution result containing the provided errors as a reason.
 Returns a not found execution result with the provided errors.
 
 ```csharp
-public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult NotFound(System.Collections.Generic.IEnumerable<string> errors);
+public static Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult NotFound(System.Collections.Generic.IEnumerable<string> errors);
 ```
 #### Parameters
 
@@ -256,7 +256,7 @@ public static Myprysm.SharedKernel.ExecutionResults.IExecutionResult NotFound(Sy
 The errors to report.
 
 #### Returns
-[IExecutionResult](Myprysm.SharedKernel.ExecutionResults.IExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.IExecutionResult')  
+[NotFoundExecutionResult](Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult.md 'Myprysm.SharedKernel.ExecutionResults.NotFoundExecutionResult')  
 A not found execution result containing the provided errors as a reason.
 
 <a name='Myprysm.SharedKernel.ExecutionResults.ExecutionResult.Success()'></a>
