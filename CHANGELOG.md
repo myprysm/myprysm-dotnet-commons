@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v2.1.0...v3.0.0) (2023-06-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **kernel:** All IWriters must return an IExecutionResult to better indicate conventional errors from actual exceptions
+
+### Features
+
+* **kernel:** Enforce IExecutionResult on IWriter ([a0f54e3](https://github.com/myprysm/myprysm-dotnet-commons/commit/a0f54e330ceb5aab3a31a1d951d5c3f2fe140553))
+
 ## [2.1.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v2.0.0...v2.1.0) (2023-06-24)
 
 
