@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.5.0...v2.0.0) (2023-06-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **kernel:** IReader implementations must explicitly expose whether the result can be null.
+It means that any code using nullable reference type may break because the reader interface doesn't declare anymore that the result may be null
+
+### Bug Fixes
+
+* **build:** Adjust Github Publish action for nuget api key injection ([5973938](https://github.com/myprysm/myprysm-dotnet-commons/commit/597393814d8cf955fb331f436a9c558aa09f65f9))
+* **kernel:** Remove optional constraint on IReader ([2e6359d](https://github.com/myprysm/myprysm-dotnet-commons/commit/2e6359d9d1d1045880e5a3047abc7695556ab7aa))
+
 ## [1.5.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v1.4.1...v1.5.0) (2022-12-03)
 
 
