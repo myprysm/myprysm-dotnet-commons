@@ -38,10 +38,6 @@ public class SuccessExecutionResult : ExecutionResult
     /// <inheritdoc />
     public override bool IsSuccess => true;
 
-    internal SuccessExecutionResult()
-    {
-    }
-
     /// <inheritdoc />
     public override string ToString()
     {
@@ -60,7 +56,11 @@ public class ObjectSuccessExecutionResult<TResult> : SuccessExecutionResult
     /// </summary>
     public const string MessageTemplate = $"{DefaultMessage}: {{0}}";
 
-    internal ObjectSuccessExecutionResult(TResult result)
+    /// <summary>
+    /// Create a new <see cref="ObjectSuccessExecutionResult{TResult}"/>.
+    /// </summary>
+    /// <param name="result">The result.</param>
+    public ObjectSuccessExecutionResult(TResult result)
     {
         this.Result = result;
     }
