@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/myprysm/myprysm-dotnet-commons/compare/v3.0.0...v3.0.1) (2023-07-30)
+
+
+### Bug Fixes
+
+* **kernel:** Open execution result constructors ([22c255b](https://github.com/myprysm/myprysm-dotnet-commons/commit/22c255b910e5d443e59adef36bb2e6bd2cb6c093))
+
 ## [3.0.0](https://github.com/myprysm/myprysm-dotnet-commons/compare/v2.1.0...v3.0.0) (2023-06-24)
 
 
