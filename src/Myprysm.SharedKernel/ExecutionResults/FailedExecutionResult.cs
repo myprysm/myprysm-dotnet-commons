@@ -42,7 +42,11 @@ public class FailedExecutionResult : ExecutionResult
     /// </summary>
     internal const string MessageTemplate = "Failed execution due to: {0}";
 
-    internal FailedExecutionResult(
+    /// <summary>
+    /// Create a new <see cref="FailedExecutionResult"/>.
+    /// </summary>
+    /// <param name="errors">The errors associated with the failure.</param>
+    public FailedExecutionResult(
         IEnumerable<string> errors)
     {
         this.Errors = errors.ToList().AsReadOnly();
